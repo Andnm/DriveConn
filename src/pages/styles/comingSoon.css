@@ -5,6 +5,7 @@
   background-position: center;
   background-size: cover;
 }
+
 .Soon {
   top: 25%;
   left: 50%;
@@ -73,4 +74,41 @@
 
 .count-down .clone {
   font-size: 45px;
+}
+
+@media only screen and (max-width: 1600px) {
+  .Soon {
+    top: 25%;
+  }
+
+  .Soon p {
+    font-size: 15px;
+  }
+
+  .title-coming-soon {
+    font-size: 55px;
+  }
+
+  .count-down .timer .numb {
+    font-size: 20px;
+  }
+  
+  .count-down .timer .text-time {
+    font-size: 10px;
+  }
+  
+  .count-down .clone {
+    font-size: 40px;
+  }
+
+  .count-down .timer {
+    height: 80px;
+    width: 80px;
+  }
+}
+
+@media only screen and (max-width: 1200px) {
+  .Soon {
+    top: 30%;
+  }
 }

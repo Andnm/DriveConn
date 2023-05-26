@@ -8,7 +8,6 @@ const ComingSoon = () => {
   const [minute, setMinute] = useState('00');
   const [second, setSecond] = useState('00');
 
-
   useEffect(() => {
     const interval = setInterval(() => {
       const now = new Date().getTime();
