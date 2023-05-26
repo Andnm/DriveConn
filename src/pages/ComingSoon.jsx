@@ -30,7 +30,7 @@ const ComingSoon = () => {
       <header className="bg-coming-soon">
         <div className="Soon">
           <h1 className='title-coming-soon'>COMING SOON</h1>
-          <p>We're a small and growing consulting firm with big ideas</p>
+          <p>We're a small and growing firm with big ideas</p>
           <hr className='spectator-line' />
           
           <div className='count-down'>
