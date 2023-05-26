@@ -1,0 +1,66 @@
+.doughnut {
+    height: auto;
+    width: 50%;
+}
+
+.custom-legend {
+    width: 50%;
+    height: 100%;
+}
+
+.legend-logo {
+    height: 70px;
+    width: 70px;
+    border: 1px solid #a6a6a6;
+    border-radius: 15px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 30px;
+}
+
+.legend-title {
+    font-size: 17px;
+    line-height: 12px;
+    padding-left: 5px;
+}
+
+.legend-title span {
+    font-size: 12px;
+}
+
+.legend-title_attended {
+    color: #5fb2ff;
+    font-weight: 500;
+    margin: 0;
+}
+
+.legend-title_absent {
+    color: rgb(255, 99, 132);
+    font-weight: 500;
+    margin: 0;
+}
+
+.legend-title_empty {
+    color: #a3a1a1;
+    font-weight: 500;
+    margin: 0;
+}
+
+table {
+    font-family: arial, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+    margin: auto;
+}
+
+td,
+th {
+    border: 1px solid #dddddd;
+    text-align: left;
+    padding: 8px;
+}
+
+tr:nth-child(even) {
+    background-color: #dddddd;
+}

@@ -1,0 +1,40 @@
+.car_owner_register_form{
+    width: 80%;
+    margin: 5% 10%;
+}
+
+.register_form_row{
+    margin: 2% 0;
+}
+
+.form_input{
+    width: 40%;
+}
+
+.form_input .input_referral{
+    width: 25%;
+}
+
+.register_form_guide{
+    margin: 0;
+}
+
+.register_form_guide_text{
+    width: 90%;
+    margin: 1% 20px;
+    opacity: 0.5;
+}
+
+.register_form_submit_button{
+    margin: 0 auto;
+}
+
+.register_form_submit_button button{
+    width: 100%;
+}
+
+.register_form_message{
+    margin: 1px 20px;
+    font-size: 10px;
+    color: red;
+}

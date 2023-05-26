@@ -1,0 +1,82 @@
+.background-img {
+  background-image: url('../../../assets/all-images/auth_background.jpg');
+  background-repeat: no-repeat;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.input-form {
+  width: 900px;
+  background-color: white;
+  box-shadow: 3px 4px 36px -6px rgba(0, 0, 0, 0.4);
+  border-radius: 50px !important;
+  padding: 20px 60px;
+  border-radius: 10px;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.input-form h1 {
+  font-size: 30px;
+  font-weight: 400;
+  color: #2c444e;
+  margin-bottom: 20px;
+  margin-top: 20px;
+  text-align: center;
+}
+
+.home-icon-register {
+  position: absolute;
+  font-size: 30px;
+  color: #000d6b;
+  display: flex;
+  top: 10px;
+  left: 60px;
+}
+
+.home-icon-register p {
+  margin-bottom: 0;
+}
+
+.btn-signup {
+  font-size: 18px;
+  font-weight: 500;
+  padding: 8px 25px;
+  color: #000d6b;
+  border-radius: 12px;
+  margin: 10px 0 0 0;
+  outline: none;
+  border: 2px solid #000d6b !important;
+  background-color: white;
+  cursor: pointer;
+  transition: all 0.25s ease-in-out;
+  left: 45%;
+}
+
+.btn-signup:hover {
+  background-color: #000d6b !important;
+  color: white !important;
+  border: #000d6b;
+  transition: all 0.25s ease-in-out;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  width: 350px;
+}
+
+.form-group label {
+  font-size: 10px;
+  color: gray;
+}
+
+.option-radio label{
+  font-size: 20px;
+
+}

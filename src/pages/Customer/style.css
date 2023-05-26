@@ -1,0 +1,57 @@
+.table-striped {
+  margin-top: 10px;
+}
+
+.dataTables_wrapper {
+  margin-top: 20px;
+}
+
+.dataTables_length select {
+  padding: 5px;
+}
+
+.dataTables_length {
+  margin-bottom: 30px;
+}
+
+.dataTables_filter {
+  margin-bottom: 30px;
+}
+
+.dataTables_filter input {
+  padding: 5px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+}
+
+.dataTables_paginate {
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+.dataTables_info {
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+.dataTables_paginate .paginate_button {
+  padding: 5px 10px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  margin-right: 10px;
+}
+
+.dataTables_paginate .paginate_button.active {
+  background-color: #ccc;
+  color: #fff;
+}
+
+table.dataTable thead th,
+table.dataTable thead td {
+  border-top: 1px solid #111;
+}
+
+.confirm_cancel_booking {
+  display: flex;
+  justify-content: space-around;
+}

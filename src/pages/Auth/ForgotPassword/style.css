@@ -1,0 +1,41 @@
+.background-img {
+  background-image: url("https://wallscloud.net/img/resize/2400/1350/MM/2019-05-10-%D0%90%D0%B2%D1%82%D0%BE%D0%BC%D0%BE%D0%B1%D0%B8%D0%BB%D1%8C_%D0%9B%D0%B0%D0%BC%D0%B1%D0%BE%D1%80%D0%B4%D0%B6%D0%B8%D0%BD%D0%B8_%D0%A3%D1%80%D0%B0%D0%BA%D0%B0%D0%BD.jpg");
+  background-repeat: no-repeat;
+  height: 100vh;
+}
+
+.card_forgot_password {
+  background-color: white;
+  width: 500px;
+  height: 300px;
+  padding: 20px;
+}
+
+.form_forgot_password {
+  flex-direction: column;
+}
+
+.form_forgot_password input {
+  padding: 10px;
+  border-radius: 10px;
+}
+
+.mr-5 {
+  margin-right: 10px;
+}
+
+.card_otp {
+  background-color: white;
+  width: 500px;
+  height: 300px;
+  padding: 20px;
+}
+
+.card_form {
+  flex-direction: column;
+}
+
+.card_form input {
+  padding: 10px;
+  border-radius: 10px;
+}

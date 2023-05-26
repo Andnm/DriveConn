@@ -1,0 +1,24 @@
+.yard-pagination {
+    text-align: end;
+}
+
+.pagination-statistic {
+    display: inline-block;
+    width: 5rem;
+    text-align: center;
+}
+
+.pagination-statistic > input {
+    display: inline;
+    width: 1.5rem;
+    text-align: center;
+    border: none;
+}
+
+.pagination-arrow {
+    cursor: pointer;
+}
+
+.pagination-arrow:hover {
+    color: #999;
+}

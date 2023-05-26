@@ -1,0 +1,243 @@
+.car__item {
+  border: 1px solid #7c8a9736;
+  padding: 20px;
+  border-radius: 5px;
+  box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
+  cursor: pointer;
+  transition: transform 0.2s;
+  width: 400px;
+}
+
+.car__item:hover {
+  transform: scale(1.05);
+  transition: transform 0.2s;
+}
+
+.car__item-info span i {
+  color: #f9a826;
+  font-size: 1.1rem;
+}
+
+.car__item-btn {
+  border-radius: 0;
+  border: none;
+  outline: none;
+  background: #000d6b;
+  padding: 8px 0px;
+}
+
+.car__item-btn a {
+  text-decoration: none;
+  color: #fff;
+  font-weight: 500;
+}
+
+.car__img img {
+  height: 300px;
+  object-fit: contain;
+}
+
+.car__item-btn a:hover {
+  color: #fff;
+}
+.car__btn-details {
+  background: #f9a826;
+  border-radius: 0px 4px 4px 0px;
+}
+
+.car__btn-rent {
+  border-radius: 4px 0px 0px 4px;
+}
+
+.car__item-content h4 {
+  font-size: 1.8rem;
+}
+
+.car__item-content h6 {
+  font-size: 1.2rem;
+  font-weight: 600;
+}
+
+.ReactModal__Overlay {
+  background-color: rgba(143, 142, 142, 0.742) !important;
+}
+
+.detail-vehicle {
+  background-color: #fff;
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+  border-radius: 20px;
+  padding: 50px 50px 50px 50px;
+}
+
+.detail-vehicle label {
+  font-size: 20px;
+  margin-left: 30px;
+}
+
+.react-datepicker__input-container {
+  /* margin-left: 30px; */
+}
+
+.input_date {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-left: 30px;
+  border: 1px solid gray;
+  border-radius: 5px;
+  width: 300px;
+  cursor: pointer;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.react-datepicker__input-container input {
+  height: 30px;
+  padding: 20px;
+  font-size: 20px;
+  border: none !important;
+  cursor: pointer;
+  outline-style: none;
+  outline-offset: none;
+  width: 200px;
+}
+
+.rent__price__detail {
+  text-align: center;
+  font-size: 50px !important;
+}
+
+.detail__price {
+  margin: 30px;
+}
+
+.detail__price hr {
+  margin: 0px;
+  margin-bottom: 4px !important;
+}
+
+.detail__price p {
+  margin-left: 10px;
+}
+
+.total_price {
+  font-weight: bold;
+  font-size: 20px;
+}
+
+.date_dif {
+  font-weight: bold;
+}
+
+.total_price_money {
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.input_date i {
+  margin-left: 20px;
+}
+
+.button_booking {
+  position: absolute;
+  bottom: 40px;
+  right: 40px;
+}
+
+.payments {
+  margin: 30px;
+}
+
+.button-confirm-cancel {
+  position: absolute;
+  right: 20px;
+  bottom: 30px;
+}
+
+.button-confirm-cancel button:first-child {
+  margin-right: 20px;
+}
+
+.information-customer {
+  margin-left: 20px;
+}
+
+.information-customer p {
+  margin-left: 30px;
+}
+
+.information-vehicle {
+  margin-left: 20px;
+}
+
+.information-vehicle p {
+  margin-left: 30px;
+}
+
+.information-booking {
+  margin-left: 20px;
+}
+
+.information-booking p {
+  margin-left: 30px;
+}
+
+.modal-header {
+  height: 50px;
+  padding: 20px !important;
+  margin-top: 20px;
+  margin-bottom: 10px;
+}
+
+.modal-body {
+  padding: 20px !important;
+
+}
+
+@media only screen and (max-width: 992px) {
+  .car__item h4 {
+    font-size: 1.1rem;
+    margin-bottom: 0;
+  }
+
+  .car__item h6 {
+    font-size: 1rem;
+    margin-top: 10px;
+  }
+
+  .car__item-info {
+    flex-wrap: wrap;
+  }
+
+  .car__item-info span {
+    font-size: 0.8rem;
+    justify-content: space-between;
+  }
+
+  .car__item-btn {
+    padding: 5px 10px;
+    font-size: 0.9rem;
+  }
+}
+
+@media only screen and (max-width: 768px) {
+  .car__item h4 {
+    font-size: 1rem;
+  }
+
+  .car__item h6 {
+    font-size: 0.9rem;
+  }
+
+  .car__item-info span {
+    font-size: 0.7rem;
+  }
+
+  .car__item-info span i {
+    font-size: 0.9rem;
+  }
+
+  .car__item-btn {
+    font-size: 0.8rem;
+  }
+}

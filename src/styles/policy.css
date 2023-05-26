@@ -1,0 +1,134 @@
+/* policy header */
+
+.policy_item{
+    cursor: pointer;
+    position: relative;
+}
+
+.policy_item::before{
+    content: '';
+    position: absolute;
+    bottom: 20%;
+    display: block;
+    left: 50%;
+    right: 50%;
+    transition: 0.25s;
+    height: 2px;
+    background-color: black;
+}
+
+.policy_item:hover::before{
+    left: 5%;
+    right: 5%;
+    transition: 0.25s;
+}
+
+.policy_active{
+    position: relative;
+}
+
+.policy_active::before{
+    content: '';
+    position: absolute;
+    bottom: 20%;
+    display: block;
+    left: 5%;
+    right: 5%;
+    transition: 0.25s;
+    height: 2px;
+    background-color: black;
+}
+
+/* policy content */
+
+.policy_content{
+    user-select: none;
+    width: 100%;
+    margin-left: 1%;
+}
+
+/* damage policy table */
+.damage_table{
+    width: 50%;
+    margin: 0 25%;
+    display: inline-block;
+    border-top: 1px solid black ;
+    border-left: 1px solid black;
+}
+
+.damage_table_column{
+    display: flex;
+    border-bottom: 1px solid black;
+}
+
+.column_header{
+    font-weight: bold;
+}
+
+.column_text{
+    width: 50%;
+    border-right: 1px solid black;
+    padding: 10px 30px;
+    text-align: center;
+}
+/* fee policy table  */
+.fee_policy_table{
+    width: 100%;
+    display: inline-block;
+    border-top: 1px solid black;
+    border-left: 1px solid black;
+}
+
+.fee_policy_table_row{
+    display: flex;
+    width: 100%;
+    border-bottom: 1px solid black;
+    border-right: 1px solid black;
+}
+
+.column_header{
+    width: 15%;
+    border-right: 1px solid black;
+    font-weight: bold;
+    text-align: center;
+}
+
+.column_header p{
+    margin: 15px 0px;
+}
+
+.column_content{
+    width: 85%;
+}
+
+.column_content p{
+    margin: 15px 15px;
+}
+
+/* fee policy fuel table */
+
+.fee_policy_fuel_table{
+    width: 40%;
+    margin: 0 40% 3% 20%;
+    display: inline-block;
+    border-top: 1px solid black ;
+    border-left: 1px solid black;
+}
+
+.fee_policy_fuel_table_column{
+    display: flex;
+    width: 100%;
+    border-bottom: 1px solid black;
+}
+
+.fee_policy_fuel_table_column .column_text{
+    width: 50%;
+    border-right: 1px solid black;
+    padding: 10px 30px;
+    text-align: center;
+}
+
+.fuel_table_left_content{
+    width: 65%;
+}
+
