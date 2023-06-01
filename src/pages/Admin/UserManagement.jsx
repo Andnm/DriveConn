@@ -7,7 +7,8 @@ import { AuthContext } from "../../context/authContext";
 import { blockUserById, deleteUserById, getUserList, upRole } from "../../api/user";
 import Pagination from "../../components/UI/Pagination";
 import 'react-confirm-alert/src/react-confirm-alert.css';
-import Loading from 'react-loading';
+import LoadingCar from '../../components/LoadingCar/LoadingCar'
+
 
 const filterableFields = [{
     label: "Status", options: [{ value: true, label: "ACTIVE" }, { value: false, label: "INACTIVE" },], field: "status",
@@ -208,9 +209,8 @@ const UserManagement = () => {
 
                     <Pagination maxPage={maxPage} onChangePage={onChangePage} />
                 </>
-                : <div className='d-flex justify-content-center'>
-                    <Loading type="spin" color="#000" />
-                </div>
+                : <LoadingCar />
+
             }
 
         </div>

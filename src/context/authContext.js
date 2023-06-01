@@ -8,12 +8,14 @@ import API_URL from "../api/Router";
 
 import {auth, provider} from "../config/configFirebase"
 import {signInWithPopup} from "firebase/auth"
-
 export const AuthContext = createContext({});
+
+{/* <LoadingCar style={{backgroundColor: '#e5e5e5', opacity: '0.5'}}/> */}
 
 export default function AuthContextProvider({ children }) {
   const navigate = useNavigate();
   const [currentToken, setCurrentToken] = useState(Cookies.get("token"));
+  const [loadingLogin, setLoadingLogin] = useState(false);
 
   const [userDecode, setUserDecode] = useState(() => {
     const storedItem = localStorage.getItem("user");
@@ -36,6 +38,8 @@ export default function AuthContextProvider({ children }) {
   // Functions
   const login = async (inputs) => {
     try {
+      setLoadingLogin(true)
+      
       const res = await axios.post(`${API_URL}` + "/api/auth/login", {
         ...inputs,
       });
@@ -55,6 +59,7 @@ export default function AuthContextProvider({ children }) {
       const resUser = await axios.get(`${API_URL}` + `/api/users/${user.user.id}`, config)
       setUserDecode(resUser?.data ?? {});
       // navigate("/");
+      setLoadingLogin(false)
 
       if (["Admin"].includes(user.user.roleName)) {
         navigate("/admin");
@@ -64,7 +69,7 @@ export default function AuthContextProvider({ children }) {
     } catch (error) {
       toast.error('Gmail or password is not correct');
       // if(error?.response?.data) {
-      // setIsLoading(false);
+      setLoadingLogin(false)
       // }
     }
   };
@@ -77,6 +82,7 @@ export default function AuthContextProvider({ children }) {
   
     signInWithPopup(auth, provider).then((data) => {
       setValue(data.user.email)
+      console.log(data.user)
       localStorage.setItem("email", data.user.email)
       navigate("/profile");
     })
@@ -93,32 +99,15 @@ export default function AuthContextProvider({ children }) {
       await axios.post(`${API_URL}` + "/api/auth/logout");
       setCurrentToken(null);
       setUserDecode({})
-      navigate("/login");
+      navigate("/home");
     } catch (err) {
       console.log(err);
     }
   };
 
-  //todo
-  // const update = async (formData) => {
-  //   try {
-  //     // check api phải gửi after change object
-  //     const res = await axios.put(
-  //       `${API_URL}/users/${currentToken._id}`,
-  //       formData
-  //     );
-  //     // console.log(res.data);
-  //     setCurrentToken(res.data);
-  //     navigate(0);
-  //     toast.success("Cập nhật thành công.");
-  //   } catch (err) {
-  //     throw err;
-  //   }
-  // };
-
   return (
     <AuthContext.Provider
-      value={{ userDecode, currentToken, login, logout, loginWithGoogle}}
+      value={{ userDecode, currentToken, login, logout, loginWithGoogle, loadingLogin}}
     >
       {children}
     </AuthContext.Provider>

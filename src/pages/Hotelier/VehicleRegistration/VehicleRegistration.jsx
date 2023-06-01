@@ -9,7 +9,7 @@ import CommonSection from '../../../components/UI/CommonSection';
 import './style.css'
 import { toast } from 'react-toastify';
 import toastOption from '../../../config/toast';
-import Loading from 'react-loading';
+import LoadingCar from '../../../components/LoadingCar/LoadingCar';
 
 
 const VehicleRegistration = () => {
@@ -116,7 +116,7 @@ const VehicleRegistration = () => {
               
             </Col>
 
-            {isLoading ? <Loading type="spin" color="#000" /> : (!listVehicle
+            {isLoading ? <LoadingCar className={'blank-container'}/> : (!listVehicle
               ? <h3>You don't have any vehicle to rent yet</h3>
               :
               <div className='d-flex flex-wrap justify-content-center gap-3'>

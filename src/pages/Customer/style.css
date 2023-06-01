@@ -55,3 +55,7 @@ table.dataTable thead td {
   display: flex;
   justify-content: space-around;
 }
+
+.blank-container {
+  height: 100vh;
+}

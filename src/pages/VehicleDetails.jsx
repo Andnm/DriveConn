@@ -14,8 +14,8 @@ import DatePicker from 'react-datepicker';
 import { differenceInDays, addDays, startOfDay } from "date-fns";
 import { toast } from 'react-toastify';
 import toastOption from "../config/toast";
-import Loading from 'react-loading';
 import commentImg from "../assets/all-images/ava-1.jpg";
+import LoadingCar from '../components/LoadingCar/LoadingCar'
 
 const VehicleDetails = () => {
   const { currentToken, userDecode } = useContext(AuthContext);
@@ -194,8 +194,7 @@ const VehicleDetails = () => {
 
   return (
     <div className="d-flex justify-content-center">
-      {isLoading ?
-        <Loading type="spin" color="#000" />
+      {isLoading ?<LoadingCar className={'blank-container'} />
         :
         <Helmet title={slug}>
           <section>
@@ -445,7 +444,7 @@ const VehicleDetails = () => {
                         Eos nobis totam eius laborum molestias itaque minima
                         distinctio, quae velit tempore!
                       </p>
-                  
+
                     </div>
                   </div>
 
@@ -459,7 +458,7 @@ const VehicleDetails = () => {
                         Eos nobis totam eius laborum molestias itaque minima
                         distinctio, quae velit tempore!
                       </p>
-                  
+
                     </div>
                   </div>
 
@@ -473,11 +472,11 @@ const VehicleDetails = () => {
                         Eos nobis totam eius laborum molestias itaque minima
                         distinctio, quae velit tempore!
                       </p>
-                  
+
                     </div>
                   </div>
-                  
-                  
+
+
 
                   {/* =============== comment form ============ */}
                   {/* <div className="leave__comment-form mt-5">

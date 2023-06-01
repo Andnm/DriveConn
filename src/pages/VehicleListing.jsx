@@ -7,7 +7,7 @@ import VehicleItem from "../components/UI/VehicleItem";
 
 import axios from 'axios'
 import API_URL from "../api/Router";
-import Loading from 'react-loading';
+import LoadingCar from '../components/LoadingCar/LoadingCar'
 
 
 const CarListing = () => {
@@ -65,7 +65,8 @@ const CarListing = () => {
               </div>
             </Col>
 
-            {isLoading ? <div className="d-flex justify-content-center"><Loading type="spin" color="#000" /></div> :
+            {isLoading ? <div className="d-flex justify-content-center">
+              <LoadingCar className={'blank-container'}/></div> :
               carData?.length && carData?.map((item) => (
                 (!item.isRented ? <VehicleItem item={item} key={item.id} /> : '')
               ))

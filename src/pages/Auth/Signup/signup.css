@@ -1,19 +1,16 @@
-.background-img {
-  background-image: url('../../../assets/all-images/auth_background.jpg');
-  background-repeat: no-repeat;
-  height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+.signUp-modal .modal-content{
+  width: 1000px !important;
+  border-radius: 50px !important;
+}
+
+.signUp-modal .modal-content .modal-body{
+  padding: 0px;
+  margin-bottom: 30px;
 }
 
 .input-form {
-  width: 900px;
-  background-color: white;
-  box-shadow: 3px 4px 36px -6px rgba(0, 0, 0, 0.4);
-  border-radius: 50px !important;
-  padding: 20px 60px;
-  border-radius: 10px;
+  width: 900px !important;
+  padding: 0px 60px;
   position: relative;
   display: flex;
   flex-direction: column;
@@ -25,9 +22,8 @@
   font-size: 30px;
   font-weight: 400;
   color: #2c444e;
-  margin-bottom: 20px;
-  margin-top: 20px;
   text-align: center;
+
 }
 
 .home-icon-register {

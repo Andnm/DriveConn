@@ -9,7 +9,7 @@ import DataTable from 'react-data-table-component';
 import './style.css'
 import { toast } from "react-toastify";
 import toastOption from "../../../config/toast";
-import Loading from 'react-loading';
+import LoadingCar from '../../../components/LoadingCar/LoadingCar';
 import Modal from 'react-modal'
 
 
@@ -279,7 +279,7 @@ const RentalHistory = () => {
         <Container className="mb-5">
             <h3 className="mt-5">Rental History </h3>
 
-            {isLoading ? <Loading type="spin" color="#000" /> : (!data
+            {isLoading ? <LoadingCar className={'blank-container'}/> : (!data
                 ? <p>You have never booked, just bring your ass to travel and rent a car. <Link to="/vehicles" style={{ textDecoration: 'underline !important' }}>Booking now!</Link></p>
                 : <div className="App">
                     <div class="input-group" style={{ marginBottom: '30px' }}>

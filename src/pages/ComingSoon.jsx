@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import './styles/comingSoon.css'
 
 const ComingSoon = () => {
-  const countDownDate = new Date('June 4, 2023 00:00:00').getTime();
+  const countDownDate = new Date('June 7, 2023 00:00:00').getTime();
   const [day, setDay] = useState('00');
   const [hour, setHour] = useState('00');
   const [minute, setMinute] = useState('00');

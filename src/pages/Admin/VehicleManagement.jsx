@@ -6,7 +6,7 @@ import Pagination from "../../components/UI/Pagination";
 import 'react-confirm-alert/src/react-confirm-alert.css';
 import empty from "../../assets/all-images/empty.png";
 import { getVehicleList } from "../../api/vehicle";
-import Loading from 'react-loading';
+import LoadingCar from '../../components/LoadingCar/LoadingCar'
 
 const filterableFields = [];
 
@@ -57,6 +57,10 @@ const VehicleManagement = () => {
         setPage(page);
     }
 
+    const inlineStyle = {
+        
+    }
+
     return (
         <div className="pt-5"><SearchBar
             filterableFields={filterableFields}
@@ -97,9 +101,8 @@ const VehicleManagement = () => {
                     </table>
                     <Pagination maxPage={maxPage} onChangePage={onChangePage} />
                 </>
-                : <div className='d-flex justify-content-center'>
-                <Loading type="spin" color="#000" />
-            </div>
+                : <LoadingCar />
+         
             }
         </div>
     )

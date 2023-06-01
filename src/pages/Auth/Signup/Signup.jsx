@@ -2,15 +2,15 @@ import React, { useState } from 'react'
 import './signup.css'
 import FormInput from '../../../components/FormInput/FormInput'
 import { Link } from "react-router-dom";
-import logo_google from '../../../assets/all-images/google/google_logo.png'
 import axios from "axios";
 import API_URL from "../../../api/Router";
 import toastOption from '../../../config/toast';
 import { useNavigate } from 'react-router-dom';
 import { ToastContainer, toast } from 'react-toastify';
 import Message from '../../../components/shared/Message'
+import Modal from 'react-bootstrap/Modal';
 
-const Signup = () => {
+const Signup = ({ open, onClose }) => {
   const [values, setValues] = useState({
     firstName: "",
     address: "",
@@ -31,10 +31,10 @@ const Signup = () => {
       id: 1,
       name: "firstName",
       type: "text",
-      placeholder: "Firstname",
+      placeholder: "FirstName",
       errorMessage:
-        "Firstname should be have at least 1 characters and shouldn't include any special character!",
-      label: "Firstname",
+        "FirstName should be have at least 1 characters and shouldn't include any special character!",
+      label: "FirstName",
       pattern: "^[ a-zA-Z\-\']+$",
       required: true,
     },
@@ -52,10 +52,10 @@ const Signup = () => {
       id: 3,
       name: "lastName",
       type: "text",
-      placeholder: "Lastname",
+      placeholder: "LastName",
       errorMessage:
-        "Firstname should be have at least 1 characters and shouldn't include any special character!",
-      label: "Lastname",
+        "LastName should be have at least 1 characters and shouldn't include any special character!",
+      label: "LastName",
       pattern: "^[ a-zA-Z\-\']+$",
       required: true,
     },
@@ -175,88 +175,110 @@ const Signup = () => {
     setValues({ ...values, [e.target.name]: e.target.value });
   };
 
-  const googleAuth = async () => {
-    // window.open(`${API_URL}/api/auth/login/google`, "_blank")
-
-    const popW = 500;
-    const popH = 1000;
-
-    const left = (window.innerWidth - popW) / 3;
-    const top = (window.innerHeight - popH) / 2;
-
-    // mở cửa sổ popup mới và đặt nó ở giữa trang web
-    const newWindow = window.open(`${API_URL}/api/auth/login/google`, '_blank', 'width=' + popW + ', height=' + popH + ', top=' + top + ', left=' + left);
-
-    if (newWindow) {
-      const intervalId = setInterval(() => {
-        if (newWindow.closed) {
-          clearInterval(intervalId);
-
-          axios.get(`${API_URL}/api/auth/me`).then((response) => {
-            const { accessToken } = response.data;
-            console.log(accessToken)
-          });
-        }
-      }, 1000);
-    }
-
-  }
-
   return (
-    <div className='background-img'>
-      <div className="input-form">
-        <h1>Sign Up Form</h1>
-        {error && <Message variant='danger'>{error}</Message>}
-        <Link to="/home" className='home-icon-register'><i className="ri-home-4-line"></i><p>Home</p></Link>
-        <ToastContainer />
-        <form onSubmit={registerHandle} className="position-relative pb-5 pt-2 d-flex justify-content-between flex-wrap">
-          {inputs?.length && inputs?.map((input) => {
-            if (input.type === "radio") {
-              return (<div className="form-group">
-                <label htmlFor="gender" className="form-label">{input.label}</label>
-                <div className='d-flex gap-5'>
-                  {option.map((option) => (
-                    <div key={option.value} className='option-radio'>
-                      <input
-                        type="radio"
-                        id={option.value}
-                        name={input.name}
-                        value={option.value}
-                        onChange={onChange}
-                        checked={values[input.name] === option.value}
-                        className='m-2'
-                      />
-                      <label htmlFor={option.value}>{option.label}</label>
-                    </div>
-                  ))}
+
+    <Modal show={open} onHide={onClose} dialogClassName="d-flex justify-content-center signUp-modal">
+      <Modal.Header closeButton>
+      </Modal.Header>
+      <Modal.Body>
+        <div className="input-form">
+          <h1>Sign Up Form</h1>
+          {error && <Message variant='danger'>{error}</Message>}
+          <ToastContainer />
+          <form onSubmit={registerHandle} className="position-relative mt-3 mb-3 pb-5 pt-2 d-flex justify-content-between flex-wrap">
+            {inputs?.length && inputs?.map((input) => {
+              if (input.type === "radio") {
+                return (<div className="form-group">
+                  <label htmlFor="gender" className="form-label">{input.label}</label>
+                  <div className='d-flex gap-5'>
+                    {option.map((option) => (
+                      <div key={option.value} className='option-radio'>
+                        <input
+                          type="radio"
+                          id={option.value}
+                          name={input.name}
+                          value={option.value}
+                          onChange={onChange}
+                          checked={values[input.name] === option.value}
+                          className='m-2'
+                        />
+                        <label htmlFor={option.value}>{option.label}</label>
+                      </div>
+                    ))}
+                  </div>
                 </div>
-              </div>
-              )
-            } else {
-              return (
-                <FormInput
-                  key={input.id}
-                  {...input}
-                  value={values[input.name]}
-                  onChange={onChange}
-                />
-              );
-            }
-          })}
+                )
+              } else {
+                return (
+                  <FormInput
+                    key={input.id}
+                    {...input}
+                    value={values[input.name]}
+                    onChange={onChange}
+                  />
+                );
+              }
+            })}
 
-          <button type="submit" value="Register" className="btn btn-signup position-absolute bottom-0">Sign up</button>
-        </form>
+            <button type="submit" value="Register" className="btn btn-signup position-absolute bottom-0">Sign up</button>
+          </form>
 
-        <div className='other-option d-flex flex-column justify-content-center align-items-center'>
-          <p className='text'>or</p>
-          <button className='google_btn' onClick={googleAuth}>
-            <img src={logo_google} alt="google icon" />
-            <span>Sign up with Google</span>
-          </button>
-          <p className='text'>Have an account ? <Link to="/login">Log in</Link></p>
+          <div className='other-option d-flex flex-column justify-content-center align-items-center'>
+            <p className='text'>Have an account ? <Link to="/login">Log in</Link></p>
+          </div>
         </div>
-      </div>
-    </div>
+      </Modal.Body>
+    </Modal>
+
+    // <div className='background-img'>
+    //   <div className="input-form">
+    //     <h1>Sign Up Form</h1>
+    //     {error && <Message variant='danger'>{error}</Message>}
+    //     <Link to="/home" className='home-icon-register'><i className="ri-home-4-line"></i><p>Home</p></Link>
+    //     <ToastContainer />
+    //     <form onSubmit={registerHandle} className="position-relative pb-5 pt-2 d-flex justify-content-between flex-wrap">
+    //       {inputs?.length && inputs?.map((input) => {
+    //         if (input.type === "radio") {
+    //           return (<div className="form-group">
+    //             <label htmlFor="gender" className="form-label">{input.label}</label>
+    //             <div className='d-flex gap-5'>
+    //               {option.map((option) => (
+    //                 <div key={option.value} className='option-radio'>
+    //                   <input
+    //                     type="radio"
+    //                     id={option.value}
+    //                     name={input.name}
+    //                     value={option.value}
+    //                     onChange={onChange}
+    //                     checked={values[input.name] === option.value}
+    //                     className='m-2'
+    //                   />
+    //                   <label htmlFor={option.value}>{option.label}</label>
+    //                 </div>
+    //               ))}
+    //             </div>
+    //           </div>
+    //           )
+    //         } else {
+    //           return (
+    //             <FormInput
+    //               key={input.id}
+    //               {...input}
+    //               value={values[input.name]}
+    //               onChange={onChange}
+    //             />
+    //           );
+    //         }
+    //       })}
+
+    //       <button type="submit" value="Register" className="btn btn-signup position-absolute bottom-0">Sign up</button>
+    //     </form>
+
+    //     <div className='other-option d-flex flex-column justify-content-center align-items-center'>
+    //       <p className='text'>Have an account ? <Link to="/login">Log in</Link></p>
+    //     </div>
+    //   </div>
+    // </div>
   );
 }
 

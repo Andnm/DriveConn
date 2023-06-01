@@ -7,11 +7,10 @@ import API_URL from "../../api/Router";
 import { Link } from 'react-router-dom'
 import DataTable from 'react-data-table-component';
 import './style.css'
-import Loading from 'react-loading';
+import LoadingCar from '../../components/LoadingCar/LoadingCar'
 import Modal from 'react-modal'
 import { toast } from "react-toastify";
 import toastOption from "../../config/toast";
-import { Document, Page, Text, View, StyleSheet, PDFDownloadLink } from '@react-pdf/renderer';
 
 const BookingHistory = () => {
   const { currentToken, userDecode } = useContext(AuthContext);
@@ -262,25 +261,14 @@ const BookingHistory = () => {
     getBookingHistory();
   }, [])
 
-  const [prescriptionContent, setPrescriptionContent] = useState('');
-
-  const styles = StyleSheet.create({
-    page: {
-      backgroundColor: '#fff',
-      padding: 20,
-    },
-    section: {
-      margin: 10,
-      padding: 10,
-      flexGrow: 1,
-    },
-  });
 
   return (
     <Container className="mb-5">
       <h3 className="mt-5">Booking History </h3>
 
-      {isLoading ? <Loading type="spin" color="#000" /> :
+      {isLoading ? 
+        <LoadingCar className={'blank-container'}/>
+        :
         <>{!data
           ? <p>You have never booked, just bring your ass to travel and rent a car. <Link to="/vehicles" style={{ textDecoration: 'underline !important' }}>Booking now!</Link></p>
           : <div>
