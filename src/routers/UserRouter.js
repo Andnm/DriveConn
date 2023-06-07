@@ -21,6 +21,7 @@ import ForgotPassword from "../pages/Auth/ForgotPassword/ForgotPassword";
 import { AuthContext } from "../context/authContext";
 
 import ComingSoon from "../pages/ComingSoon";
+import Maintenance from "../pages/Maintenance";
 
 const UserRouter = () => {
   const { currentToken } = useContext(AuthContext);
@@ -28,7 +29,8 @@ const UserRouter = () => {
   return (
     <Routes>
       <>
-        <Route path="/" element={<ComingSoon />} />
+        {/* <Route path="/" element={<ComingSoon />} /> */}
+        <Route path="/" element={<Maintenance />} />
 
         <Route element={<Layout />}>
           <Route path="/" element={<Home />} />

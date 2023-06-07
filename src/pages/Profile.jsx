@@ -1,7 +1,6 @@
 import React, { useContext, useEffect, useState, useRef } from 'react'
 import './styles/profile.css'
 import { AuthContext } from "../context/authContext";
-import logo from '../assets/all-images/avatar.jpg'
 import axios from 'axios'
 import API_URL from '../api/Router';
 import UpdateInformation from '../components/UI/UpdateInformation/UpdateInformation';

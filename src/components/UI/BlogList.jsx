@@ -32,7 +32,7 @@ const BlogItem = ({ item }) => {
           </p>
 
           <Link to={`/blogs/${title}`} className="read__more">
-            Read More
+            Đọc thêm
           </Link>
 
           <div className="blog__time pt-3 mt-3 d-flex align-items-center justify-content-between">

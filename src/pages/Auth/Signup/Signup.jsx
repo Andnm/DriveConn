@@ -176,13 +176,12 @@ const Signup = ({ open, onClose }) => {
   };
 
   return (
-
     <Modal show={open} onHide={onClose} dialogClassName="d-flex justify-content-center signUp-modal">
       <Modal.Header closeButton>
       </Modal.Header>
       <Modal.Body>
         <div className="input-form">
-          <h1>Sign Up Form</h1>
+          <h1>Đơn đăng kí</h1>
           {error && <Message variant='danger'>{error}</Message>}
           <ToastContainer />
           <form onSubmit={registerHandle} className="position-relative mt-3 mb-3 pb-5 pt-2 d-flex justify-content-between flex-wrap">
@@ -219,12 +218,11 @@ const Signup = ({ open, onClose }) => {
                 );
               }
             })}
-
             <button type="submit" value="Register" className="btn btn-signup position-absolute bottom-0">Sign up</button>
           </form>
 
           <div className='other-option d-flex flex-column justify-content-center align-items-center'>
-            <p className='text'>Have an account ? <Link to="/login">Log in</Link></p>
+            <p className='text'>Đã có tài khoản? <Link to="/login">Đăng ký</Link></p>
           </div>
         </div>
       </Modal.Body>

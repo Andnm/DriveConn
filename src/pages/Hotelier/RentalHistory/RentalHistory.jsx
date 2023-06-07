@@ -277,10 +277,10 @@ const RentalHistory = () => {
 
     return (
         <Container className="mb-5">
-            <h3 className="mt-5">Rental History </h3>
+            <h3 className="mt-5">Lịch sử cho thuê</h3>
 
             {isLoading ? <LoadingCar className={'blank-container'}/> : (!data
-                ? <p>You have never booked, just bring your ass to travel and rent a car. <Link to="/vehicles" style={{ textDecoration: 'underline !important' }}>Booking now!</Link></p>
+                ? <p>Bạn chưa từng cho thuê xe nào cả <Link to="/vehicles" style={{ textDecoration: 'underline !important' }}>Cho thuê xe nào!</Link></p>
                 : <div className="App">
                     <div class="input-group" style={{ marginBottom: '30px' }}>
                         <div class="form-outline">
@@ -331,7 +331,7 @@ const RentalHistory = () => {
                     <hr style={{ width: '100%', margin: '0px' }}></hr>
                     <div className="modal-body">
                         <div className="information-customer">
-                            <h5 style={{ color: 'black' }}>Personal Information:</h5>
+                            <h5 style={{ color: 'black' }}>Thông tin cá nhân:</h5>
                             <p>Customer name: {dataBookingDetail.custName}</p>
                             <p>Customer email: {dataBookingDetail.custEmail}</p>
                             <p>Customer address: {dataBookingDetail.custAddress}</p>
@@ -339,7 +339,7 @@ const RentalHistory = () => {
                         </div>
 
                         <div className="information-vehicle">
-                            <h5 style={{ color: 'black' }}>Vehicle Information:</h5>
+                            <h5 style={{ color: 'black' }}>Thông tin chiếc xe:</h5>
                             <p>License Plate: {dataVehicle.licensePlate}</p>
                             <p>Manufacturer: {dataVehicle.manufacturer}</p>
                             <p>Model: {dataVehicle.model}</p>
@@ -349,7 +349,7 @@ const RentalHistory = () => {
 
 
                         <div className="information-booking">
-                            <h5 style={{ color: 'black' }}>Booking Information:</h5>
+                            <h5 style={{ color: 'black' }}>Thông tin đặt xe:</h5>
                             <div className="d-flex "><p className="total_price">Total price:  </p>
                                 <p className="total_price_money">{(dataBookingDetail?.totalPrice)?.toLocaleString('vi', { style: 'currency', currency: 'VND' })}</p>
                             </div>

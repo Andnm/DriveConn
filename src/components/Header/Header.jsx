@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from 'react'
+import React, { useContext, useState } from 'react'
 import { Container, DropdownItem } from "reactstrap";
 import { Link, NavLink } from "react-router-dom";
 import "./header.css";
@@ -9,7 +9,6 @@ import Login from '../../pages/Auth/Login/Login'
 import Signup from '../../pages/Auth/Signup/Signup'
 import LoadingCar from '../LoadingCar/LoadingCar'
 import incognitoAvatar from '../../assets/all-images/avatar.jpg'
-
 
 const Header = () => {
 
@@ -91,7 +90,7 @@ const Header = () => {
                   }}
                   className="btn btn-outline-light"
                 >
-                  Log in
+                  Đăng nhập
                 </button>
                 <Login open={modalLoginOpen} onClose={() => setModalLoginOpen(false)} />
 
@@ -101,7 +100,7 @@ const Header = () => {
                   }}
                   className="btn btn-light"
                 >
-                  Sign up
+                  Đăng ký
                 </button>
                 <Signup open={modalSignupOpen} onClose={() => setModalSignupOpen(false)} />
               </div>
@@ -115,7 +114,7 @@ const Header = () => {
                   }}
                   className="btn btn-outline-light"
                 >
-                  Log in
+                  Đăng nhập
                 </button>
                 <Login open={modalLoginOpen} onClose={() => setModalLoginOpen(false)} />
 
@@ -125,7 +124,7 @@ const Header = () => {
                   }}
                   className="btn btn-light"
                 >
-                  Sign up
+                  Đăng ký
                 </button>
                 <Signup open={modalSignupOpen} onClose={() => setModalSignupOpen(false)} />
               </div>
@@ -148,17 +147,16 @@ const Header = () => {
                   </Dropdown.Toggle>
 
                   <Dropdown.Menu>
-                    <Link to="/profile">Profile</Link>
+                    <Link to="/profile">Thông tin tài khoản</Link>
 
                     {(userDecode?.role_id?.roleName === 'Customer')
-                      ? <Link to="/booking_history">Booking History</Link>
+                      ? <Link to="/booking_history">Lịch sử đặt xe</Link>
                       : <>
-                        <Link to="/vehicle_registration">Vehicle Registration</Link>
-                        <Link to="/rental_history">Rental History</Link>
+                        <Link to="/vehicle_registration">Xe của tôi</Link>
+                        <Link to="/rental_history">Lịch sử cho thuê</Link>
                       </>
-
                     }
-                    <DropdownItem onClick={handleLogout}>Log out</DropdownItem>
+                    <DropdownItem onClick={handleLogout}>Đăng xuất</DropdownItem>
                   </Dropdown.Menu>
                 </Dropdown>
               </div>

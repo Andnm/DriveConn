@@ -17,8 +17,8 @@ const AboutSection = ({ aboutClass }) => {
         <Row>
           <Col lg="6" md="6">
             <div className="about__section-content">
-              <h4 className="section__subtitle">About Us</h4>
-              <h2 className="section__title">Welcome to Vehicle rent service</h2>
+              <h4 className="section__subtitle">Thông tin chúng tôi</h4>
+              <h2 className="section__title">Chào mừng tới dịch vụ cho thuê xe</h2>
               <p className="section__description">
                 Lorem ipsum dolor sit amet consectetur, adipisicing elit.
                 Voluptatum blanditiis esse accusantium dignissimos labore

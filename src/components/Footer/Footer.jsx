@@ -3,7 +3,6 @@ import { Container, Row, Col, ListGroup, ListGroupItem } from "reactstrap";
 import { Link } from "react-router-dom";
 import "./footer.css";
 import logo from '../../assets/all-images/logo/Final_DriveConn_logo.png'
-import banner_footer from '../../assets/all-images/banner-footer.png'
 
 const quickLinks = [
   {
@@ -68,9 +67,9 @@ const Footer = () => {
                 <p className="office__info">123 abc xyz</p>
                 <p className="office__info">Phone: +09xxxxxxxx</p>
 
-                <p className="office__info">Email: aibietgidau@gmail.com</p>
+                <p className="office__info">Email: infor.driveconn@gmail.com</p>
 
-                <p className="office__info">Office Time: All day</p>
+                <p className="office__info">Thời gian hoạt động: 8am - 17pm</p>
               </div>
             </Col>
 

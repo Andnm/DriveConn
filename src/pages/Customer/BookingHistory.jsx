@@ -264,13 +264,13 @@ const BookingHistory = () => {
 
   return (
     <Container className="mb-5">
-      <h3 className="mt-5">Booking History </h3>
+      <h3 className="mt-5">Lịch sử đặt xe</h3>
 
       {isLoading ? 
         <LoadingCar className={'blank-container'}/>
         :
         <>{!data
-          ? <p>You have never booked, just bring your ass to travel and rent a car. <Link to="/vehicles" style={{ textDecoration: 'underline !important' }}>Booking now!</Link></p>
+          ? <p>Bạn chưa đặt xe lần nào. <Link to="/vehicles" style={{ textDecoration: 'underline !important' }}>Đặt xe ngay!</Link></p>
           : <div>
 
             <div class="input-group" style={{ marginBottom: '30px' }}>
@@ -315,17 +315,17 @@ const BookingHistory = () => {
           padding: '20px'
         },
       }}>
-        <h4 style={{ marginBottom: '30px' }}>Are you sure want to cancel this booking?</h4>
+        <h4 style={{ marginBottom: '30px' }}>Bạn có chắc muốn hủy chuyến xe này?</h4>
         <div>
           <div class="form-floating">
             <textarea class="form-control" placeholder="Leave a comment here" id="floatingTextarea2" style={{ height: '200px' }}></textarea>
-            <label for="floatingTextarea2">Reason for canceling</label>
+            <label for="floatingTextarea2">Lý do hủy</label>
           </div>
         </div>
 
         <div className="confirm_cancel_booking" style={{ marginTop: '20px' }}>
-          <button onClick={closeModalConfirm} className='btn btn-outline-secondary'>Cancel</button>
-          <button onClick={handleCancelRental} className='btn btn-primary'>Confirm</button>
+          <button onClick={closeModalConfirm} className='btn btn-outline-secondary'>Hủy</button>
+          <button onClick={handleCancelRental} className='btn btn-primary'>Xác nhận</button>
         </div>
       </Modal>
 
@@ -345,13 +345,13 @@ const BookingHistory = () => {
       }}>
         <div className="modal-content">
           <div className="modal-header">
-            <h3>Booking Detail</h3>
+            <h3>Thông tin chi tiết cuốc xe</h3>
             <button onClick={closeModalDetail} className="btn-close"></button>
           </div>
 
           <hr style={{ width: '100%', margin: '0px' }}></hr>
           <div class="modal-body">
-            <p>License Plate: {dataVehicle.licensePlate}</p>
+            <p>Biển số xe: {dataVehicle.licensePlate}</p>
             <p>Manufacturer: {dataVehicle.manufacturer}</p>
             <p>Model: {dataVehicle.model}</p>
             <p>Transmission: {dataVehicle.transmission}</p>

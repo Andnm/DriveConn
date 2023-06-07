@@ -7,7 +7,6 @@ import SearchBar from "../../components/UI/SearchBar";
 import { AuthContext } from "../../context/authContext";
 import Pagination from "../../components/UI/Pagination";
 import 'react-confirm-alert/src/react-confirm-alert.css';
-import empty from "../../assets/all-images/empty.png";
 import { cancelBookingById, getBookingList } from "../../api/booking";
 import { DATE_FORMAT } from "../../constants/default";
 import LoadingCar from '../../components/LoadingCar/LoadingCar'
@@ -105,28 +104,28 @@ const BookingManagement = () => {
                         <thead>
                             <tr>
                                 <th scope="col">
-                                    Actions
+                                    Thao tác
                                 </th>
                                 <th scope="col" style={{ width: '15%' }}>
-                                    License plate
+                                    Biển số xe
                                 </th>
                                 <th scope="col">
-                                    From
+                                    Từ
                                 </th>
                                 <th scope="col">
-                                    To
+                                    Đến
                                 </th>
                                 <th scope="col" style={{ width: '15%' }}>
-                                    Customer
+                                    Khách hàng
                                 </th>
                                 <th scope="col">
-                                    Price
+                                    Tổng tiền
                                 </th>
                                 <th scope="col">
                                     Has driver
                                 </th>
                                 <th scope="col">
-                                    Status
+                                    Trạng thái
                                 </th>
                             </tr>
                         </thead>

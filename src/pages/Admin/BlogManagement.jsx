@@ -2,7 +2,7 @@ import React from 'react'
 
 const BlogManage = () => {
   return (
-    <div>BlogManage</div>
+    <div>Quản lý bài viết</div>
   )
 }
 

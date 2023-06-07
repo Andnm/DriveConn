@@ -22,11 +22,11 @@ const HeroSlider = () => {
       <div className="slider__item slider__item-01 mt0">
         <Container>
           <div className="slider__content ">
-            <h4 className="text-light mb-3">For Rent $70 Per Day</h4>
-            <h1 className="text-light mb-4">Booking Now and Get 50% Off</h1>
+            <h4 className="text-light mb-3">Với chỉ 70k/ngày</h4>
+            <h1 className="text-light mb-4">Đặt xe ngay để được giảm giá 50%</h1>
 
             <button className="btn reserve__btn mt-4">
-              <Link to="/vehicles">Booking Now</Link>
+              <Link to="/vehicles">Đặt xe ngay</Link>
             </button>
           </div>
         </Container>
@@ -35,11 +35,11 @@ const HeroSlider = () => {
       <div className="slider__item slider__item-04 mt0">
         <Container>
           <div className="slider__content ">
-            <h4 className="text-light mb-3">For Rent $70 Per Day</h4>
-            <h1 className="text-light mb-4">Booking Now and Get 50% Off</h1>
+            <h4 className="text-light mb-3">Với chỉ 70k/ngày</h4>
+            <h1 className="text-light mb-4">Đặt xe ngay để được giảm giá 50%</h1>
 
             <button className="btn reserve__btn mt-4">
-              <Link to="/vehicles">Booking Now</Link>
+              <Link to="/vehicles">Đặt xe ngay</Link>
             </button>
           </div>
         </Container>
@@ -48,11 +48,11 @@ const HeroSlider = () => {
       <div className="slider__item slider__item-02 mt0">
         <Container>
           <div className="slider__content ">
-            <h4 className="text-light mb-3">For Rent $70 Per Day</h4>
-            <h1 className="text-light mb-4">Booking Now and Get 50% Off</h1>
+            <h4 className="text-light mb-3">Với chỉ 70k/ngày</h4>
+            <h1 className="text-light mb-4">Đặt xe ngay để được giảm giá 50%</h1>
 
             <button className="btn reserve__btn mt-4">
-              <Link to="/vehicles">Booking Now</Link>
+              <Link to="/vehicles">Đặt xe ngay</Link>
             </button>
           </div>
         </Container>
@@ -61,11 +61,11 @@ const HeroSlider = () => {
       <div className="slider__item slider__item-05 mt0">
         <Container>
           <div className="slider__content ">
-            <h4 className="text-light mb-3">For Rent $70 Per Day</h4>
-            <h1 className="text-light mb-4">Booking Now and Get 50% Off</h1>
+            <h4 className="text-light mb-3">Với chỉ 70k/ngày</h4>
+            <h1 className="text-light mb-4">Đặt xe ngay để được giảm giá 50%</h1>
 
             <button className="btn reserve__btn mt-4">
-              <Link to="/vehicles">Booking Now</Link>
+              <Link to="/vehicles">Đặt xe ngay</Link>
             </button>
           </div>
         </Container>
@@ -74,11 +74,11 @@ const HeroSlider = () => {
       <div className="slider__item slider__item-03 mt0">
         <Container>
           <div className="slider__content ">
-            <h4 className="text-light mb-3">For Rent $70 Per Day</h4>
-            <h1 className="text-light mb-4">Booking Now and Get 50% Off</h1>
+            <h4 className="text-light mb-3">Với chỉ 70k/ngày</h4>
+            <h1 className="text-light mb-4">Đặt xe ngay để được giảm giá 50%</h1>
 
             <button className="btn reserve__btn mt-4">
-              <Link to="/vehicles">Booking Now</Link>
+              <Link to="/vehicles">Đặt xe ngay</Link>
             </button>
           </div>
         </Container>
@@ -87,11 +87,11 @@ const HeroSlider = () => {
       <div className="slider__item slider__item-06 mt0">
         <Container>
           <div className="slider__content ">
-            <h4 className="text-light mb-3">For Rent $70 Per Day</h4>
-            <h1 className="text-light mb-4">Booking Now and Get 50% Off</h1>
+            <h4 className="text-light mb-3">Với chỉ 70k/ngày</h4>
+            <h1 className="text-light mb-4">Đặt xe ngay để được giảm giá 50%</h1>
 
             <button className="btn reserve__btn mt-4">
-              <Link to="/vehicles">Booking Now</Link>
+              <Link to="/vehicles">Đặt xe ngay</Link>
             </button>
           </div>
         </Container>

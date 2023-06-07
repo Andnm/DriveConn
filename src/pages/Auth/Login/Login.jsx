@@ -7,7 +7,6 @@ import { validateEmail } from "../../../utils/utils";
 import './login.css'
 import logo_google from '../../../assets/all-images/google/google_logo.png'
 import Modal from 'react-bootstrap/Modal';
-import LoadingCar from "../../../components/LoadingCar/LoadingCar";
 
 function Login({ open, onClose }) {
   const { login, loginWithGoogle, loadingLogin } = useContext(AuthContext);
@@ -17,7 +16,6 @@ function Login({ open, onClose }) {
   const errorAlert = useRef();
   const errorPassword = useRef();
   const inputRef = useRef();
-  const [loading, setLoading] = useState(false);
 
   const [token, setToken] = useState('');
 
@@ -34,19 +32,19 @@ function Login({ open, onClose }) {
 
     if (!email) {
       errorAlert.current.className = "login__errorAlert";
-      errorAlert.current.innerText = "Please enter the email!";
+      errorAlert.current.innerText = "Vui lòng nhập email!";
       inputRef.current.focus();
       return;
     }
 
     if (!validateEmail(email)) {
-      errorAlert.current.innerText = "Email is not valid!";
+      errorAlert.current.innerText = "Email không hợp lệ!";
       return;
     }
 
     if (!password) {
       errorPassword.current.className = "login__errorAlert";
-      errorPassword.current.innerText = "Please enter the password!";
+      errorPassword.current.innerText = "Vui lòng nhập mật khẩu!";
       return;
     }
 
@@ -86,7 +84,7 @@ function Login({ open, onClose }) {
           <Modal.Header closeButton>
           </Modal.Header>
           <div className='right'>
-            <h2 className='from_heading'>Welcome to DriveConn</h2>
+            <h2 className='from_heading'>Chào mừng đến với DriveConn</h2>
             <form onSubmit={handleValidateLogin} className="login__form-content">
               <div className="input-box">
                 <input type="text" className='input'
@@ -111,21 +109,21 @@ function Login({ open, onClose }) {
                   placeholder=" "
                 />
 
-                <label for="">Password</label>
+                <label for="">Mật khẩu</label>
               </div>
               <span ref={errorPassword}>{/* error alert */}</span>
 
-              <button className='btn-login'>Log in</button>
-              <Link to='/forgot_password'>Forgot password?</Link>
+              <button className='btn-login'>Đăng nhập</button>
+              <Link to='/forgot_password'>Quên mật khẩu?</Link>
             </form>
 
             <p className='text'>or</p>
             <button className='google_btn' onClick={loginWithGoogle}>
               <img src={logo_google} alt="google icon" />
-              <span>Log in with Google</span>
+              <span>Đăng nhập với Google</span>
             </button>
             <p className='text'>
-              Don't have account? <Link to="/signup">Sign Up</Link>
+              bạn chưa có sẵn tài khoản? <Link to="/signup">Đăng ký</Link>
             </p>
           </div>
         </div>
