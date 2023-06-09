@@ -1,5 +1,5 @@
-import React, { useContext } from "react";
-import { Routes, Route, Navigate } from "react-router-dom";
+import React from "react";
+import { Routes, Route } from "react-router-dom";
 import Home from "../pages/Home";
 import About from "../pages/About";
 import VehicleListing from "../pages/VehicleListing";
@@ -11,20 +11,27 @@ import Policy from "../pages/Policy";
 import VehicleOwner from "../pages/VehicleOwner";
 
 import Layout from "../components/Layout/Layout";
-import Login from "../pages/Auth/Login/Login";
-import Signup from "../pages/Auth/Signup/Signup";
-import Profile from "../pages/Profile";
-import BookingHistory from "../pages/Customer/BookingHistory";
-import VehicleRegistration from "../pages/Hotelier/VehicleRegistration/VehicleRegistration";
-import RentalHistory from "../pages/Hotelier/RentalHistory/RentalHistory";
-import ForgotPassword from "../pages/Auth/ForgotPassword/ForgotPassword";
-import { AuthContext } from "../context/authContext";
+// import Login from "../pages/Auth/Login/Login";
+// import Signup from "../pages/Auth/Signup/Signup";
+// import Profile from "../pages/Profile";
+// import VehicleRegistration from "../pages/Hotelier/VehicleRegistration/VehicleRegistration";
+// import ForgotPassword from "../pages/Auth/ForgotPassword/ForgotPassword";
+// import { AuthContext } from "../context/authContext";
 
-import ComingSoon from "../pages/ComingSoon";
+// import ComingSoon from "../pages/ComingSoon";
 import Maintenance from "../pages/Maintenance";
+import LayoutAccount from "../components/LayoutAccount/LayoutAccount";
+
+import UserInfo from "../pages/UserInfo/UserInfo";
+import ChangePassword from "../pages/ChangePassword/ChangePassword";
+
+import BookingHistory from "../pages/Customer/BookingHistory/BookingHistory";
+
+import CreateVehicle from "../pages/Accommodation/CreateVehicle/CreateVehicle";
+import RentalHistory from "../pages/Accommodation/RentalHistory/RentalHistory";
 
 const UserRouter = () => {
-  const { currentToken } = useContext(AuthContext);
+  // const { currentToken } = useContext(AuthContext);
 
   return (
     <Routes>
@@ -44,19 +51,31 @@ const UserRouter = () => {
           <Route path="/blogs/:slug" element={<BlogDetails />} />
           <Route path="/contact" element={<Contact />} />
 
-          <Route path="/profile" element={<Profile />} />
+          <Route element={<LayoutAccount />}>
+            {/* --------Share-------- */}
+            <Route path="/my_account" element={<UserInfo />} />
+            <Route path="/change_password" element={<ChangePassword />} />
+
+            {/* --------Cusomter-------- */}
+            <Route path="/booking_history" element={<BookingHistory />} />
+
+            {/* --------Accommodation-------- */}
+            <Route path="/create_vehicle" element={<CreateVehicle />} />
+            <Route path="/rental_history" element={<RentalHistory />} />
+
+            {/* --------Owner-------- */}
+
+          </Route>
+
+          {/* <Route path="/profile" element={<Profile />} />
           <Route path="/booking_history" element={<BookingHistory />} />
           <Route
             path="/vehicle_registration"
             element={<VehicleRegistration />}
           />
-          <Route path="/rental_history" element={<RentalHistory />} />
+          <Route path="/rental_history" element={<RentalHistory />} /> */}
         </Route>
       </>
-
-      <Route path="/login" element={<Login />} />
-      <Route path="/signup" element={<Signup />} />
-      <Route path="/forgot_password" element={<ForgotPassword />} />
     </Routes>
   );
 };

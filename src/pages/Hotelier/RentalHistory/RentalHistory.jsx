@@ -89,21 +89,21 @@ const RentalHistory = () => {
         if (row.bookingStatus === 'Processing') {
             return (
                 <div>
-                    <button class="btn btn-sm btn-outline-success mx-1" onClick={() => openModalConfirm(row._id)}>
-                        <i class="ri-check-line"></i>
+                    <button className="btn btn-sm btn-outline-success mx-1" onClick={() => openModalConfirm(row._id)}>
+                        <i className="ri-check-line"></i>
                     </button>
-                    <button class="btn btn-sm btn-outline-danger mx-1" onClick={() => handleCancelRental(row._id)}>
-                        <i class="ri-close-line"></i>
+                    <button className="btn btn-sm btn-outline-danger mx-1" onClick={() => handleCancelRental(row._id)}>
+                        <i className="ri-close-line"></i>
                     </button>
-                    <button class="btn btn-sm btn-outline-primary mx-1" onClick={() => handleDetailRental(row._id, row.licensePlate)}>
-                        <i class="ri-edit-box-line"></i>
+                    <button className="btn btn-sm btn-outline-primary mx-1" onClick={() => handleDetailRental(row._id, row.licensePlate)}>
+                        <i className="ri-edit-box-line"></i>
                     </button>
                 </div>
             )
         } else {
             return (
-                <button class="btn btn-sm btn-outline-primary mx-1" onClick={() => handleDetailRental(row._id, row.licensePlate)}>
-                    <i class="ri-edit-box-line"></i>
+                <button className="btn btn-sm btn-outline-primary mx-1" onClick={() => handleDetailRental(row._id, row.licensePlate)}>
+                    <i className="ri-edit-box-line"></i>
                 </button>
             );
         }
@@ -282,12 +282,12 @@ const RentalHistory = () => {
             {isLoading ? <LoadingCar className={'blank-container'}/> : (!data
                 ? <p>Bạn chưa từng cho thuê xe nào cả <Link to="/vehicles" style={{ textDecoration: 'underline !important' }}>Cho thuê xe nào!</Link></p>
                 : <div className="App">
-                    <div class="input-group" style={{ marginBottom: '30px' }}>
-                        <div class="form-outline">
-                            <input type="search" id="form1" class="form-control" placeholder="Search" />
+                    <div className="input-group" style={{ marginBottom: '30px' }}>
+                        <div className="form-outline">
+                            <input type="search" id="form1" className="form-control" placeholder="Search" />
                         </div>
-                        <button type="button" class="btn btn-primary" style={{ marginLeft: '20px' }}>
-                            <i class="ri-search-line"></i>
+                        <button type="button" className="btn btn-primary" style={{ marginLeft: '20px' }}>
+                            <i className="ri-search-line"></i>
                         </button>
                     </div>
 
@@ -324,7 +324,7 @@ const RentalHistory = () => {
                 },
             }}>
                 <div className="modal-content">
-                    <div class="modal-header">
+                    <div className="modal-header">
                         <h3>Booking Detail</h3>
                         <button onClick={closeModalDetail} className="btn-close"></button>
                     </div>

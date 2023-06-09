@@ -9,7 +9,7 @@ import logo_google from '../../../assets/all-images/google/google_logo.png'
 import Modal from 'react-bootstrap/Modal';
 
 function Login({ open, onClose }) {
-  const { login, loginWithGoogle, loadingLogin } = useContext(AuthContext);
+  const { login, loginWithGoogle, loginWithFacebook, isLoadingEvent } = useContext(AuthContext);
   const [cookies, setCookie, removeCookie] = useCookies(["error"]);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -69,6 +69,16 @@ function Login({ open, onClose }) {
     }
   };
 
+  const handleLoginWithGoogle = () => {
+    loginWithGoogle()
+    onClose()
+  }
+
+  const handleLoginWithFacebook = () => {
+    loginWithFacebook()
+    onClose()
+  }
+
   useEffect(() => {
     const url = new URL(window.location.href);
     const token = url.searchParams.get('token');
@@ -95,7 +105,7 @@ function Login({ open, onClose }) {
                   }}
                   placeholder=" "
                   ref={inputRef} />
-                <label for="">Email</label>
+                <label htmlFor="">Email</label>
               </div>
               <span ref={errorAlert}>{/* error alert */}</span>
 
@@ -109,7 +119,7 @@ function Login({ open, onClose }) {
                   placeholder=" "
                 />
 
-                <label for="">Mật khẩu</label>
+                <label htmlFor="">Mật khẩu</label>
               </div>
               <span ref={errorPassword}>{/* error alert */}</span>
 
@@ -118,12 +128,16 @@ function Login({ open, onClose }) {
             </form>
 
             <p className='text'>or</p>
-            <button className='google_btn' onClick={loginWithGoogle}>
+            <button className='google_btn' onClick={handleLoginWithGoogle}>
               <img src={logo_google} alt="google icon" />
               <span>Đăng nhập với Google</span>
             </button>
+            <button className='facebook_btn' onClick={handleLoginWithFacebook}>
+              <img src="https://img.icons8.com/color/48/facebook-new.png" alt="facebook icon" />
+              <span>Đăng nhập với Facebook</span>
+            </button>
             <p className='text'>
-              bạn chưa có sẵn tài khoản? <Link to="/signup">Đăng ký</Link>
+              Bạn chưa có sẵn tài khoản? <Link to="/signup">Đăng ký</Link>
             </p>
           </div>
         </div>

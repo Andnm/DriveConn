@@ -4,7 +4,7 @@ import Button from 'react-bootstrap/Button';
 
 const ModalBox = (props) => {
 
-    const {open, onClose, title, body, btnAction, centerAction} = props;
+    const { open, onClose, centerAction, title, body, btnActionNo, btnActionYes, eventToContinue } = props;
 
     return (
         <Modal show={open} onHide={onClose} centered={centerAction}>
@@ -13,8 +13,11 @@ const ModalBox = (props) => {
             </Modal.Header>
             <Modal.Body>{body}</Modal.Body>
             <Modal.Footer>
-                <Button variant="primary" onClick={onClose}>
-                    {btnAction}
+                <Button variant="secondary" onClick={onClose}>
+                    {btnActionNo}
+                </Button>
+                <Button variant="primary" onClick={eventToContinue} >
+                    {btnActionYes}
                 </Button>
             </Modal.Footer>
         </Modal>

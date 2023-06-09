@@ -1,0 +1,49 @@
+.option-account-container {
+  width: 25%
+}
+
+.option-account-container .title {
+  font-weight: 550;
+  font-size: 30px;
+}
+
+.option-account-container .sidebar-account {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.option-account-container .sidebar-account .active {
+  font-weight: 550;
+  border-left: 4px solid blue;
+  border-right: 4px solid blue;
+  color: #000d6b !important;
+}
+
+.option-account-container .sidebar-account .active i {
+  font-weight: 700;
+  color: #000d6b;
+}
+
+.option-account-container .sidebar-account .link-option-account {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  padding: 16px;
+  color: black;
+  border-top: 1px solid gray;
+}
+
+.option-account-container .sidebar-account .link-option-account:hover {
+  font-weight: 550;
+  color: #000d6b;
+}
+
+.option-account-container .sidebar-account div {
+  cursor: pointer;
+}
+
+.link-option-account:hover .bold-icon {
+  font-weight: 700;
+  color: #000d6b;
+}

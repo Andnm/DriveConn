@@ -12,7 +12,7 @@ import incognitoAvatar from '../../assets/all-images/avatar.jpg'
 
 const Header = () => {
 
-  const { currentToken, logout, userDecode, loadingLogin } = useContext(AuthContext);
+  const { currentToken, logout, userDecode, isLoadingEvent } = useContext(AuthContext);
   const [modalLoginOpen, setModalLoginOpen] = useState(false);
   const [modalSignupOpen, setModalSignupOpen] = useState(false);
   const [isOpenCurrentPwdModal, setIsOpenCurrentPwdModal] = useState(false)
@@ -133,17 +133,22 @@ const Header = () => {
             {userDecode && Object.keys(userDecode).length !== 0 && (
               <div className='headerAfterLogin gap-3'>
                 <div className='bell'>
-                  <i class="ri-notification-4-line"></i>
+                  <i className="ri-notification-4-line"></i>
                 </div>
 
-                <div className="avatar-profile">
-                  <img src={userDecode?.imgURL || incognitoAvatar}
-                    alt={userDecode?.imgURL ? "UserAva" : "IncognitoAva"} />
+                <div className='personal-page'>
+                  <NavLink to="/my_account" className='d-flex gap-3 justify-content-center align-items-center' >
+                    <div className="avatar-profile">
+                      <img src={userDecode?.imgURL || incognitoAvatar}
+                        alt={userDecode?.imgURL ? "UserAva" : "IncognitoAva"} />
+                    </div>
+                    <p >{userDecode?.lastName + ' ' + userDecode?.firstName}</p>
+                  </NavLink>
                 </div>
 
-                <Dropdown>
+                {/* <Dropdown>
                   <Dropdown.Toggle variant="primary" id="dropdown-basic">
-                    {userDecode?.lastName}
+                    {userDecode?.firstName}
                   </Dropdown.Toggle>
 
                   <Dropdown.Menu>
@@ -158,11 +163,13 @@ const Header = () => {
                     }
                     <DropdownItem onClick={handleLogout}>Đăng xuất</DropdownItem>
                   </Dropdown.Menu>
-                </Dropdown>
+                </Dropdown> */}
+
               </div>
+             
             )}
 
-            {loadingLogin && <LoadingCar style={{ backgroundColor: '#e5e5e5', opacity: '0.5' }} />}
+            {isLoadingEvent && <LoadingCar style={{ backgroundColor: '#e5e5e5', opacity: '0.5' }} />}
           </div>
         </Container >
       </div >

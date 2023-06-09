@@ -123,7 +123,24 @@ a {
   font-size: 30px;
 }
 
-.separation-line {
+.menu .separation-line {
   border-right: 2px solid white;
-  height: 40px
+  height: 40px;
+}
+
+.personal-page {
+  cursor: pointer;
+}
+
+.personal-page a p {
+  margin-bottom: 0px;
+  color: white;
+}
+
+.personal-page:hover p {
+  color: #f9a826;
+}
+
+.personal-page .active p {
+  color: #f9a826 !important;
 }

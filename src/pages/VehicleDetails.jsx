@@ -292,7 +292,7 @@ const VehicleDetails = () => {
 
                   <label htmlFor="start-date">Start booking date:</label>
                   <div className="input_date">
-                    <i class="ri-calendar-2-line"></i>
+                    <i className="ri-calendar-2-line"></i>
                     <DatePicker
                       id="start-date"
                       selected={startDate}
@@ -305,7 +305,7 @@ const VehicleDetails = () => {
 
                   <label htmlFor="end-date">End booking Date:</label>
                   <div className="input_date">
-                    <i class="ri-calendar-2-line"></i>
+                    <i className="ri-calendar-2-line"></i>
                     <DatePicker
                       id="end-date"
                       selected={endDate}
@@ -318,16 +318,16 @@ const VehicleDetails = () => {
 
                   <div className="payments">
                     <h3>Payment</h3>
-                    <div class="form-check">
-                      <input class="form-check-input" type="radio" name="payment" id="no-payment" value='no-payment' onChange={handlePayment} checked />
-                      <label class="form-check-label" for="no-payment">
+                    <div className="form-check">
+                      <input className="form-check-input" type="radio" name="payment" id="no-payment" value='no-payment' onChange={handlePayment} checked />
+                      <label className="form-check-label" htmlFor="no-payment">
                         Pay when receiving the vehicle
                       </label>
                     </div>
 
-                    <div class="form-check">
-                      <input class="form-check-input" type="radio" name="payment" id="paypal-payment" value="paypal-payment" onChange={handlePayment} />
-                      <label class="form-check-label" for="paypal-payment">
+                    <div className="form-check">
+                      <input className="form-check-input" type="radio" name="payment" id="paypal-payment" value="paypal-payment" onChange={handlePayment} />
+                      <label className="form-check-label" htmlFor="paypal-payment">
                         Payment via Paypal
                       </label>
                     </div>

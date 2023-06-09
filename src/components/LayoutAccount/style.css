@@ -1,0 +1,25 @@
+.separate-line-line-layout-account {
+  border-left: 1px solid;
+}
+
+.content-option-container {
+  width: 75%;
+}
+
+@media only screen and (max-width: 1400px) {
+  .content-option-container {
+    width: 80%;
+  }
+
+  .option-account-container {
+    width: 20%;
+  }
+
+  .profile-container .user-profile .left .avatar-user img {
+    width: 200px !important;
+  }
+
+  .profile-container .gap-5{
+    gap: 1rem !important
+  }
+}

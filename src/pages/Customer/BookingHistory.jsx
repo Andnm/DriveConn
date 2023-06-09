@@ -82,18 +82,18 @@ const BookingHistory = () => {
     if (row.bookingStatus === 'Processing') {
       return (
         <div>
-          <button class="btn btn-sm btn-outline-danger mx-1" onClick={() => openModalConfirm(row._id)}>
-            <i class="ri-close-line"></i>
+          <button className="btn btn-sm btn-outline-danger mx-1" onClick={() => openModalConfirm(row._id)}>
+            <i className="ri-close-line"></i>
           </button>
-          <button class="btn btn-sm btn-outline-primary mx-1" onClick={() => handleDetailRental(row._id, row.licensePlate)}>
-            <i class="ri-edit-box-line"></i>
+          <button className="btn btn-sm btn-outline-primary mx-1" onClick={() => handleDetailRental(row._id, row.licensePlate)}>
+            <i className="ri-edit-box-line"></i>
           </button>
         </div>
       )
     } else {
       return (
-        <button class="btn btn-sm btn-outline-primary mx-1" onClick={() => handleDetailRental(row._id)}>
-          <i class="ri-edit-box-line"></i>
+        <button className="btn btn-sm btn-outline-primary mx-1" onClick={() => handleDetailRental(row._id)}>
+          <i className="ri-edit-box-line"></i>
         </button>
       );
     }
@@ -273,12 +273,12 @@ const BookingHistory = () => {
           ? <p>Bạn chưa đặt xe lần nào. <Link to="/vehicles" style={{ textDecoration: 'underline !important' }}>Đặt xe ngay!</Link></p>
           : <div>
 
-            <div class="input-group" style={{ marginBottom: '30px' }}>
-              <div class="form-outline">
-                <input type="search" id="form1" class="form-control" placeholder="Search" />
+            <div className="input-group" style={{ marginBottom: '30px' }}>
+              <div className="form-outline">
+                <input type="search" id="form1" className="form-control" placeholder="Search" />
               </div>
-              <button type="button" class="btn btn-primary" style={{ marginLeft: '20px' }}>
-                <i class="ri-search-line"></i>
+              <button type="button" className="btn btn-primary" style={{ marginLeft: '20px' }}>
+                <i className="ri-search-line"></i>
               </button>
             </div>
 
@@ -317,9 +317,9 @@ const BookingHistory = () => {
       }}>
         <h4 style={{ marginBottom: '30px' }}>Bạn có chắc muốn hủy chuyến xe này?</h4>
         <div>
-          <div class="form-floating">
-            <textarea class="form-control" placeholder="Leave a comment here" id="floatingTextarea2" style={{ height: '200px' }}></textarea>
-            <label for="floatingTextarea2">Lý do hủy</label>
+          <div className="form-floating">
+            <textarea className="form-control" placeholder="Leave a comment here" id="floatingTextarea2" style={{ height: '200px' }}></textarea>
+            <label htmlFor="floatingTextarea2">Lý do hủy</label>
           </div>
         </div>
 
@@ -350,7 +350,7 @@ const BookingHistory = () => {
           </div>
 
           <hr style={{ width: '100%', margin: '0px' }}></hr>
-          <div class="modal-body">
+          <div className="modal-body">
             <p>Biển số xe: {dataVehicle.licensePlate}</p>
             <p>Manufacturer: {dataVehicle.manufacturer}</p>
             <p>Model: {dataVehicle.model}</p>

@@ -6,16 +6,18 @@ import jwt_decode from "jwt-decode";
 import Cookies from "js-cookie";
 import API_URL from "../api/Router";
 
-import {auth, provider} from "../config/configFirebase"
-import {signInWithPopup} from "firebase/auth"
+import {
+  auth,
+  providerGoogle,
+  providerFacebook,
+} from "../config/configFirebase";
+import { signInWithPopup } from "firebase/auth";
 export const AuthContext = createContext({});
-
-{/* <LoadingCar style={{backgroundColor: '#e5e5e5', opacity: '0.5'}}/> */}
 
 export default function AuthContextProvider({ children }) {
   const navigate = useNavigate();
   const [currentToken, setCurrentToken] = useState(Cookies.get("token"));
-  const [loadingLogin, setLoadingLogin] = useState(false);
+  const [isLoadingEvent, setIsLoadingEvent] = useState(false);
 
   const [userDecode, setUserDecode] = useState(() => {
     const storedItem = localStorage.getItem("user");
@@ -31,15 +33,19 @@ export default function AuthContextProvider({ children }) {
   }, [currentToken]);
 
   useEffect(() => {
-    localStorage.setItem("user", userDecode && Object.keys(userDecode).length ? JSON.stringify(userDecode) : null);
-  }, [userDecode])
+    localStorage.setItem(
+      "user",
+      userDecode && Object.keys(userDecode).length
+        ? JSON.stringify(userDecode)
+        : null
+    );
+  }, [userDecode]);
 
-  // console.log(currentToken);
-  // Functions
+  // function login normally
   const login = async (inputs) => {
     try {
-      setLoadingLogin(true)
-      
+      setIsLoadingEvent(true);
+
       const res = await axios.post(`${API_URL}` + "/api/auth/login", {
         ...inputs,
       });
@@ -56,58 +62,164 @@ export default function AuthContextProvider({ children }) {
         },
       };
 
-      const resUser = await axios.get(`${API_URL}` + `/api/users/${user.user.id}`, config)
+      const resUser = await axios.get(
+        `${API_URL}` + `/api/users/${user.user.id}`,
+        config
+      );
       setUserDecode(resUser?.data ?? {});
       // navigate("/");
-      setLoadingLogin(false)
+      setIsLoadingEvent(false);
 
       if (["Admin"].includes(user.user.roleName)) {
         navigate("/admin");
       } else {
-        navigate("/profile");
+        navigate("/my_account");
       }
     } catch (error) {
-      toast.error('Gmail or password is not correct');
+      toast.error("Gmail or password is not correct");
       // if(error?.response?.data) {
-      setLoadingLogin(false)
+      setIsLoadingEvent(false);
       // }
     }
   };
 
+  //-------------------HANDLE LOGIN WITH GOOGLE----------------------
+  //function handle displayName into firstName and lastName
+  const splitFullName = (fullName) => {
+    const nameArray = fullName.trim().split(" ");
 
-  //function login with google
-  const [value, setValue] = useState('')
+    let firstName = "";
+    let lastName = "";
+    if (nameArray.length >= 3) {
+      firstName = nameArray.slice(0, 2).join(" ");
+      lastName = nameArray.slice(2).join(" ");
+    } else {
+      firstName = nameArray.slice(0, 1).join(" ");
+      lastName = nameArray.slice(1).join(" ");
+    }
 
+    return { firstName, lastName };
+  };
+
+  //function login with google by firebase
   const loginWithGoogle = async () => {
-  
-    signInWithPopup(auth, provider).then((data) => {
-      setValue(data.user.email)
-      console.log(data.user)
-      localStorage.setItem("email", data.user.email)
-      navigate("/profile");
-    })
-    
-  }
+    signInWithPopup(auth, providerGoogle).then(async (data) => {
+      setIsLoadingEvent(true);
+      const { firstName: firstName, lastName: lastName } = splitFullName(
+        data.user.displayName
+      );
 
-  useEffect(() => {
-    setValue(localStorage.getItem('email'))
-  })
+      const userInfo = {
+        firstName: firstName,
+        lastName: lastName,
+        email: data.user.email,
+        imgURL: data.user.photoURL,
+      };
+
+      const res = await axios.post(`${API_URL}/api/auth/loginGoogle`, userInfo);
+
+      const token = res.data.accessToken;
+      setCurrentToken(token);
+
+      const user = jwt_decode(token);
+
+      const config = {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+      };
+
+      const resUser = await axios.get(
+        `${API_URL}` + `/api/users/${user.user.id}`,
+        config
+      );
+
+      setUserDecode(resUser?.data ?? {});
+      setIsLoadingEvent(false);
+
+      if (["Admin"].includes(user.user.roleName)) {
+        navigate("/admin");
+      } else {
+        navigate("/my_account");
+      }
+    });
+  };
 
   //function logout
   const logout = async () => {
     try {
+      setIsLoadingEvent(true);
       await axios.post(`${API_URL}` + "/api/auth/logout");
       setCurrentToken(null);
-      setUserDecode({})
+      setUserDecode({});
+      setIsLoadingEvent(false);
       navigate("/home");
     } catch (err) {
       console.log(err);
     }
   };
 
+  //-------------------HANDLE LOGIN WITH FACEBOOK----------------------
+  const loginWithFacebook = async () => {
+    signInWithPopup(auth, providerFacebook).then((data) => {
+      // setIsLoadingEvent(true);
+
+      // const { firstName: firstName, lastName: lastName } = splitFullName(
+      //   data.user.displayName
+      // );
+
+      console.log(data.user);
+      navigate("/home")
+
+      // const userInfo = {
+      //   firstName: firstName,
+      //   lastName: lastName,
+      //   email: data.user.email,
+      //   imgURL: data.user.photoURL,
+      // };
+
+      // const res = await axios.post(`${API_URL}/api/auth/loginGoogle`, userInfo);
+
+      // const token = res.data.accessToken;
+      // setCurrentToken(token);
+
+      // const user = jwt_decode(token);
+
+      // const config = {
+      //   headers: {
+      //     "Content-Type": "application/json",
+      //     Authorization: `Bearer ${token}`,
+      //   },
+      // };
+
+      // const resUser = await axios.get(
+      //   `${API_URL}` + `/api/users/${user.user.id}`,
+      //   config
+      // );
+
+      // setUserDecode(resUser?.data ?? {});
+      // setIsLoadingEvent(false);
+
+      // if (["Admin"].includes(user.user.roleName)) {
+      //   navigate("/admin");
+      // } else {
+      //   navigate("/my_account");
+      // }
+    });
+  };
+
   return (
     <AuthContext.Provider
-      value={{ userDecode, currentToken, login, logout, loginWithGoogle, loadingLogin}}
+      value={{
+        userDecode,
+        currentToken,
+        login,
+        logout,
+        loginWithGoogle,
+        isLoadingEvent,
+        loginWithFacebook,
+      }}
     >
       {children}
     </AuthContext.Provider>

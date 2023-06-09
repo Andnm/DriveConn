@@ -1,0 +1,176 @@
+.profile-container {
+}
+
+.profile-container .title {
+  font-weight: 550;
+  font-size: 30px;
+}
+
+.profile-container .user-profile {
+}
+
+.profile-container .user-profile .left {
+  width: 25%;
+}
+
+.profile-container .user-profile .left .avatar-user img {
+  width: 250px;
+  height: auto;
+}
+
+.profile-container .user-profile .right {
+  width: 75%;
+}
+
+.profile-container .user-profile .right p {
+  margin-bottom: 0px;
+}
+
+.profile-container .user-profile .right .header {
+}
+
+.profile-container .user-profile .right .header .top-header {
+  width: 100%;
+}
+
+.profile-container .user-profile .right .header .top-header .edit-profile {
+  color: rgb(161, 159, 159);
+  cursor: pointer;
+}
+
+.profile-container
+  .user-profile
+  .right
+  .header
+  .top-header
+  .left-top-header
+  .user-name {
+  font-size: 35px;
+  color: #000d6b;
+}
+
+.profile-container
+  .user-profile
+  .right
+  .header
+  .top-header
+  .left-top-header
+  .user-location {
+  color: gray;
+}
+
+.profile-container .user-profile .right .header .role-name {
+  color: #2437c5;
+  font-weight: bold;
+}
+
+.profile-container .user-profile .right .header .rate-section {
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+.profile-container .user-profile .right .header .rate-section .title-rate {
+  color: gray;
+}
+
+.profile-container .user-profile .right .header .rate-section .rate-data {
+  font-size: 25px;
+}
+
+.profile-container
+  .user-profile
+  .right
+  .header
+  .rate-section
+  .rate-data
+  .score {
+  font-weight: bold;
+}
+
+.profile-container .user-profile .right .header .rate-section .rate-data .star {
+  margin-left: 20px;
+}
+
+.star .ri-star-fill {
+  color: #2437c5;
+}
+
+.star .ri-star-line {
+  color: #2437c5;
+}
+
+.profile-container .user-profile .right .main .main-top {
+  border-bottom: 3px solid #d9d0d0;
+  position: relative;
+}
+
+.profile-container .user-profile .right .main .main-top a {
+  text-decoration: none;
+  color: gray;
+}
+
+.profile-container .user-profile .right .main .main-top a:hover {
+  color: black;
+}
+
+.profile-container .user-profile .right .main .main-top .active {
+  color: black;
+  border-bottom: 3px solid #3498db;
+}
+
+.profile-container .user-profile .right .main .main-top .about {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.profile-container .user-profile .right .main .main-top .timeline {
+  position: relative;
+  z-index: 1;
+  left: 115px;
+}
+
+/* .profile-container .user-profile .right .main .main-info {
+  height: 250px;
+} */
+
+.profile-container .user-profile .right .main .main-info .contact-info ,
+.profile-container .user-profile .right .main .main-info .basic-info {
+  margin-top: 25px;
+}
+
+.profile-container .user-profile .right .main .main-info .contact-info .text-header,
+.profile-container .user-profile .right .main .main-info .basic-info .text-header{
+  margin-bottom: 15px;
+  color: gray;
+  text-transform: uppercase;
+  font-size: 15px;
+}
+
+.profile-container .user-profile .right .main .main-info .contact-info .content,
+.profile-container .user-profile .right .main .main-info .basic-info .content{
+  width: 50%;
+}
+
+.profile-container .user-profile .right .main .main-info .contact-info .content .label-info,
+.profile-container .user-profile .right .main .main-info .basic-info .content .label-info{
+  width: 40%;
+}
+
+.profile-container .user-profile .right .main .main-info .contact-info .content .label-info p,
+.profile-container .user-profile .right .main .main-info .basic-info .content .label-info p{
+  margin-top: 10px;
+}
+
+.profile-container .user-profile .right .main .main-info .contact-info .content .input-info p,
+.profile-container .user-profile .right .main .main-info .basic-info .content .input-info p{
+  margin-top: 10px;
+}
+
+
+
+
+
+
+

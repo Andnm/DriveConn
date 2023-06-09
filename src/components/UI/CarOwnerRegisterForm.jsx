@@ -107,13 +107,13 @@ const RegisterForm = () => {
                     </FormGroup>
                     <FormGroup check inline>
                         <Input type="radio" name="insured" id="insured_yes" value="true" onChange={(event) => handleChange(event, "insured")} checked />
-                        <Label for="insured_yes" check>
+                        <Label htmlFor="insured_yes" check>
                             Yes
                         </Label>
                     </FormGroup>
                     <FormGroup check inline >
                         <Input type="radio" name="insured" id="insured_no" value="false" onChange={(event) => handleChange(event, "insured")} />
-                        <Label for="insured_no" check>
+                        <Label htmlFor="insured_no" check>
                             No
                         </Label>
                     </FormGroup>

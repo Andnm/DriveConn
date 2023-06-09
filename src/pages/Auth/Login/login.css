@@ -43,7 +43,7 @@
   border-radius: 50px !important;
 }
 
-.right {
+.form_container .right {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -141,7 +141,7 @@
   color: #000d6b;
 }
 
-.google_btn {
+.google_btn, .facebook_btn {
   width: 230px;
   height: 40px;
   border-radius: 5px;
@@ -167,11 +167,22 @@
   object-fit: cover;
 }
 
+
+.facebook_btn > img {
+  width: 35px;
+  height: 35px;
+  object-fit: cover;
+}
+
 .google_btn > span {
   margin-left: 10px;
 }
 
-.right .home-icon {
+.facebook_btn > span {
+  margin-left: 10px;
+}
+
+.form_container .right .home-icon {
   position: absolute;
   top: -60px;
   left: 30px;
