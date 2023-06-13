@@ -1,6 +1,10 @@
 .profile-container {
 }
 
+.user-profile p {
+  margin-bottom: 0px;
+}
+
 .profile-container .title {
   font-weight: 550;
   font-size: 30px;
@@ -14,8 +18,72 @@
 }
 
 .profile-container .user-profile .left .avatar-user img {
-  width: 250px;
+  width: 100%;
   height: auto;
+}
+
+.profile-container .user-profile .left .another-info {
+}
+
+.profile-container .user-profile .add-something {
+  cursor: pointer;
+}
+
+.profile-container .user-profile .left .another-info .driving-license {
+}
+
+.profile-container .user-profile .left .another-info .driving-license .header,
+.citizen-identification .header {
+  display: flex;
+  justify-content: space-between;
+}
+
+.driving-license .header .text,
+.citizen-identification .header .text {
+  color: #808080;
+}
+
+.driving-license .header .line,
+.citizen-identification .header .line {
+  width: 80%;
+  border-bottom: 2px solid #808080;
+  transform: translateY(-10px);
+}
+
+.driving-license .content {
+}
+
+.driving-license-motorbike, .driving-license-car {
+  height: 50px;
+}
+
+.verified-box,
+.unverified-box {
+  /* width: 65%; */
+  align-items: center;
+  justify-content: center;
+  padding: 4px 6px;
+  border-radius: 100px;
+  font-weight: 500;
+  color: #262626;
+}
+
+.verified-box {
+  background-color: #cff1db;
+}
+
+.unverified-box {
+  background-color: #ffd0cd;
+}
+
+.verified-box .ri-checkbox-circle-fill {
+  color: green;
+  font-size: 25px;
+}
+
+.unverified-box .ri-close-circle-fill {
+  color: red;
+  font-size: 25px;
 }
 
 .profile-container .user-profile .right {
@@ -135,13 +203,25 @@
   height: 250px;
 } */
 
-.profile-container .user-profile .right .main .main-info .contact-info ,
+.profile-container .user-profile .right .main .main-info .contact-info,
 .profile-container .user-profile .right .main .main-info .basic-info {
   margin-top: 25px;
 }
 
-.profile-container .user-profile .right .main .main-info .contact-info .text-header,
-.profile-container .user-profile .right .main .main-info .basic-info .text-header{
+.profile-container
+  .user-profile
+  .right
+  .main
+  .main-info
+  .contact-info
+  .text-header,
+.profile-container
+  .user-profile
+  .right
+  .main
+  .main-info
+  .basic-info
+  .text-header {
   margin-bottom: 15px;
   color: gray;
   text-transform: uppercase;
@@ -149,28 +229,67 @@
 }
 
 .profile-container .user-profile .right .main .main-info .contact-info .content,
-.profile-container .user-profile .right .main .main-info .basic-info .content{
-  width: 50%;
+.profile-container .user-profile .right .main .main-info .basic-info .content {
+  width: 100%;
 }
 
-.profile-container .user-profile .right .main .main-info .contact-info .content .label-info,
-.profile-container .user-profile .right .main .main-info .basic-info .content .label-info{
-  width: 40%;
+.profile-container
+  .user-profile
+  .right
+  .main
+  .main-info
+  .contact-info
+  .content
+  .label-info,
+.profile-container
+  .user-profile
+  .right
+  .main
+  .main-info
+  .basic-info
+  .content
+  .label-info {
+  width: 30%;
 }
 
-.profile-container .user-profile .right .main .main-info .contact-info .content .label-info p,
-.profile-container .user-profile .right .main .main-info .basic-info .content .label-info p{
+.profile-container
+  .user-profile
+  .right
+  .main
+  .main-info
+  .contact-info
+  .content
+  .label-info
+  p,
+.profile-container
+  .user-profile
+  .right
+  .main
+  .main-info
+  .basic-info
+  .content
+  .label-info
+  p {
   margin-top: 10px;
 }
 
-.profile-container .user-profile .right .main .main-info .contact-info .content .input-info p,
-.profile-container .user-profile .right .main .main-info .basic-info .content .input-info p{
+.profile-container
+  .user-profile
+  .right
+  .main
+  .main-info
+  .contact-info
+  .content
+  .input-info
+  p,
+.profile-container
+  .user-profile
+  .right
+  .main
+  .main-info
+  .basic-info
+  .content
+  .input-info
+  p {
   margin-top: 10px;
 }
-
-
-
-
-
-
-

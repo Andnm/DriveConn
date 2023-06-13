@@ -1,10 +1,13 @@
 import React from 'react'
 import './style.css'
 
-const LoadingCar = ({ style, className }) => {
+const LoadingCar = ({ background, className }) => {
+
+    const style={ backgroundColor: '#e5e5e5', opacity: '0.5' }
+
     return (
         <div className={className}>
-            <div className="loader" style={style}>
+            <div className="loader" style={background ? style : undefined}>
                 <svg className="car" width="102" height="40" xmlns="http://www.w3.org/2000/svg">
                     <g transform="translate(2 1)" stroke="#0077b6" fill="none" fillRule="evenodd" strokeLinecap="round"
                         strokeLinejoin="round">

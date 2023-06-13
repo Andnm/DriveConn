@@ -65,8 +65,8 @@ const CarListing = () => {
               </div>
             </Col>
 
-            {isLoading ? <div className="d-flex justify-content-center">
-              <LoadingCar className={'blank-container'}/></div> :
+            {isLoading ?
+              <LoadingCar className={'blank-container'} /> :
               carData?.length && carData?.map((item) => (
                 (!item.isRented ? <VehicleItem item={item} key={item.id} /> : '')
               ))

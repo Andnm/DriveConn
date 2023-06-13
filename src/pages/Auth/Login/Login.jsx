@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { useCookies } from "react-cookie";
 import { AuthContext } from "../../../context/authContext";
 import { toast } from "react-toastify";
+import toastOption from "../../../config/toast";
 import { validateEmail } from "../../../utils/utils";
 import './login.css'
 import logo_google from '../../../assets/all-images/google/google_logo.png'
@@ -16,13 +17,14 @@ function Login({ open, onClose }) {
   const errorAlert = useRef();
   const errorPassword = useRef();
   const inputRef = useRef();
+  const [isOpenModal, setIsOpenModal] = useState(false)
 
   const [token, setToken] = useState('');
 
   const [err, setErr] = useState(false);
 
   useEffect(() => {
-    cookies?.error && toast.error(cookies?.error);
+    cookies?.error && toast.error(cookies?.error, toastOption);
     removeCookie("error");
   }, [cookies?.error, removeCookie]);
 
@@ -55,10 +57,10 @@ function Login({ open, onClose }) {
     };
 
     onClose()
+    setEmail('')
+    setPassword('')
     login(loginUser);
   };
-
-  // <LoadingCar style={{backgroundColor: '#e5e5e5', opacity: '0.5'}}></LoadingCar>
 
   const handleOnInput = (e) => {
     if (e.target.value) {
@@ -75,8 +77,9 @@ function Login({ open, onClose }) {
   }
 
   const handleLoginWithFacebook = () => {
-    loginWithFacebook()
+    toast.warning('Tính năng chưa hỗ trợ', toastOption)
     onClose()
+    // loginWithFacebook()
   }
 
   useEffect(() => {
@@ -124,7 +127,7 @@ function Login({ open, onClose }) {
               <span ref={errorPassword}>{/* error alert */}</span>
 
               <button className='btn-login'>Đăng nhập</button>
-              <Link to='/forgot_password'>Quên mật khẩu?</Link>
+              <Link to='/forgot_password' onClick={onClose}>Quên mật khẩu?</Link>
             </form>
 
             <p className='text'>or</p>
@@ -136,6 +139,7 @@ function Login({ open, onClose }) {
               <img src="https://img.icons8.com/color/48/facebook-new.png" alt="facebook icon" />
               <span>Đăng nhập với Facebook</span>
             </button>
+
             <p className='text'>
               Bạn chưa có sẵn tài khoản? <Link to="/signup">Đăng ký</Link>
             </p>

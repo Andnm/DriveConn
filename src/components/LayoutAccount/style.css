@@ -15,10 +15,6 @@
     width: 20%;
   }
 
-  .profile-container .user-profile .left .avatar-user img {
-    width: 200px !important;
-  }
-
   .profile-container .gap-5{
     gap: 1rem !important
   }

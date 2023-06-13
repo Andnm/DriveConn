@@ -5,3 +5,26 @@
   font-weight: 550;
   font-size: 30px;
 }
+
+.change-password-container .content {
+}
+
+.change-password-container .content .note {
+  margin-bottom: 0px;
+}
+
+.change-password-container .content .handle-password-box {
+  padding: 20px 30px 20px 30px;
+}
+
+.change-password-container .link-to-forgot {
+  width: 150px !important;
+}
+
+.change-password-container .link-to-forgot:hover {
+  text-decoration: underline !important;
+}
+
+.change-password-container .content .handle-password-box .btn-confirm {
+  width: 60%;
+}

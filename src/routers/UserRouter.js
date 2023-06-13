@@ -24,11 +24,14 @@ import LayoutAccount from "../components/LayoutAccount/LayoutAccount";
 
 import UserInfo from "../pages/UserInfo/UserInfo";
 import ChangePassword from "../pages/ChangePassword/ChangePassword";
+import ForgotPassword from "../pages/ForgotPassword/ForgotPassword";
 
 import BookingHistory from "../pages/Customer/BookingHistory/BookingHistory";
 
 import CreateVehicle from "../pages/Accommodation/CreateVehicle/CreateVehicle";
 import RentalHistory from "../pages/Accommodation/RentalHistory/RentalHistory";
+
+import NotFound from "../pages/NotFound/NotFound";
 
 const UserRouter = () => {
   // const { currentToken } = useContext(AuthContext);
@@ -66,6 +69,9 @@ const UserRouter = () => {
             {/* --------Owner-------- */}
 
           </Route>
+
+          <Route path="/forgot_password" element={<ForgotPassword/>} />
+          <Route path="/*" element={<NotFound />} />
 
           {/* <Route path="/profile" element={<Profile />} />
           <Route path="/booking_history" element={<BookingHistory />} />

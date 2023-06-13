@@ -51,7 +51,7 @@ const OptionAccount = () => {
     },
   ];
 
-  const navLinksAccommodation = [
+  const navLinksBusiness= [
     {
       path: "/my_account",
       display: "Tài khoản của tôi",
@@ -109,7 +109,7 @@ const OptionAccount = () => {
 
   const roleBasedNavLinks = {
     Customer: navLinksCustomer,
-    Hotelier: navLinksAccommodation,
+    Business: navLinksBusiness,
     Owner: navLinksOwner
   };
 

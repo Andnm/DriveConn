@@ -1,0 +1,48 @@
+.not-found-container {
+  height: calc(100vh - 110px);
+}
+
+/*======================
+    404 page
+=======================*/
+
+.not-found-container .page_404 {
+  padding: 40px 0;
+  background: #fff;
+  font-family: "Arvo", serif;
+}
+
+.not-found-container .page_404 img {
+  width: 100%;
+}
+
+.four_zero_four_bg {
+  background-image: url(https://cdn.dribbble.com/users/285475/screenshots/2083086/dribbble_1.gif);
+  height: 400px;
+  width: 400px;
+  background-position: center;
+  object-fit: cover;
+}
+
+.page_404 .text-center {
+  font-size: 100px;
+}
+
+.link_404 {
+  color: #fff !important;
+  padding: 10px 20px;
+  background: #000d6b;
+  display: inline-block;
+  transition: color 0.3s ease 0s;
+  border-radius: 10px;
+}
+
+.link_404:hover {
+  background: #66b8ff;
+  transition: color 0.3s ease 0s;
+
+}
+
+.contant_box_404 p {
+  font-size: 20px;
+}

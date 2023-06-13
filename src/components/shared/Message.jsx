@@ -1,11 +1,10 @@
 import React from 'react'
-import { Alert } from 'react-bootstrap'
 
-const Message = ({ variant, children }) => {
+const Message = ({ text_color, children, style }) => {
     return (
-        <Alert key={variant} variant={variant}>
+        <span className={text_color} style={style}>
             {children}
-        </Alert>
+        </span>
     )
 }
 

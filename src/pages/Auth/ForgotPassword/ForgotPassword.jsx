@@ -14,7 +14,6 @@ const ForgotPassword = () => {
     const [sendingOtp, setSendingOtp] = useState(false)
     const [errOtp, setErrOtp] = useState('')
 
-
     const navigate = useNavigate();
 
     const cancelHandle = () => {
@@ -65,7 +64,6 @@ const ForgotPassword = () => {
                 setFormOtp(true)
                 setSendingOtp(false)
                 setIsOpenModal(true)
-
             }
         } catch (error) {
             console.log(error)

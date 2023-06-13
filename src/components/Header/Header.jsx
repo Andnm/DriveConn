@@ -169,7 +169,7 @@ const Header = () => {
              
             )}
 
-            {isLoadingEvent && <LoadingCar style={{ backgroundColor: '#e5e5e5', opacity: '0.5' }} />}
+            {isLoadingEvent && <LoadingCar background={true} />}
           </div>
         </Container >
       </div >

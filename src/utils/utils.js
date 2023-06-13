@@ -1,3 +1,5 @@
+import moment from 'moment';
+
 const validateEmail = (email) => {
   return String(email)
     .toLowerCase()
@@ -6,4 +8,9 @@ const validateEmail = (email) => {
     );
 };
 
-export { validateEmail };
+const formatDate = (dateString) => {
+  const formattedDate = moment(dateString).format('DD/MM/YYYY');
+  return formattedDate;
+};
+
+export { validateEmail, formatDate };

@@ -13,9 +13,11 @@ const ModalBox = (props) => {
             </Modal.Header>
             <Modal.Body>{body}</Modal.Body>
             <Modal.Footer>
-                <Button variant="secondary" onClick={onClose}>
-                    {btnActionNo}
-                </Button>
+                {btnActionNo
+                    && <Button variant="secondary" onClick={onClose}>
+                        {btnActionNo}
+                    </Button>
+                }
                 <Button variant="primary" onClick={eventToContinue} >
                     {btnActionYes}
                 </Button>

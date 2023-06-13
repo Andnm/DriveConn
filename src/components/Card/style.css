@@ -1,0 +1,26 @@
+.card-box-container {
+}
+
+.card-box-container .card-header {
+  font-weight: bold;
+  font-size: 25px;
+}
+
+.card-box-container .card-body {
+  display: flex;
+  align-self: flex-end;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.card-box-container .card-body .btn {
+  align-self: flex-end;
+}
+
+.card-box-container .input-box {
+  width: 100%;
+}
+
+.card-box-container .card-body .input-box .input {
+  width: 450px;
+}
