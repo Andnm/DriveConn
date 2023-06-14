@@ -13,29 +13,50 @@ const UpdateDrivingLicense = ({ currentToken, open, onClose }) => {
     const [licenseClass, setLicenseClass] = useState('')
     const [licenseNo, setLicenseNo] = useState('')
     const [expireDate, setExpireDate] = useState('')
+    const [urlImage, setUrlImage] = useState('')
+
+    const [preImgDrivingLicense, setPreImgDrivingLicense] = useState('')
     const [imgDrivingLicense, setImgDrivingLicense] = useState('')
-    const [url, setUrl] = useState('')
+
     const [isLoading, setIsLoading] = useState(false)
+    const [errorLicenseNo, setErrorLicenseNo] = useState('')
+    const [errorLicenseClass, setErrorLicenseClass] = useState('')
+    const [errorExpireDate, setErrorExpireDate] = useState('')
+
 
     const handleRegisterDrivingLicense = async () => {
         handleSubmit()
-        console.log(url)
-        const response = await registerDrivingLicense(currentToken, licenseNo, licenseClass, expireDate, url);
-
-        if (response) {
-            onClose()
-            toast.success('Cập nhập GPLX thành công. Đang được xác minh!', toastOption)
-        } else {
-            onClose()
-            toast.error('Cập nhập GPLX thất bại. Vui lòng thử lại!', toastOption)
+        if (urlImage) {
+            const response = await registerDrivingLicense(currentToken, licenseNo, licenseClass, expireDate, urlImage);
+            console.log(response)
+            if (response != '') {
+                onClose()
+                toast.success('Cập nhập GPLX thành công. Đang được xác minh!', toastOption)
+            } else {
+                onClose()
+                toast.error('Cập nhập GPLX thất bại. Vui lòng thử lại!', toastOption)
+            }
         }
     }
 
-    const handleImageChange = (e) => {
-        if (e.target.files[0]) {
-            setImgDrivingLicense(e.target.files[0]);
-        }
-        console.log(e.target.files[0])
+    const handleSubmit = () => {
+        const fileName = generateFileName();
+        const imageRef = ref(storage, fileName);
+        uploadBytes(imageRef, imgDrivingLicense)
+            .then(() => {
+                getDownloadURL(imageRef)
+                    .then((url) => {
+                        setUrlImage(url);
+                    })
+                    .catch((error) => {
+                        console.log(error.message, "error getting the image url");
+                    });
+                setImgDrivingLicense(null);
+                setPreImgDrivingLicense(null)
+            })
+            .catch((error) => {
+                console.log(error.message);
+            });
     };
 
     const generateFileName = () => {
@@ -51,23 +72,23 @@ const UpdateDrivingLicense = ({ currentToken, open, onClose }) => {
         return fileName;
     };
 
-    const handleSubmit = () => {
-        const fileName = generateFileName();
-        const imageRef = ref(storage, fileName);
-        uploadBytes(imageRef, imgDrivingLicense)
-            .then(() => {
-                getDownloadURL(imageRef)
-                    .then((url) => {
-                        setUrl(url);
-                    })
-                    .catch((error) => {
-                        console.log(error.message, "error getting the image url");
-                    });
-                setImgDrivingLicense(null);
-            })
-            .catch((error) => {
-                console.log(error.message);
-            });
+    const handleRemoveImage = () => {
+        setImgDrivingLicense('')
+    }
+
+    const handleImageChange = (event) => {
+        const file = event.target.files[0];
+        const reader = new FileReader();
+
+        setImgDrivingLicense(event.target.files[0])
+
+        reader.onload = (e) => {
+            setPreImgDrivingLicense(e.target.result);
+        }
+
+        if (file) {
+            reader.readAsDataURL(file)
+        }
     };
 
     return (
@@ -82,6 +103,7 @@ const UpdateDrivingLicense = ({ currentToken, open, onClose }) => {
                         value={licenseClass}
                         onChangeFunction={(e) => setLicenseClass(e.target.value)}
                         label={'Loại GPLX'}
+                        error={errorLicenseClass}
                     />
 
                     <InputBox
@@ -89,6 +111,7 @@ const UpdateDrivingLicense = ({ currentToken, open, onClose }) => {
                         value={licenseNo}
                         onChangeFunction={(e) => setLicenseNo(e.target.value)}
                         label={'Số GPLX'}
+                        error={errorLicenseNo}
                     />
 
                     <InputBox
@@ -96,15 +119,19 @@ const UpdateDrivingLicense = ({ currentToken, open, onClose }) => {
                         value={expireDate}
                         onChangeFunction={(e) => setExpireDate(e.target.value)}
                         label={'Ngày hết hạn'}
+                        error={errorExpireDate}
                     />
 
-                    <div className=''>
+                    <div className='upload-image-box'>
                         <p>Ảnh giấy phép lái xe</p>
                         <div className='d-flex justify-content-center align-items-center flex-column'>
-                            <label className="custum-file-upload" htmlFor="file">
-
-                                {imgDrivingLicense
-                                    ? <img src={url} alt="picture"></img>
+                            <label className="custom-file-upload" htmlFor="file">
+                                {preImgDrivingLicense
+                                    ?
+                                    <div className='img-upload'>
+                                        <div className='remove-img d-flex justify-content-center align-items-center' onClick={handleRemoveImage}>X</div>
+                                        <img src={preImgDrivingLicense} alt="picture"></img>
+                                    </div>
                                     :
                                     <>
                                         <div className="icon">
@@ -115,7 +142,6 @@ const UpdateDrivingLicense = ({ currentToken, open, onClose }) => {
                                         </div>
                                     </>
                                 }
-
                                 <input type="file" id="file" onChange={handleImageChange} />
                             </label>
                         </div>

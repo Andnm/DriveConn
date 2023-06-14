@@ -4,6 +4,7 @@ import { AuthContext } from "../../context/authContext";
 import './style.css'
 import img_tmp from '../../assets/all-images/avatar.jpg'
 import DrivingLicense from '../../components/UI/DrivingLicense/DrivingLicense';
+import { formatDate } from '../../utils/utils'
 
 const UserInfo = () => {
   const { currentToken, userDecode } = useContext(AuthContext);
@@ -74,10 +75,10 @@ const UserInfo = () => {
             <div className="header d-flex flex-column">
               <div className='top-header d-flex justify-content-between align-items-center gap-3'>
                 <div className="left-top-header d-flex justify-content-center align-items-center gap-3">
-                  <p className='user-name'>{userDecode.firstName || ''}</p>
+                  <p className='user-name'>{userDecode.firstName || '...'}</p>
                   <div className='user-location d-flex'>
                     <i className="ri-map-pin-line"></i>
-                    <p className=''>{userDecode.address || ''}</p>
+                    <p className=''>{userDecode.address || '...'}</p>
                   </div>
                 </div>
 
@@ -94,7 +95,7 @@ const UserInfo = () => {
               <div className='rate-section'>
                 <p className='title-rate'>Lượt đánh giá</p>
                 <div className='d-flex rate-data'>
-                  {userDecode.rate === '0'
+                  {userDecode.rate === 0
                     ? <p className='h6'><em>Chưa có lượt đánh giá nào</em></p>
                     :
                     <>
@@ -129,9 +130,9 @@ const UserInfo = () => {
                       <p>Email: </p>
                     </div>
                     <div className="input-info d-flex flex-column">
-                      <p>{userDecode.phone || ''}</p>
-                      <p>{userDecode.address_detail || ''}</p>
-                      <p>{userDecode.email || ''}</p>
+                      <p>{userDecode.phone || '...'}</p>
+                      <p>{userDecode.address_detail || '...'}</p>
+                      <p>{userDecode.email || '...'}</p>
                     </div>
                   </div>
                 </div>
@@ -146,14 +147,13 @@ const UserInfo = () => {
                       <p>Giới tính: </p>
                     </div>
                     <div className="input-info d-flex flex-column">
-                      <p>{userDecode.lastName || ''}</p>
-                      <p>{userDecode.firstName || ''}</p>
-                      <p>{userDecode.dob || 'rỗng'}</p>
-                      <p>{userDecode.gender === 'Male' ? 'Nam' : (userDecode.gender === 'Female' ? 'Nữ' : '')}</p>
+                      <p>{userDecode.lastName || '...'}</p>
+                      <p>{userDecode.firstName || '...'}</p>
+                      <p>{formatDate(userDecode.dob) || '...'}</p>
+                      <p>{userDecode.gender === 'Male' ? 'Nam' : (userDecode.gender === 'Female' ? 'Nữ' : '...')}</p>
                     </div>
                   </div>
                 </div>
-
               </div>
             </div>
           </div>
