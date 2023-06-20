@@ -8,7 +8,7 @@ const WelcomeAdmin = () => {
   return (
     <div className='d-flex justify-content-center align-items-center'>
       <p>
-      Xin chào {userDecode.lastName}
+      Xin chào {userDecode?.lastName}
       </p>
     </div>
   )

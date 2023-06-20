@@ -25,9 +25,6 @@
 .profile-container .user-profile .left .another-info {
 }
 
-.profile-container .user-profile .add-something {
-  cursor: pointer;
-}
 
 .profile-container .user-profile .left .another-info .driving-license {
 }
@@ -48,42 +45,6 @@
   width: 80%;
   border-bottom: 2px solid #808080;
   transform: translateY(-10px);
-}
-
-.driving-license .content {
-}
-
-.driving-license-box {
-  height: 50px;
-}
-
-.verified-box,
-.unverified-box {
-  /* width: 65%; */
-  align-items: center;
-  justify-content: center;
-  padding: 4px 6px;
-  border-radius: 100px;
-  font-weight: 500;
-  color: #262626;
-}
-
-.verified-box {
-  background-color: #cff1db;
-}
-
-.unverified-box {
-  background-color: #ffd0cd;
-}
-
-.verified-box .ri-checkbox-circle-fill {
-  color: green;
-  font-size: 25px;
-}
-
-.unverified-box .ri-close-circle-fill {
-  color: red;
-  font-size: 25px;
 }
 
 .profile-container .user-profile .right {

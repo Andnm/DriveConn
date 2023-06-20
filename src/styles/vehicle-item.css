@@ -1,243 +1,148 @@
-.car__item {
-  border: 1px solid #7c8a9736;
-  padding: 20px;
-  border-radius: 5px;
-  box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
-  cursor: pointer;
-  transition: transform 0.2s;
-  width: 400px;
+.vehicle-item p {
+  margin-bottom: 0px;
 }
 
-.car__item:hover {
-  transform: scale(1.05);
-  transition: transform 0.2s;
-}
-
-.car__item-info span i {
-  color: #f9a826;
-  font-size: 1.1rem;
-}
-
-.car__item-btn {
-  border-radius: 0;
-  border: none;
-  outline: none;
-  background: #000d6b;
-  padding: 8px 0px;
-}
-
-.car__item-btn a {
-  text-decoration: none;
-  color: #fff;
-  font-weight: 500;
-}
-
-.car__img img {
-  height: 300px;
-  object-fit: contain;
-}
-
-.car__item-btn a:hover {
-  color: #fff;
-}
-.car__btn-details {
-  background: #f9a826;
-  border-radius: 0px 4px 4px 0px;
-}
-
-.car__btn-rent {
-  border-radius: 4px 0px 0px 4px;
-}
-
-.car__item-content h4 {
-  font-size: 1.8rem;
-}
-
-.car__item-content h6 {
-  font-size: 1.2rem;
-  font-weight: 600;
-}
-
-.ReactModal__Overlay {
-  background-color: rgba(143, 142, 142, 0.742) !important;
-}
-
-.detail-vehicle {
-  background-color: #fff;
-  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+.vehicle-item .card {
+  /* width: 190px; */
+  /* height: 254px; */
   border-radius: 20px;
-  padding: 50px 50px 50px 50px;
-}
-
-.detail-vehicle label {
-  font-size: 20px;
-  margin-left: 30px;
-}
-
-.react-datepicker__input-container {
-  /* margin-left: 30px; */
-}
-
-.input_date {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin-left: 30px;
-  border: 1px solid gray;
-  border-radius: 5px;
-  width: 300px;
+  position: relative;
+  padding: 1rem;
+  border: 2px solid #c3c6ce;
+  transition: 0.5s ease-out;
+  overflow: visible;
   cursor: pointer;
-  margin-top: 10px;
-  margin-bottom: 10px;
 }
 
-.react-datepicker__input-container input {
-  height: 30px;
-  padding: 20px;
-  font-size: 20px;
-  border: none !important;
-  cursor: pointer;
-  outline-style: none;
-  outline-offset: none;
-  width: 200px;
+.vehicle-item .card .car__img {
+  max-width: 100%;
+  position: relative;
+  /* height: 150px; */
 }
 
-.rent__price__detail {
-  text-align: center;
-  font-size: 50px !important;
+.vehicle-item .card .car__img img:first-child {
+  object-fit: cover;
+  height: 270px;
+  width: 100%;
 }
 
-.detail__price {
-  margin: 30px;
-}
-
-.detail__price hr {
-  margin: 0px;
-  margin-bottom: 4px !important;
-}
-
-.detail__price p {
-  margin-left: 10px;
-}
-
-.total_price {
-  font-weight: bold;
-  font-size: 20px;
-}
-
-.date_dif {
-  font-weight: bold;
-}
-
-.total_price_money {
-  font-size: 20px;
-  font-weight: bold;
-}
-
-.input_date i {
-  margin-left: 20px;
-}
-
-.button_booking {
+.vehicle-item .card .car__img .owner {
+  height: 40px;
+  width: 40px;
+  object-fit: cover;
   position: absolute;
-  bottom: 40px;
-  right: 40px;
+  bottom: -15px;
+  left: 10px;
+  border-radius: 50%;
 }
 
-.payments {
-  margin: 30px;
-}
-
-.button-confirm-cancel {
-  position: absolute;
-  right: 20px;
-  bottom: 30px;
-}
-
-.button-confirm-cancel button:first-child {
-  margin-right: 20px;
-}
-
-.information-customer {
-  margin-left: 20px;
-}
-
-.information-customer p {
-  margin-left: 30px;
-}
-
-.information-vehicle {
-  margin-left: 20px;
-}
-
-.information-vehicle p {
-  margin-left: 30px;
-}
-
-.information-booking {
-  margin-left: 20px;
-}
-
-.information-booking p {
-  margin-left: 30px;
-}
-
-.modal-header {
-  height: 50px;
-  padding: 20px !important;
+.vehicle-item .card .card__body {
   margin-top: 20px;
   margin-bottom: 10px;
+  display: flex;
+  flex-direction: column;
 }
 
-.modal-body {
-  padding: 20px !important;
+.vehicle-item .card .card__body .services {
 
 }
 
-@media only screen and (max-width: 992px) {
-  .car__item h4 {
-    font-size: 1.1rem;
-    margin-bottom: 0;
-  }
-
-  .car__item h6 {
-    font-size: 1rem;
-    margin-top: 10px;
-  }
-
-  .car__item-info {
-    flex-wrap: wrap;
-  }
-
-  .car__item-info span {
-    font-size: 0.8rem;
-    justify-content: space-between;
-  }
-
-  .car__item-btn {
-    padding: 5px 10px;
-    font-size: 0.9rem;
-  }
+.vehicle-item .card .card__body .services button {
+  font-size: 12px;
+  padding: 0px 10px 0px 10px;
+  border: none;
+  border-radius: 0.375rem;
 }
 
-@media only screen and (max-width: 768px) {
-  .car__item h4 {
-    font-size: 1rem;
-  }
+.vehicle-item .card .card__body .services .mortgage{
+  background-color: #0dcaf0;
+}
 
-  .car__item h6 {
-    font-size: 0.9rem;
-  }
+.vehicle-item .card .card__body .services .transmission{
+  background-color: #ffc107;
+}
 
-  .car__item-info span {
-    font-size: 0.7rem;
-  }
+.vehicle-item .card .card__body .name p{
+  font-size: 20px;
+  font-weight: bold;
+}
 
-  .car__item-info span i {
-    font-size: 0.9rem;
-  }
+.vehicle-item .card .card__body .name .ri-shield-check-line{
+  color: green;
+}
 
-  .car__item-btn {
-    font-size: 0.8rem;
-  }
+.vehicle-item .card .card__body .other-info .rating i{
+  color: rgb(214, 181, 17);
+}
+
+.vehicle-item .card .card__body .location{
+  font-size: 12px;
+}
+
+.vehicle-item .card .separation-line{
+  border-bottom: 1px solid gray;
+}
+
+.vehicle-item .card__footer{
+  
+}
+
+.vehicle-item .card__footer .price{
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.vehicle-item .card__footer p:last-child{
+  font-size: 15px;
+}
+
+
+/* ------------------- */
+.vehicle-item .card-details {
+  color: black;
+  height: 100%;
+  gap: 0.5em;
+  display: grid;
+  place-content: center;
+}
+
+.vehicle-item .card-button {
+  transform: translate(-50%, 125%);
+  width: 60%;
+  border-radius: 1rem;
+  border: none;
+  background-color: #008bf8;
+  color: #fff;
+  font-size: 1rem;
+  padding: 0.5rem 1rem;
+  position: absolute;
+  left: 50%;
+  bottom: 0;
+  opacity: 0;
+  transition: 0.3s ease-out;
+  text-align: center;
+}
+
+.vehicle-item .text-body {
+  color: rgb(134, 134, 134);
+}
+
+/*Text*/
+.vehicle-item .text-title {
+  font-size: 1.5em;
+  font-weight: bold;
+}
+
+/*Hover*/
+.vehicle-item .card:hover {
+  border-color: #008bf8;
+  box-shadow: 0 4px 18px 0 rgba(0, 0, 0, 0.25);
+}
+
+.vehicle-item .card:hover .card-button {
+  transform: translate(-50%, 50%);
+  opacity: 1;
+}
+
+.vehicle-item .card__content {
 }

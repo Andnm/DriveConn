@@ -5,13 +5,14 @@ import { toast } from "react-toastify";
 import jwt_decode from "jwt-decode";
 import Cookies from "js-cookie";
 import API_URL from "../api/Router";
-
 import {
   auth,
   providerGoogle,
   providerFacebook,
 } from "../config/configFirebase";
 import { signInWithPopup } from "firebase/auth";
+import { splitFullName } from "../utils/utils";
+
 export const AuthContext = createContext({});
 
 export default function AuthContextProvider({ children }) {
@@ -85,42 +86,27 @@ export default function AuthContextProvider({ children }) {
 
   //-------------------HANDLE LOGIN WITH GOOGLE----------------------
   //function handle displayName into firstName and lastName
-  const splitFullName = (fullName) => {
-    const nameArray = fullName.trim().split(" ");
-
-    let firstName = "";
-    let lastName = "";
-    if (nameArray.length >= 3) {
-      firstName = nameArray.slice(0, 2).join(" ");
-      lastName = nameArray.slice(2).join(" ");
-    } else {
-      firstName = nameArray.slice(0, 1).join(" ");
-      lastName = nameArray.slice(1).join(" ");
-    }
-
-    return { firstName, lastName };
-  };
 
   //function login with google by firebase
   const loginWithGoogle = async () => {
     signInWithPopup(auth, providerGoogle).then(async (data) => {
       setIsLoadingEvent(true);
-      const { firstName: firstName, lastName: lastName } = splitFullName(
+      const { lastName: lastName, firstName: firstName } = splitFullName(
         data.user.displayName
       );
 
       const userInfo = {
-        firstName: firstName,
         lastName: lastName,
+        firstName: firstName,
         email: data.user.email,
         imgURL: data.user.photoURL,
       };
+
 
       const res = await axios.post(`${API_URL}/api/auth/loginGoogle`, userInfo);
 
       const token = res.data.accessToken;
       setCurrentToken(token);
-
       const user = jwt_decode(token);
 
       const config = {
@@ -170,7 +156,7 @@ export default function AuthContextProvider({ children }) {
       // );
 
       console.log(data.user);
-      navigate("/home")
+      navigate("/home");
 
       // const userInfo = {
       //   firstName: firstName,

@@ -1,5 +1,7 @@
-import React from "react";
+import React, {useContext} from "react";
 import { Routes, Route } from "react-router-dom";
+import { AuthContext } from "../context/authContext";
+
 import Home from "../pages/Home";
 import About from "../pages/About";
 import VehicleListing from "../pages/VehicleListing";
@@ -34,7 +36,7 @@ import RentalHistory from "../pages/Accommodation/RentalHistory/RentalHistory";
 import NotFound from "../pages/NotFound/NotFound";
 
 const UserRouter = () => {
-  // const { currentToken } = useContext(AuthContext);
+  const { currentToken, userDecode } = useContext(AuthContext);
 
   return (
     <Routes>
@@ -71,7 +73,7 @@ const UserRouter = () => {
           </Route>
 
           <Route path="/forgot_password" element={<ForgotPassword/>} />
-          <Route path="/*" element={<NotFound />} />
+          {userDecode?.role_id?.roleName !== 'Admin' && <Route path="/*" element={<NotFound />} />}
 
           {/* <Route path="/profile" element={<Profile />} />
           <Route path="/booking_history" element={<BookingHistory />} />

@@ -10,13 +10,17 @@ const createAxiosInstance = (token) => {
   });
 };
 
-export const getDrivingLicense = async (token) => {
+export const getDrivingLicense = async (token, user_id) => {
   try {
+    const data ={
+      user_id: user_id
+    }
+    console.log(user_id)
     const instance = createAxiosInstance(token)
-    const response = await instance.get(`/api/users/drivingLicense`);
+    const response = await instance.get(`/api/users/drivingLicense`, data);
     return response.data;
   } catch (error) {
-    console.error("Error fetching driving license:", error);
+    console.error("Error fetching driving license:", error.response);
     return [];
   }
 };

@@ -8,6 +8,7 @@ import { validateEmail } from "../../../utils/utils";
 import './login.css'
 import logo_google from '../../../assets/all-images/google/google_logo.png'
 import Modal from 'react-bootstrap/Modal';
+import Signup from "../Signup/Signup";
 
 function Login({ open, onClose }) {
   const { login, loginWithGoogle, loginWithFacebook, isLoadingEvent } = useContext(AuthContext);
@@ -17,7 +18,7 @@ function Login({ open, onClose }) {
   const errorAlert = useRef();
   const errorPassword = useRef();
   const inputRef = useRef();
-  const [isOpenModal, setIsOpenModal] = useState(false)
+  const [isOpenSignUpModal, setIsOpenSignUpModal] = useState(false)
 
   const [token, setToken] = useState('');
 
@@ -82,6 +83,11 @@ function Login({ open, onClose }) {
     // loginWithFacebook()
   }
 
+  const handleOpenSignUpModal = () => {
+    onClose()
+    setIsOpenSignUpModal(true)
+  }
+
   useEffect(() => {
     const url = new URL(window.location.href);
     const token = url.searchParams.get('token');
@@ -141,8 +147,10 @@ function Login({ open, onClose }) {
             </button>
 
             <p className='text'>
-              Bạn chưa có sẵn tài khoản? <Link to="/signup">Đăng ký</Link>
+              Bạn chưa có sẵn tài khoản? <span className="text-signup" onClick={handleOpenSignUpModal}>Đăng ký</span>
             </p>
+
+            {isOpenSignUpModal && <Signup open={isOpenSignUpModal} onClose={() => setIsOpenSignUpModal(false)}/>}
           </div>
         </div>
       </div>

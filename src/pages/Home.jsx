@@ -7,7 +7,6 @@ import { Container, Row, Col } from "reactstrap";
 import FindCarForm from "../components/UI/FindCarForm";
 import AboutSection from "../components/UI/AboutSection";
 import ServicesList from "../components/UI/ServicesList";
-// import carData from "../assets/data/carData";
 import VehicleItem from "../components/UI/VehicleItem";
 import BecomeDriverSection from "../components/UI/BecomeDriverSection";
 import Testimonial from "../components/UI/Testimonial";
@@ -47,11 +46,11 @@ const Home = () => {
             <Row className="form__row">
               <Col lg="4" md="4">
                 <div className="find__cars-left">
-                  <h2>Find your best vehicle here</h2>
+                  <h2>Lựa chọn phương tiện bạn muốn đi</h2>
                 </div>
               </Col>
 
-              <Col lg="8" md="8" sm="12">
+              <Col lg="8" md="8" sm="12" className="d-flex justify-content-center align-items-center">
                 <FindCarForm />
               </Col>
             </Row>

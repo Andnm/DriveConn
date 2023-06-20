@@ -3,37 +3,21 @@ import { Container, Row, Col } from "reactstrap";
 import Helmet from "../components/Helmet/Helmet";
 import CommonSection from "../components/UI/CommonSection";
 import VehicleItem from "../components/UI/VehicleItem";
-// import carData from "../assets/data/carData";
-
-import axios from 'axios'
-import API_URL from "../api/Router";
-import LoadingCar from '../components/LoadingCar/LoadingCar'
-
+import { getVehicleList } from "../api/vehicle";
+import LoadingCar from "../components/LoadingCar/LoadingCar";
 
 const CarListing = () => {
-  const [carData, setCarData] = useState();
+  const [vehicleData, setVehicleData] = useState();
   const [isLoading, setIsLoading] = useState(true);
 
-  // useEffect(() => {
-  //   const timer = setTimeout(() => {
-  //     setIsLoading(false);
-  //   }, 1500);
-
-  //   return () => clearTimeout(timer);
-  // }, []);
-
-  const getAllVehicles = async () => {
-    try {
-      const res = await axios.get(`${API_URL}/api/vehicles/home`);
-      if (res.status === 200) {
-        console.log(res)
-        setCarData(res.data)
-        setIsLoading(false)
-      }
-
-    } catch (error) {
-      console.log(error.message);
+  const handleGetVehicleList = async () => {
+    setIsLoading(true)
+    const response = await getVehicleList();
+    if (response) {
+      setVehicleData(response)
+      setIsLoading(false)
     }
+
   }
 
   useEffect(() => {
@@ -41,7 +25,7 @@ const CarListing = () => {
   }, []);
 
   useEffect(() => {
-    getAllVehicles()
+    handleGetVehicleList()
   }, [])
 
   return (
@@ -51,7 +35,7 @@ const CarListing = () => {
       <section>
         <Container>
           <Row>
-            <Col lg="12">
+            {/* <Col lg="12">
               <div className=" d-flex align-items-center gap-3 mb-5">
                 <span className=" d-flex align-items-center gap-2">
                   <i className="ri-sort-asc"></i> Sort By
@@ -63,14 +47,26 @@ const CarListing = () => {
                   <option value="high">High to Low</option>
                 </select>
               </div>
-            </Col>
+            </Col> */}
 
-            {isLoading ?
+            {console.log(vehicleData)}
+
+            {/* {isLoading ?
               <LoadingCar className={'blank-container'} /> :
-              carData?.length && carData?.map((item) => (
+              vehicleData?.length && vehicleData?.map((item) => (
                 (!item.isRented ? <VehicleItem item={item} key={item.id} /> : '')
               ))
-            }
+            } */}
+
+            {isLoading ? (
+              <LoadingCar className={'blank-container'} />
+            ) : (
+              <>
+                {Array.from({ length: 5 }).map((_, index) => (
+                  <VehicleItem item={vehicleData[0]} key={index} />
+                ))}
+              </>
+            )}
 
           </Row>
         </Container>

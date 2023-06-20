@@ -1,3 +1,7 @@
+.find-car-form-container p {
+  margin-bottom: 0px;
+}
+
 .find__cars-left {
   background: linear-gradient(rgb(249, 168, 38, 0.9), rgb(249, 168, 38, 0.9)),
     url("../assets/all-images/toyota-offer-2.png");
@@ -10,42 +14,6 @@
 .find__cars-left h2 {
   font-weight: 600;
   font-size: 2.8rem;
-}
-
-.form__group {
-  width: 30%;
-  margin-bottom: 0;
-}
-
-.form__group input {
-  border: 1px solid #7c8a972a;
-  padding: 8px 12px;
-
-  width: 100%;
-  outline: none;
-}
-.form__group input::placeholder {
-  color: #7c8a97;
-}
-
-.form {
-  background: #fff;
-  padding-top: 55px;
-  padding-bottom: 50px;
-  padding-left: 15px;
-  padding-right: 15px;
-}
-
-.select__group {
-  width: 30%;
-}
-
-.select__group select {
-  width: 100%;
-  padding: 10px 15px;
-  border: 1px solid #7c8a972a;
-  outline: none;
-  color: #7c8a97;
 }
 
 .hero__slider-section {
@@ -66,21 +34,6 @@
   box-shadow: 5px 5px 15px -5px #7c8a97;
 }
 
-.journey__time::before {
-  content: "Journey time";
-  margin-right: 0.8rem;
-  color: #7c8a97;
-}
-
-.find__car-btn {
-  background: #000d6b !important;
-  color: #fff !important;
-  padding: 8px 15px;
-  width: 100%;
-  border: none;
-  outline: none;
-}
-
 @media only screen and (max-width: 992px) {
   .find__cars-left {
     padding: 65px 22px;
@@ -88,16 +41,6 @@
 
   .find__cars-left h2 {
     font-size: 1.5rem;
-  }
-
-  .form {
-    padding: 30px 10px;
-  }
-
-  .form__group input,
-  .select__group select {
-    padding: 7px 10px;
-    font-size: 0.8rem;
   }
 
   .hero__form {
@@ -119,31 +62,241 @@
 }
 
 @media only screen and (max-width: 576px) {
-  .form__group {
-    width: 100%;
-    margin: auto;
-    margin-bottom: 15px;
-  }
-
-  .form__group input {
-    font-size: 0.7rem !important;
-  }
-
-  .select__group {
-    width: 100%;
-    padding-right: 10px;
-    font-size: 0.7rem;
-  }
-
-  .find__car-btn {
-    font-size: 0.8rem;
-  }
-
-  .find__cars-left h2 {
-    font-size: 1rem;
-  }
-
   .hero__form {
     bottom: -250px;
   }
+}
+
+.find-car-form-container .container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.find-car-form-container .radio-tile-group {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.find-car-form-container .radio-tile-group .input-container {
+  position: relative;
+  margin: 0.5rem;
+  width: 150px;
+  height: 55px;
+}
+
+.find-car-form-container .radio-tile-group .input-container .radio-button {
+  opacity: 0;
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  margin: 0;
+  cursor: pointer;
+}
+
+.find-car-form-container .radio-tile-group .input-container .radio-tile {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  border: 2px solid #b5bfd9;
+  border-radius: 5px;
+  transition: transform 300ms ease;
+}
+
+.find-car-form-container .radio-tile-group .input-container .icon svg {
+  fill: #079ad9;
+  width: 2rem;
+  height: 2rem;
+}
+
+.find-car-form-container .radio-tile-group .input-container .radio-tile-label {
+  text-align: center;
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: #079ad9;
+}
+
+.find-car-form-container
+  .radio-tile-group
+  .input-container
+  .radio-button:checked
+  + .radio-tile {
+  background-color: #079ad9;
+  border: 2px solid #079ad9;
+  color: white;
+  transform: scale(1.1, 1.1);
+}
+
+.radio-tile-group
+  .input-container
+  .radio-button:checked
+  + .radio-tile
+  .icon
+  svg {
+  fill: white;
+  background-color: #079ad9;
+}
+
+.radio-tile-group
+  .input-container
+  .radio-button:checked
+  + .radio-tile
+  .radio-tile-label {
+  color: white;
+  background-color: #079ad9;
+}
+
+.find-car-form-container .radio-tile-group .input-container:hover .radio-tile {
+  border: 3px dashed #079ad9;
+}
+
+/* ------------------------------------------------ */
+.search-option .search {
+  display: flex;
+  flex-direction: column;
+  padding: 16px;
+  border-radius: 16px;
+  box-shadow: 0 -3px 12px rgba(0, 0, 0, 0.1), 0 9px 12px rgba(75, 75, 75, 0.1);
+}
+
+.search-option .search-form:last-child {
+  padding-bottom: 16px;
+}
+
+.search-option .search-form:first-child {
+  padding-top: 16px;
+}
+.search-option .search-form {
+  display: flex;
+  padding: 8px 16px;
+  width: 100%;
+}
+
+.search-option .search-form__item {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.search-option .search-form__item .title {
+  display: flex;
+  align-items: center;
+  margin-bottom: 8px;
+}
+
+.search-option .search-form__item .title .wrap-svg {
+  margin-right: 16px;
+  color: #000d6b;
+}
+
+.search-option .search-form__item .title p {
+  color: #000d6b;
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.search-option .search-form__item .choose {
+  display: flex;
+  grid-gap: 16px;
+  gap: 16px;
+}
+
+.search-option .search-form__item .choose .choose-item.has-arrow:before {
+  content: url(https://www.mioto.vn/static/media/arrow-down.d8b3609e.svg);
+  position: absolute;
+  right: 0;
+  width: 24px;
+  height: 24px;
+  pointer-events: none;
+}
+
+.search-option .search-form__item .choose .choose-item.has-arrow {
+  position: relative;
+}
+
+.search-option .search-form__item .choose .choose-item.has-arrow input, .search-option .search-form__item .choose .choose-item.has-arrow p.select, .search-option .search-form__item .choose .choose-item.has-arrow select, .search-option .search-form__item .choose .choose-item.has-arrow span.value {
+  padding-right: 32px;
+}
+
+.search-option .search-form__item .choose .choose-item {
+  position: relative;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  width: 100%;
+  font-size: 20px;
+}
+
+.search-option .search-form__item .choose .choose-item input {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  color: #000;
+  font-size: 20px;
+  font-weight: 600;
+  line-height: 30px;
+
+  display: inline-block;
+  background-color: initial;
+  width: 100%;
+  border: none;
+  box-shadow: none;
+  outline: none;
+}
+
+.search-option .search-form__item .choose .choose-item .here-autocomplete {
+  width: 100%;
+}
+
+.here-autocomplete {
+  position: relative;
+  width: 100%;
+}
+
+.search-option .search-form .line {
+  border-right: 1px solid #c6c6c6;
+  margin: 4px 12px;
+}
+
+.search-option .search-form .calendar-wrap {
+  display: flex;
+}
+
+.search-option .search-form a.btn {
+  margin-left: 16px;
+  display: flex;
+  align-items: center;
+  width: 200px;
+  background-color: #000d6b;
+  border: #000d6b;
+}
+
+.search-option .search-form a.btn:hover {
+  background-color: #079ad9;
+  border: #079ad9;
+}
+
+.search-option .search-form__item {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.search-option .search-form .line {
+  border-right: 1px solid #c6c6c6;
+  margin: 4px 12px;
+}
+
+.search-option .search-form__item {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
 }

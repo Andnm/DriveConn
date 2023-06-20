@@ -93,9 +93,6 @@ export const confirmOtpHandle = async (email, otp) => {
       email: email,
       otp: otp,
     };
-    
-    console.log("email", email);
-    console.log("otp", otp);
 
     const response = await axios.post(
       `${API_URL}/api/users/resetPassword`,
@@ -145,3 +142,13 @@ export const upRole = async (token, userId) => {
     return null;
   }
 };
+
+export const registerAccount = async (data) => {
+  try {
+    const response = await axios.post(`${API_URL}/api/users/register`, data)
+    return response.data;
+  }catch (error) {
+    console.error("Error to create account: ", error)
+    return null;
+  }
+}

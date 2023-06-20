@@ -26,6 +26,9 @@ const VehicleDetails = () => {
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const [modalConfirmBooking, setModalConfirmBooking] = useState(false);
 
+
+
+
   const [isLoading, setIsLoading] = useState(true);
 
   const [startDate, setStartDate] = useState(new Date());

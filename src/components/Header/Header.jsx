@@ -145,30 +145,8 @@ const Header = () => {
                     <p >{userDecode?.lastName + ' ' + userDecode?.firstName}</p>
                   </NavLink>
                 </div>
-
-                {/* <Dropdown>
-                  <Dropdown.Toggle variant="primary" id="dropdown-basic">
-                    {userDecode?.firstName}
-                  </Dropdown.Toggle>
-
-                  <Dropdown.Menu>
-                    <Link to="/profile">Thông tin tài khoản</Link>
-
-                    {(userDecode?.role_id?.roleName === 'Customer')
-                      ? <Link to="/booking_history">Lịch sử đặt xe</Link>
-                      : <>
-                        <Link to="/vehicle_registration">Xe của tôi</Link>
-                        <Link to="/rental_history">Lịch sử cho thuê</Link>
-                      </>
-                    }
-                    <DropdownItem onClick={handleLogout}>Đăng xuất</DropdownItem>
-                  </Dropdown.Menu>
-                </Dropdown> */}
-
-              </div>
-             
+              </div>           
             )}
-
             {isLoadingEvent && <LoadingCar background={true} />}
           </div>
         </Container >

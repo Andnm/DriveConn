@@ -1,0 +1,56 @@
+.driving-license .content {
+  width: 150px;
+}
+
+.driving-license .separation-line {
+  border-bottom: 2px dashed rgba(128, 128, 128, 0.614);
+  width: 90%;
+  margin: 0 auto;
+}
+
+.add-something {
+  width: 85%;
+}
+
+.add-something .d-flex {
+  cursor: pointer;
+}
+
+.driving-license-box .update-container-box {
+  cursor: pointer;
+}
+
+.update-container-box {
+  width: 60%;
+}
+
+.verified-box,
+.unverified-box {
+  /* width: 65%; */
+  align-items: center;
+  justify-content: center;
+  padding: 3px 10px;
+  border-radius: 100px;
+  font-weight: 500;
+  color: white;
+  font-size: 12px;
+  width: 100px;
+}
+
+.verified-box {
+  background-color: rgb(47, 132, 47);
+}
+
+.unverified-box {
+  background-color: rgb(206, 57, 57);
+}
+
+/* .verified-box .ri-checkbox-circle-fill {
+  color: green;
+  font-size: 25px;
+}
+
+.unverified-box .ri-close-circle-fill {
+  color: red;
+  font-size: 25px;
+} */

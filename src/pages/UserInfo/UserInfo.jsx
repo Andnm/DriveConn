@@ -5,29 +5,13 @@ import './style.css'
 import img_tmp from '../../assets/all-images/avatar.jpg'
 import DrivingLicense from '../../components/UI/DrivingLicense/DrivingLicense';
 import { formatDate } from '../../utils/utils'
+import StarRating from '../../components/UI/StarRating/StarRating';
 
 const UserInfo = () => {
   const { currentToken, userDecode } = useContext(AuthContext);
 
   if (!userDecode) {
     return <Navigate to="/home" />;
-  }
-
-  const StarRating = ({ rate }) => {
-    const filledStars = [...Array(rate)].map((_, index) => (
-      <i key={index} className="ri-star-fill"></i>
-    ));
-
-    const emptyStars = [...Array(5 - rate)].map((_, index) => (
-      <i key={index} className="ri-star-line"></i>
-    ));
-
-    return (
-      <div className='star'>
-        {filledStars}
-        {emptyStars}
-      </div>
-    );
   }
 
   const RenderRole = ({ role }) => {
@@ -89,7 +73,7 @@ const UserInfo = () => {
               </div>
 
               <div className='role-name'>
-                <RenderRole role={userDecode.role_id.roleName} />
+                <RenderRole role={userDecode.role_id?.roleName} />
               </div>
 
               <div className='rate-section'>
@@ -99,7 +83,7 @@ const UserInfo = () => {
                     ? <p className='h6'><em>Chưa có lượt đánh giá nào</em></p>
                     :
                     <>
-                      <p className='score'>{userDecode.rate.toFixed(1)}</p>
+                      <p className='score'>{userDecode.rate?.toFixed(1)}</p>
                       <StarRating rate={userDecode.rate} />
                     </>
                   }

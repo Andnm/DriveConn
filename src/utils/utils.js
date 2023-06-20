@@ -27,4 +27,21 @@ const generateFileNameImage = () => {
   return fileName;
 };
 
-export { validateEmail, formatDate };
+const splitFullName = (fullName) => {
+  const nameArray = fullName.trim().split(" ");
+
+  let lastName = "";
+  let firstName = "";
+
+  if (nameArray.length > 2) {
+    lastName = nameArray.slice(0, 2).join(" ");
+    firstName = nameArray.slice(2, nameArray.length).join(" ");
+  } else if (nameArray.length === 1 || nameArray.length === 2) {
+    lastName = " "
+    firstName = fullName;
+  }
+
+  return { lastName, firstName };
+};
+
+export { validateEmail, formatDate, generateFileNameImage, splitFullName};

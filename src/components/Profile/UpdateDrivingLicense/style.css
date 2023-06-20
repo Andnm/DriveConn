@@ -16,6 +16,16 @@
 .update-driving-license-container .custom-file-upload {
   height: 200px;
   width: 300px;
+  border: 2px dashed #cacaca;
+  background-color: rgba(255, 255, 255, 1);
+  padding: 1.5rem;
+  border-radius: 10px;
+  box-shadow: 0px 48px 35px -48px rgba(0, 0, 0, 0.1);
+}
+
+.update-driving-license-container .custom-file-upload label {
+  width: 100%;
+  height: 100%;
   display: flex;
   flex-direction: column;
   align-items: space-between;
@@ -23,11 +33,6 @@
   cursor: pointer;
   align-items: center;
   justify-content: center;
-  border: 2px dashed #cacaca;
-  background-color: rgba(255, 255, 255, 1);
-  padding: 1.5rem;
-  border-radius: 10px;
-  box-shadow: 0px 48px 35px -48px rgba(0, 0, 0, 0.1);
 }
 
 .update-driving-license-container .custom-file-upload .icon {
@@ -75,5 +80,6 @@
   width: 20px;
   border-radius: 50%;
   border: 1px dashed black;
-  font-size: 13px
+  font-size: 13px;
+  cursor: pointer
 }

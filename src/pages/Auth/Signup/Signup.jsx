@@ -31,36 +31,15 @@ const Signup = ({ open, onClose }) => {
       id: 1,
       name: "firstName",
       type: "text",
-      placeholder: "FirstName",
-      errorMessage:
-        "FirstName should be have at least 1 characters and shouldn't include any special character!",
-      label: "FirstName",
+      placeholder: "Tên hiển thị",
+      errorMessage: 
+        "Tên hiển thị phải có ít nhất 1 kí tự và không chứa kí tự đặc biệt!",
+      label: "Tên hiển thị",
       pattern: "^[ a-zA-Z\-\']+$",
       required: true,
     },
     {
       id: 2,
-      name: "address",
-      type: "text",
-      placeholder: "Address",
-      errorMessage: "Address should be 3-50 characters!",
-      label: "Address",
-      pattern: "^[A-Za-z0-9 ]{3,50}$",
-      required: true,
-    },
-    {
-      id: 3,
-      name: "lastName",
-      type: "text",
-      placeholder: "LastName",
-      errorMessage:
-        "LastName should be have at least 1 characters and shouldn't include any special character!",
-      label: "LastName",
-      pattern: "^[ a-zA-Z\-\']+$",
-      required: true,
-    },
-    {
-      id: 4,
       name: "email",
       type: "email",
       placeholder: "Email",
@@ -69,13 +48,7 @@ const Signup = ({ open, onClose }) => {
       required: true,
     },
     {
-      id: 5,
-      name: "gender",
-      type: "radio",
-      label: "Gender",
-    },
-    {
-      id: 6,
+      id: 3,
       name: "password",
       type: "password",
       placeholder: "Password",
@@ -85,14 +58,7 @@ const Signup = ({ open, onClose }) => {
       required: true,
     },
     {
-      id: 7,
-      name: "birthday",
-      type: "date",
-      placeholder: "Birthday",
-      label: "Birthday",
-    },
-    {
-      id: 8,
+      id: 4,
       name: "confirmPassword",
       type: "password",
       placeholder: "Confirm Password",
@@ -101,16 +67,6 @@ const Signup = ({ open, onClose }) => {
       pattern: values.password,
       required: true,
     },
-    {
-      id: 9,
-      name: "phone",
-      type: "text",
-      placeholder: "Phone",
-      errorMessage: "Phone number is not valid!",
-      label: "Phone",
-      pattern: "^[0-9]{3,16}$",
-      required: true,
-    }
   ];
 
   const option = [
@@ -163,7 +119,7 @@ const Signup = ({ open, onClose }) => {
           phone: ""
         })
         toast.success('Your account has been created successfully!');
-        navigate('/login')
+        navigate('/home')
       }
     } catch (error) {
       console.log(error.message);
@@ -218,7 +174,7 @@ const Signup = ({ open, onClose }) => {
                 );
               }
             })}
-            <button type="submit" value="Register" className="btn btn-signup position-absolute bottom-0">Sign up</button>
+            <button type="submit" value="Register" className="btn btn-signup position-absolute bottom-0">Tạo tài khoản</button>
           </form>
 
           <div className='other-option d-flex flex-column justify-content-center align-items-center'>
@@ -227,56 +183,6 @@ const Signup = ({ open, onClose }) => {
         </div>
       </Modal.Body>
     </Modal>
-
-    // <div className='background-img'>
-    //   <div className="input-form">
-    //     <h1>Sign Up Form</h1>
-    //     {error && <Message variant='danger'>{error}</Message>}
-    //     <Link to="/home" className='home-icon-register'><i className="ri-home-4-line"></i><p>Home</p></Link>
-    //     <ToastContainer />
-    //     <form onSubmit={registerHandle} className="position-relative pb-5 pt-2 d-flex justify-content-between flex-wrap">
-    //       {inputs?.length && inputs?.map((input) => {
-    //         if (input.type === "radio") {
-    //           return (<div className="form-group">
-    //             <label htmlFor="gender" className="form-label">{input.label}</label>
-    //             <div className='d-flex gap-5'>
-    //               {option.map((option) => (
-    //                 <div key={option.value} className='option-radio'>
-    //                   <input
-    //                     type="radio"
-    //                     id={option.value}
-    //                     name={input.name}
-    //                     value={option.value}
-    //                     onChange={onChange}
-    //                     checked={values[input.name] === option.value}
-    //                     className='m-2'
-    //                   />
-    //                   <label htmlFor={option.value}>{option.label}</label>
-    //                 </div>
-    //               ))}
-    //             </div>
-    //           </div>
-    //           )
-    //         } else {
-    //           return (
-    //             <FormInput
-    //               key={input.id}
-    //               {...input}
-    //               value={values[input.name]}
-    //               onChange={onChange}
-    //             />
-    //           );
-    //         }
-    //       })}
-
-    //       <button type="submit" value="Register" className="btn btn-signup position-absolute bottom-0">Sign up</button>
-    //     </form>
-
-    //     <div className='other-option d-flex flex-column justify-content-center align-items-center'>
-    //       <p className='text'>Have an account ? <Link to="/login">Log in</Link></p>
-    //     </div>
-    //   </div>
-    // </div>
   );
 }
 
