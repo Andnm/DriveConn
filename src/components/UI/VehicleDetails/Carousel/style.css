@@ -1,0 +1,17 @@
+.carousel-indicators button{
+    background-color: #079ad9 !important;
+}
+
+.carousel-indicators [data-bs-target] {
+    height: 7px !important;
+}
+
+.carousel-item img {
+    height: 500px !important;
+    object-fit: contain;
+}
+
+.carousel a span{
+    background-color: #079ad9;
+    border-radius: 50%;
+}

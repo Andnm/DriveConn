@@ -28,7 +28,7 @@ const VehicleManagement = () => {
     }, [page]);
 
     const handleSearchBar = (criteria = {}) => {
-        getVehicleList(currentvehicle).then((res) => {
+        getVehicleList(currentvehicle).then((res) => {          
             const filteredList = res.filter(item => {
                 if (criteria?.filter?.field) {
                     const { field, value } = criteria.filter;

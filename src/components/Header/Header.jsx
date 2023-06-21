@@ -35,15 +35,15 @@ const Header = () => {
   const navLinks = [
     {
       path: "/policy",
-      display: "Policy",
+      display: "Chính sách",
     },
     {
       path: "/blogs",
-      display: "Blog",
+      display: "Bài viết",
     },
     {
       path: "/vehicle_owner",
-      display: "Become a vehicle owner",
+      display: "Trở thành chủ xe",
     },
   ];
 
@@ -58,7 +58,7 @@ const Header = () => {
           <div className="logo">
             <Link to='/home' className="d-flex align-items-center gap-2">
               <img src={logo}></img>
-              <h3>DriveConn</h3>
+              <h3>Driveconn</h3>
             </Link>
           </div>
 

@@ -1,4 +1,4 @@
-import moment from 'moment';
+import moment from "moment";
 
 const validateEmail = (email) => {
   return String(email)
@@ -9,8 +9,29 @@ const validateEmail = (email) => {
 };
 
 const formatDate = (dateString) => {
-  const formattedDate = moment(dateString).format('DD/MM/YYYY');
+  const formattedDate = moment(dateString).format("DD/MM/YYYY");
   return formattedDate;
+};
+
+const formatPrice = (price) => {
+  if (price >= 1000000) {
+    return (price / 1000).toFixed(0);
+  } else if (price >= 1000) {
+    return (price / 1000).toFixed(0);
+  } else {
+    return price.toString();
+  }
+};
+
+const formatVNDateForm = (dateString) => {
+  const formattedDateTime = moment(dateString).format("HH:mm, DD/MM/YYYY");
+  return formattedDateTime;
+};
+
+const formatPriceNumber = (price) => {
+  const parts = price.toString().split(".");
+  parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, " ");
+  return parts.join(".");
 };
 
 //------------Handle Image With Firebase--------------
@@ -37,11 +58,78 @@ const splitFullName = (fullName) => {
     lastName = nameArray.slice(0, 2).join(" ");
     firstName = nameArray.slice(2, nameArray.length).join(" ");
   } else if (nameArray.length === 1 || nameArray.length === 2) {
-    lastName = " "
+    lastName = " ";
     firstName = fullName;
   }
 
   return { lastName, firstName };
 };
 
-export { validateEmail, formatDate, generateFileNameImage, splitFullName};
+//----------handle color status
+const getBookingStatusColor = (status) =>{
+  switch (status) {
+    case 'Pending':
+      return { color: 'var(--pending-color)', text: 'Chờ phản hồi từ chủ xe' };
+    case 'Paying':
+      return { color: 'var(--paying-color)', text: 'Chờ thanh toán' };
+    case 'Processing':
+      return { color: 'var(--processing-color)', text: 'Đang xử lý giao dịch' };
+    case 'Delivering':
+      return { color: 'var(--delivering-color)', text: 'Chờ bàn giao xe' };
+    case 'Delivered':
+      return { color: 'var(--delivered-color)', text: 'Đã bàn giao xe xong' };
+    case 'Completed':
+      return { color: 'var(--completed-color)', text: 'Đã hoàn thành' };
+    case 'Done':
+      return { color: 'var(--done-color)', text: 'Đã kết thúc' };
+    case 'Canceled':
+      return { color: 'var(--cancel-color)', text: 'Đã hủy' };
+    default:
+      return { color: '', text: '' };
+  }
+}
+
+const getCircleColor = (status) => {
+  switch (status) {
+    case 'Pending':
+      return 'var(--pending-color)';
+    case 'Paying':
+      return 'var(--paying-color)';
+    case 'Processing':
+      return 'var(--processing-color)';
+    case 'Delivering':
+      return 'var(--delivering-color)';
+    case 'Delivered':
+      return 'var(--delivered-color)';
+    case 'Completed':
+      return 'var(--completed-color)';
+    case 'Canceled':
+      return 'var(--cancel-color)';
+    case 'Done':
+      return 'var(--done-color)';
+    default:
+      return '';
+  }
+}
+
+const distanceDate = (dateStart, dateEnd) => {
+  const date1Obj = new Date(dateStart);
+  const date2Obj = new Date(dateEnd);
+
+  const distance = Math.abs((date2Obj - date1Obj) / (1000 * 60 * 60 * 24));
+
+  return distance;
+}
+
+export {
+  validateEmail,
+  formatDate,
+  generateFileNameImage,
+  splitFullName,
+  formatPrice,
+  formatPriceNumber,
+  formatVNDateForm,
+  getCircleColor,
+  getBookingStatusColor,
+  distanceDate
+};

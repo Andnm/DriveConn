@@ -152,3 +152,15 @@ export const registerAccount = async (data) => {
     return null;
   }
 }
+
+export const sendMailWhenRegisterOwner = async (data) => {
+  try {
+    console.log(data)
+    const response = await axios.post(`${API_URL}/api/users/sendMailWhenRegisterOwner`, data)
+    return response;
+  }catch (error) {
+    console.error("Error to send email register owner: ", error)
+    return null;
+  }
+}
+

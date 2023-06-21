@@ -1,0 +1,25 @@
+.qr-code {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.qr-code p {
+  margin-bottom: 0px;
+}
+
+.qr-code img {
+  width: 80%;
+}
+
+.qr-code .name-qr p:last-child {
+  font-size: 30px;
+  font-weight: bold;
+}
+.qr-code .content-qr p:last-child {
+  font-size: 25px;
+
+}
+
+

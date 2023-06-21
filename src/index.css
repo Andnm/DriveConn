@@ -70,7 +70,7 @@ section {
 .btn {
   padding: 7px 15px;
   background: #000d6b;
-  color: #fff;
+  color: #fff !important;
   border: none;
   outline: none;
   border-radius: 5px;

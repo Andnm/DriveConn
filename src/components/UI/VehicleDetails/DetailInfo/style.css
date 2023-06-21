@@ -1,0 +1,87 @@
+.vehicle-detail-container {
+  width: 60%;
+}
+
+.vehicle-detail-container p {
+  margin-bottom: 0px;
+}
+
+.vehicle-detail-container .separation-line {
+  width: 100%;
+  height: 1px;
+  background-color: #7f7f7fa3;
+  margin: 20px 0px 20px 0px;
+}
+
+.vehicle-detail-container .header {
+}
+
+.vehicle-detail-container .header h2 {
+  text-transform: uppercase;
+  font-size: 45px;
+  font-weight: bold;
+}
+
+.vehicle-detail-container .other-info {
+}
+
+.vehicle-detail-container .other-info .rating {
+}
+
+.vehicle-detail-container .other-info .rating i {
+  color: rgb(214, 181, 17);
+}
+
+.vehicle-detail-container .other-info .rating,
+.vehicle-detail-container .other-info .booked,
+.vehicle-detail-container .other-info .location {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.vehicle-detail-container .characteristic .item {
+  display: flex;
+  gap: 8px;
+  font-size: 20px;
+}
+
+.vehicle-detail-container .characteristic .item i {
+  color: #000d6b;
+}
+
+.vehicle-detail-container .description p {
+  font-size: 20px;
+}
+
+.vehicle-detail-container .other-facilities .list-facilities {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  font-size: 20px;
+}
+
+.vehicle-detail-container .other-request img{
+  width: 100%;
+}
+
+.vehicle-detail-container .owner-container {
+  
+}
+
+.vehicle-detail-container .owner-container .owner-profile{
+  align-items: center;
+  width: 90%;
+  margin: 0 auto;
+}
+
+.vehicle-detail-container .owner-container .owner-profile img{
+  width: 50px;
+  height: 50px;
+  border-radius: 50px;
+}
+
+.vehicle-detail-container .owner-container .owner-profile p{
+  font-weight: 600;
+  font-size: 20px;
+}

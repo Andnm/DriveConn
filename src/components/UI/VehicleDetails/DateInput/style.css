@@ -1,0 +1,23 @@
+.datetime-input {
+  display: flex;
+  width: 100%;
+}
+
+.datetime-input .date-label{
+  width: 70%;
+}
+
+.datetime-input .time-label{
+  width: 30%;
+}
+
+.datetime-input-field {
+  padding: 5px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  cursor: pointer;
+  width: 100%;
+  height: 50px;
+}
+
+

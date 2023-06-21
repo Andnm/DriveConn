@@ -37,7 +37,7 @@ const Sidebar = () => {
   ];
 
   return (
-    <div className="sidebar ">
+    <div className="sidebar">
       <div className="sidebar__top d-flex justify-content-center align-items-center">
 
       </div>

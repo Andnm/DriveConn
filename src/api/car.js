@@ -10,25 +10,24 @@ const createAxiosInstance = (token) => {
   });
 };
 
-export const getVehicleList = async (token) => {
+export const getCarsOfUser = async (token) => {
   try {
     const instance = createAxiosInstance(token);
-    const response = await instance.get(`/api/vehicles/home`);
+    const response = await instance.get(`/api/cars`);
     return response.data;
   } catch (error) {
-    console.error("Error fetching all vehicles:", error);
+    console.error("Error fetching car of user:", error);
     return null;
   }
 };
 
-export const getVehicleListOfUser = async (token) => {
+export const getAllCars = async (token) => {
   try {
     const instance = createAxiosInstance(token);
-    const response = await instance.get(`/api/vehicles/user`);
-    console.log(response.data)
+    const response = await instance.get(`/api/cars/home`);
     return response.data;
   } catch (error) {
-    console.error("Error fetching all vehicles of user:", error);
+    console.error("Error fetching all car:", error);
     return null;
   }
 };

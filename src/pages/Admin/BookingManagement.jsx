@@ -7,7 +7,7 @@ import SearchBar from "../../components/UI/SearchBar";
 import { AuthContext } from "../../context/authContext";
 import Pagination from "../../components/UI/Pagination";
 import 'react-confirm-alert/src/react-confirm-alert.css';
-import { cancelBookingById, getBookingList } from "../../api/booking";
+import { cancelBookingById, getBookingList, changeBookingStatus } from "../../api/booking";
 import { DATE_FORMAT } from "../../constants/default";
 import LoadingCar from '../../components/LoadingCar/LoadingCar'
 
@@ -16,7 +16,8 @@ const filterableFields = [{
     options: [
         { value: "Completed", label: "Completed" },
         { value: "Processing", label: "Processing" },
-        { value: "Cancelled", label: "Cancelled" }],
+        { value: "Cancelled", label: "Cancelled" },
+        { value: "Done", label: "Done" }],
     field: "bookingStatus",
 }, {
     label: "Has driver", options: [{ value: true, label: "Yes" }, { value: false, label: "No" },], field: "hasDriver",
@@ -64,13 +65,32 @@ const BookingManagement = () => {
         });
     };
 
-    const cancelBooking = (bookingId) => {
+    const confirmPayment = (bookingId) => {
         confirmAlert({
-            message: 'Do you want to cancel this booking?', buttons: [{
+            message: 'Do you want to confirm payment this booking?', buttons: [{
                 label: 'Yes', onClick: () => {
-                    cancelBookingById(currentToken, bookingId).then(res => {
+                    changeBookingStatus(currentToken, bookingId).then(res => {
                         if (res) {
-                            toast.success("Cancel successfully!");
+                            toast.success("Confirm successfully!");
+                            handleSearchBar();
+                        }
+                    }).catch(e => {
+                        toast.error(e.message);
+                    });
+                },
+            }, {
+                label: 'No', onClick: null,
+            }]
+        });
+    }
+
+    const confirmTransferred = (bookingId) => {
+        confirmAlert({
+            message: 'Would you like to confirm that the money has been transferred to the owner of this booking?', buttons: [{
+                label: 'Yes', onClick: () => {
+                    changeBookingStatus(currentToken, bookingId).then(res => {
+                        if (res) {
+                            toast.success("Confirm successfully!");
                             handleSearchBar();
                         }
                     }).catch(e => {
@@ -84,7 +104,7 @@ const BookingManagement = () => {
     }
 
     const getColor = (status) => {
-        return status === 'Completed' ? "text-success" : (status === 'Processing' ? "text-warning" : "text-danger");
+        return status === 'Completed' ? "text-success" : (status === 'Processing' ? "text-warning" : (status === 'Done') ? "text-secondary" : "text-danger");
     };
 
     const onChangePage = (page) => {
@@ -122,9 +142,6 @@ const BookingManagement = () => {
                                     Tổng tiền
                                 </th>
                                 <th scope="col">
-                                    Has driver
-                                </th>
-                                <th scope="col">
                                     Trạng thái
                                 </th>
                             </tr>
@@ -133,11 +150,23 @@ const BookingManagement = () => {
                             <>
                                 {bookings.map((booking) => (<tr key={booking._id}>
                                     <td className="d-flex">
-                                        {booking.bookingStatus === "Processing" ?
-                                            <i className="ri-close-circle-line cursor-pointer mx-2" title="Cancel"
-                                                onClick={() => cancelBooking(booking._id)}></i> : 'N/A'}
+                                        {
+                                            booking.bookingStatus === "Processing"
+                                                ?
+                                                <i className="ri-bank-card-line cursor-pointer mx-2" title="Confirm"
+                                                    onClick={() => confirmPayment(booking._id)}>
+                                                </i>
+                                                :
+                                                (booking.bookingStatus === "Completed"
+                                                    ?
+                                                    <i className="ri-wallet-3-line cursor-pointer mx-2" title="Confirm"
+                                                        onClick={() => confirmTransferred(booking._id)}>
+                                                    </i>
+                                                    : 'N/A'
+                                                )
+                                        }
                                     </td>
-                                    <td>{booking.licensePlate ?? 'N/A'}</td>
+                                    <td>{booking.vehicle_id.licensePlate ?? 'N/A'}</td>
                                     <td>{moment(booking.bookingStart).format(DATE_FORMAT) ?? 'N/A'}</td>
                                     <td>{moment(booking.bookingEnd).format(DATE_FORMAT) ?? 'N/A'}</td>
                                     <td
@@ -147,7 +176,6 @@ const BookingManagement = () => {
                                         {`${booking.user_id?.firstName} ${booking.user_id?.lastName}`}
                                     </td>
                                     <td>{booking.totalPrice ?? 0}</td>
-                                    <td>{booking.hasDriver ? 'Yes' : 'No'}</td>
                                     <td className={getColor(booking.bookingStatus)}>
                                         {booking.bookingStatus ?? 'N/A'}
                                     </td>

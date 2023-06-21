@@ -8,7 +8,7 @@ import { blockUserById, deleteUserById, getUserList, upRole } from "../../api/us
 import Pagination from "../../components/UI/Pagination";
 import 'react-confirm-alert/src/react-confirm-alert.css';
 import LoadingCar from '../../components/LoadingCar/LoadingCar'
-
+import { formatVNDateForm, formatDate } from '../../utils/utils'; 
 
 const filterableFields = [{
     label: "Status", options: [{ value: true, label: "ACTIVE" }, { value: false, label: "INACTIVE" },], field: "status",
@@ -185,7 +185,7 @@ const UserManagement = () => {
                                     </td>
                                     <td>{user.role_id?.roleName ?? 'N/A'}</td>
                                     <td>{user.gender ?? 'N/A'}</td>
-                                    <td>{user.dob ?? 'N/A'}</td>
+                                    <td>{formatDate(user.dob) ?? 'N/A'}</td>
                                     <td
                                         className="text-truncate"
                                         title={user.address ?? 'N/A'}

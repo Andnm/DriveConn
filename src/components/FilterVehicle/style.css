@@ -1,0 +1,61 @@
+.filter-div {
+  --black: #000;
+  --grey: #ddd;
+  --font-grey: #717171;
+  --white: #ffffff;
+  --theme: #ff385c;
+  --light-grey: #f7f7f7;
+}
+
+.filter-div p{
+  margin-bottom: 0px;
+}
+
+.filter-div {
+  border-top: 1px solid var(--grey);
+  padding: 1rem 3rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow-x: auto;
+}
+
+.filter-div .links-box {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-right: 2rem;
+  opacity: 0.5;
+  border-bottom: 1px solid var(--white);
+  min-width: 85px;
+}
+
+.filter-div .links-box:hover,
+.filter-div .selected-box {
+  opacity: 1;
+  border-bottom: 1px solid var(--black);
+  transition: all 0.3s;
+  cursor: pointer;
+}
+
+.filter-div i {
+  font-size: 1rem;
+  text-align: center;
+}
+
+.filter-div .links-label {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--font-grey);
+}
+
+.filter-div .selected-label {
+  color: var(--black);
+}
+@media only screen and (max-width: 800px) {
+  .filter-div {
+    padding: 0.5rem;
+    padding-top: 1.5rem;
+  }
+}

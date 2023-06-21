@@ -1,5 +1,6 @@
 .separate-line-line-layout-account {
   border-left: 1px solid;
+  height: calc(100vh - 110px);
 }
 
 .content-option-container {
