@@ -42,7 +42,7 @@ const UserRouter = () => {
     <Routes>
       <>
         {/* <Route path="/" element={<ComingSoon />} /> */}
-        {/* <Route path="/" element={<Maintenance />} /> */}
+        <Route path="/" element={<Maintenance />} />
 
         <Route element={<Layout />}>
           <Route path="/" element={<Home />} />
