@@ -8,6 +8,10 @@ import { formatDate } from '../../utils/utils'
 import StarRating from '../../components/UI/StarRating/StarRating';
 
 const UserInfo = () => {
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
   const { currentToken, userDecode } = useContext(AuthContext);
 
   if (!userDecode) {
@@ -27,6 +31,8 @@ const UserInfo = () => {
 
     return (<p>{roleString}</p>);
   }
+
+
 
   return (
     (userDecode

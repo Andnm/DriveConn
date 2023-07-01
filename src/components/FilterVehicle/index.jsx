@@ -49,7 +49,6 @@ const FilterVehicle = ({ selectedFilter, setSelectedFilter }) => {
                     key={i}
                     className={`links-box ${i == selectedFilter && "selected-box"}`}
                     onClick={() => {
-                        console.log("selecting key", i);
                         setSelectedFilter(i);
                     }}
                 >

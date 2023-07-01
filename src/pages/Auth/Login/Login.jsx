@@ -10,7 +10,7 @@ import logo_google from '../../../assets/all-images/google/google_logo.png'
 import Modal from 'react-bootstrap/Modal';
 import Signup from "../Signup/Signup";
 
-function Login({ open, onClose }) {
+function Login({ open, onClose, props }) {
   const { login, loginWithGoogle, loginWithFacebook, isLoadingEvent } = useContext(AuthContext);
   const [cookies, setCookie, removeCookie] = useCookies(["error"]);
   const [email, setEmail] = useState("");
@@ -60,7 +60,7 @@ function Login({ open, onClose }) {
     onClose()
     setEmail('')
     setPassword('')
-    login(loginUser);
+    login(loginUser, props);
   };
 
   const handleOnInput = (e) => {
@@ -73,7 +73,7 @@ function Login({ open, onClose }) {
   };
 
   const handleLoginWithGoogle = () => {
-    loginWithGoogle()
+    loginWithGoogle(props)
     onClose()
   }
 

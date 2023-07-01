@@ -21,6 +21,11 @@ const DrivingLicense = () => {
         }
     }
 
+    const handleAddDrivingLicense = () => {
+        setIsOpenModalAddGplx(false)
+        handleGetDrivingLicense()
+    }
+
     useEffect(() => {
         handleGetDrivingLicense()
     }, [])
@@ -81,7 +86,7 @@ const DrivingLicense = () => {
                 <UpdateDrivingLicense
                     currentToken={currentToken}
                     open={isOpenModalAddGplx}
-                    onClose={() => setIsOpenModalAddGplx(false)}
+                    onClose={handleAddDrivingLicense}
                 />
             }
         </div>

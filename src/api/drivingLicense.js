@@ -12,7 +12,6 @@ const createAxiosInstance = (token) => {
 
 export const getDrivingLicense = async (token, user_id) => {
   try {
-    console.log(user_id)
     const instance = createAxiosInstance(token)
     const response = await instance.get(`/api/users/drivingLicense/${user_id}`);
     return response.data;

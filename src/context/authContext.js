@@ -43,7 +43,7 @@ export default function AuthContextProvider({ children }) {
   }, [userDecode]);
 
   // function login normally
-  const login = async (inputs) => {
+  const login = async (inputs, props) => {
     try {
       setIsLoadingEvent(true);
 
@@ -88,7 +88,8 @@ export default function AuthContextProvider({ children }) {
   //function handle displayName into firstName and lastName
 
   //function login with google by firebase
-  const loginWithGoogle = async () => {
+  const loginWithGoogle = async (props) => {
+
     signInWithPopup(auth, providerGoogle).then(async (data) => {
       setIsLoadingEvent(true);
       const { lastName: lastName, firstName: firstName } = splitFullName(
@@ -124,10 +125,14 @@ export default function AuthContextProvider({ children }) {
       setUserDecode(resUser?.data ?? {});
       setIsLoadingEvent(false);
 
+      const currentPath = window.location.pathname;
+
       if (["Admin"].includes(user.user.roleName)) {
         navigate("/admin");
-      } else {
-        navigate("/my_account");
+      } else if (currentPath.startsWith("/vehicles/")){
+        navigate(currentPath, { state: { props } });
+      }else {
+        navigate("/my_account")
       }
     });
   };

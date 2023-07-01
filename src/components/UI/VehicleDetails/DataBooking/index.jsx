@@ -1,22 +1,24 @@
-import React, { useState, useContext } from 'react'
-import { formatPrice, formatPriceNumber, distanceDate } from '../../../../utils/utils'
+import React, { useState, useContext, useEffect } from 'react'
 import './style.css'
 import DateInput from '../DateInput'
 import ModalBox from '../../../Modal/ModalBox'
-import { createBooking } from '../../../../api/booking'
 import LoadingCar from '../../../LoadingCar/LoadingCar'
-import { toast } from 'react-toastify';
+import Login from '../../../../pages/Auth/Login/Login'
 import toastOption from '../../../../config/toast'
+
+import { toast } from 'react-toastify';
 import { AuthContext } from '../../../../context/authContext'
 import { useParams, useNavigate } from "react-router-dom";
-
+import { createBooking } from '../../../../api/booking'
+import { getDrivingLicense } from '../../../../api/drivingLicense'
+import { formatPrice, formatPriceNumber, distanceDate } from '../../../../utils/utils'
 
 const DataBooking = ({ props }) => {
   const { autoMaker_id, category_id, fuel, model_id, otherFacilities, transmission, vehicle_id } = props
 
   const { slug } = useParams();
 
-  const { currentToken } = useContext(AuthContext);
+  const { currentToken, userDecode } = useContext(AuthContext);
   const navigate = useNavigate();
 
   const [dateStart, setDateStart] = useState('');
@@ -28,6 +30,12 @@ const DataBooking = ({ props }) => {
   const [openModalConfirm, setOpenModalConfirm] = useState(false)
   const [isLoading, setIsLoading] = useState(false)
 
+  const [modalLoginOpen, setModalLoginOpen] = useState(false);
+
+  const [confirmDrivingLicenseModal, setConfirmDrivingLicenseModal] = useState(false);
+
+  const [openModalWarning, setOpenModalWarning] = useState(false)
+
   const calculatorTotalPrice = () => {
     if (distanceDate(dateStart, dateEnd)) {
       return formatPriceNumber(vehicle_id?.price * distanceDate(dateStart, dateEnd))
@@ -37,10 +45,23 @@ const DataBooking = ({ props }) => {
   }
 
   const handleBookingButton = () => {
-    setOpenModalConfirm(true)
+    if (!userDecode) {
+      setModalLoginOpen(true)
+    } else {
+      if (confirmDrivingLicenseModal) {
+        setOpenModalConfirm(true)
+      } else {
+        setOpenModalWarning(true)
+      }
+    }
+  }
+
+  const handleGoToAddDrivingLicense = () => {
+    navigate('/my_account')
   }
 
   const handleBookingApi = async () => {
+
     setIsLoading(true)
 
     const bookingStart = new Date(dateStart + 'T' + timeStart);
@@ -54,10 +75,30 @@ const DataBooking = ({ props }) => {
     } else {
       toast.error('Thuê xe thất bại, vui lòng thử lại sau', toastOption)
     }
-    
+
     setOpenModalConfirm(false)
     setIsLoading(false)
   }
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const response = await getDrivingLicense(currentToken, userDecode?._id);
+
+      const licenseClass = transmission ? 'B' : 'A';
+      const matchingObj = response.find(obj => obj.licenseClass.includes(licenseClass));
+      const isConfirmed = matchingObj?.isConfirmed;
+      setConfirmDrivingLicenseModal(isConfirmed);
+    };
+
+    if (userDecode?.id) {
+      fetchData();
+    }
+  }, [userDecode?.id, currentToken]);
+
 
   return (
     <div className="data-booking-container d-flex flex-column gap-4">
@@ -143,7 +184,11 @@ const DataBooking = ({ props }) => {
 
       </div>
 
-      <button className={`btn ${!dateStart && !timeStart && !dateEnd && !timeEnd ? 'btn-secondary' : 'btn-primary'}`} onClick={handleBookingButton} style={{ pointerEvents: !dateStart && !timeStart && !dateEnd && !timeEnd ? 'none' : 'auto' }}>
+      <button
+        className={`btn ${!dateStart && !timeStart && !dateEnd && !timeEnd ? 'btn-secondary' : 'btn-primary'}`}
+        onClick={handleBookingButton}
+      // style={{ pointerEvents: !dateStart && !timeStart && !dateEnd && !timeEnd ? 'none' : 'auto' }}
+      >
         Đặt xe
       </button>
 
@@ -156,12 +201,26 @@ const DataBooking = ({ props }) => {
           title={'Xác nhận'}
           body={'Bạn có chắc muốn thuê chiếc xe này?'}
           btnActionNo={'Không'}
-          btnActionYes={'Yet sor chéc chén rồi'}
+          btnActionYes={'Xác nhận'}
           eventToContinue={handleBookingApi}
         />
       }
 
       {isLoading && <LoadingCar />}
+
+      {modalLoginOpen && <Login open={modalLoginOpen} onClose={() => setModalLoginOpen(false)} props={props} />}
+
+      {openModalWarning && <ModalBox
+        open={openModalWarning}
+        onClose={() => setOpenModalWarning(false)}
+        centerAction={true}
+        title={'Cảnh báo'}
+        body={!transmission
+          ? 'Bạn chưa có bằng XE MÁY hoặc chưa được xác thực!'
+          : 'Bạn chưa có bằng Ô TÔ hoặc chưa được xác thực!'}
+        btnActionYes={'Đi cập nhập'}
+        eventToContinue={handleGoToAddDrivingLicense}
+      />}
     </div>
   )
 }

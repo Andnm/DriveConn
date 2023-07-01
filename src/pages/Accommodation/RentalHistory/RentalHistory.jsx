@@ -25,9 +25,9 @@ const RentalHistory = () => {
   }, []);
 
   return (
-    <div className="d-flex justify-content-center flex-column rental-history-container gap-3">
+    <div className="d-flex justify-content-center flex-column rental-history-container gap-3 ">
       <div className='title'>Lịch sử cho thuê xe</div>
-      <div className='body d-flex justify-content-around'>
+      <div className='body d-flex justify-content-around flex-wrap gap-3'>
         {isLoading
           ?
           <LoadingCar className={'blank-container'} />

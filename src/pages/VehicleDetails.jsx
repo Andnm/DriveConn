@@ -9,7 +9,7 @@ import DetailInfo from "../components/UI/VehicleDetails/DetailInfo";
 
 const VehicleDetails = () => {
   const locationState = useLocation();
-  const { vehicle_id } = locationState.state.props.item
+  const { vehicle_id } = locationState.state.props.item || locationState.state.props
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -23,9 +23,9 @@ const VehicleDetails = () => {
       <CarouselVehicle imagesArray={vehicle_id.images} />
 
       <Container className="d-flex justify-content-between detail-content-container">
-        <DetailInfo props={locationState.state.props.item}/>
+        <DetailInfo props={locationState.state.props.item || locationState.state.props}/>
 
-        <DataBooking props={locationState.state.props.item}/>
+        <DataBooking props={locationState.state.props.item || locationState.state.props}/>
       </Container>
 
     </Container>

@@ -28,7 +28,7 @@ const BookingHistory = () => {
 
     <div className="d-flex justify-content-center flex-column history-booking-container gap-3">
       <div className='title'>Lịch sử chuyến đi</div>
-      <div className='body'>
+      <div className='body d-flex flex-wrap gap-2 justify-content-center'>
         {isLoading
           ?
           <LoadingCar className={'blank-container'} />

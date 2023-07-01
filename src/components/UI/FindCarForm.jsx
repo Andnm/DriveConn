@@ -6,6 +6,7 @@ import "../../styles/find-car-form.css";
 const FindCarForm = () => {
 
   const [radioOption, setRadioOption] = useState('Motorbike');
+  const [location, setLocation] = useState('');
 
   const navigate = useNavigate();
 
@@ -65,7 +66,7 @@ const FindCarForm = () => {
               <div className="choose">
                 <div className="choose-item has-arrow" htmlFor="1">
                   <div className="here-autocomplete">
-                    <input type="text" placeholder="Nhập địa điểm thuê xe" value="" />
+                    <input type="text" placeholder="Nhập địa điểm thuê xe" value={location} onChange={(e) => setLocation(e.target.value)}/>
                   </div>
                 </div>
               </div>

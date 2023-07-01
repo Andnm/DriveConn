@@ -40,7 +40,7 @@ const UpdateDrivingLicense = ({ currentToken, open, onClose }) => {
             }
             setIsLoading(false)
         }
-        
+
     }
 
     const handleSubmit = () => {
@@ -49,8 +49,20 @@ const UpdateDrivingLicense = ({ currentToken, open, onClose }) => {
         uploadBytes(imageRef, imgDrivingLicense)
             .then(() => {
                 getDownloadURL(imageRef)
-                    .then((url) => {
+                    .then(async (url) => {
+                        setIsLoading(true)
                         setUrlImage(url);
+                        const registrationResponse = await registerDrivingLicense(currentToken, licenseNo, licenseClass, expireDate, url);
+                        console.log(registrationResponse)
+                        if (registrationResponse != '') {
+                            onClose()
+                            toast.success('Cập nhập GPLX thành công. Đang được xác minh!', toastOption)
+                            setPreImgDrivingLicense(null)
+                        } else {
+                            onClose()
+                            toast.error('Cập nhập GPLX thất bại. Vui lòng thử lại!', toastOption)
+                        }
+                        setIsLoading(false)
                     })
                     .catch((error) => {
                         console.log(error.message, "error getting the image url");
