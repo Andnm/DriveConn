@@ -8,6 +8,7 @@ import UserManagement from "../pages/Admin/UserManagement";
 import WelcomeAdmin from "../pages/Admin/WelcomeAdmin";
 import BookingManagement from "../pages/Admin/BookingManagement";
 import Dashboard from "../pages/Admin/Dashboard";
+import DrivingLicenseManagement from '../pages/Admin/DrivingLicenseManagement'
 
 import { AuthContext } from "../context/authContext";
 
@@ -25,6 +26,7 @@ const AdminRouter = () => {
             <Route path="blog_management" element={<BlogManagement />} />
             <Route path="user_management" element={<UserManagement />} />
             <Route path="booking_management" element={<BookingManagement />} />
+            <Route path="drivingLicense_management" element={<DrivingLicenseManagement />} />
           </Route>
         </>
       </Route>

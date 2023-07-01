@@ -30,6 +30,11 @@ const Sidebar = () => {
       icon: "ri-user-line"
     },
     {
+      path: "/admin/drivingLicense_management",
+      name: "License Management",
+      icon: "ri-bank-card-line"
+    },
+    {
       path: "/admin/booking_management",
       name: "Booking Management",
       icon: "ri-user-line"
