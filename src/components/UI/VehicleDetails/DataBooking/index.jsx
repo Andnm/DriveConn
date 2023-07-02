@@ -187,7 +187,7 @@ const DataBooking = ({ props }) => {
       <button
         className={`btn ${!dateStart && !timeStart && !dateEnd && !timeEnd ? 'btn-secondary' : 'btn-primary'}`}
         onClick={handleBookingButton}
-      // style={{ pointerEvents: !dateStart && !timeStart && !dateEnd && !timeEnd ? 'none' : 'auto' }}
+        style={{ pointerEvents: !dateStart && !timeStart && !dateEnd && !timeEnd ? 'none' : 'auto' }}
       >
         Đặt xe
       </button>
