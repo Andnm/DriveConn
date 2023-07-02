@@ -26,6 +26,12 @@
   text-align: center;
   margin: 0;
   margin-left: 10px;
+  color: white;
+  font-weight: 500;
+}
+
+.sidebar__top__text:hover {
+  color: #349eff
 }
 
 .sidebar__middle {
@@ -79,6 +85,11 @@
 .logout_btn {
   border: 1px solid gray !important;
   margin-left: 10px;
+  color: white
+}
+
+.logout_btn i{
+  color: white
 }
 
 .logout_btn:hover {

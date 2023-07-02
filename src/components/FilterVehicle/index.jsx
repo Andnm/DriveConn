@@ -61,7 +61,7 @@ const FilterVehicle = ({ selectedFilter, setSelectedFilter }) => {
                 </div>
             ))}
 
-            <button className='btn btn-secondary d-flex gap-2'>
+            <button className='btn btn-outline-secondary d-flex gap-2'>
                 <i className="ri-equalizer-line"></i>
                 <p>Bộ lọc</p>
             </button>

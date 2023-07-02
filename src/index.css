@@ -67,7 +67,7 @@ section {
   padding: 50px 0px;
 }
 
-.btn {
+/* .btn {
   padding: 7px 15px;
   background: #000d6b;
   color: #fff !important;
@@ -75,7 +75,7 @@ section {
   outline: none;
   border-radius: 5px;
   transition: 0.3s;
-}
+} */
 
 .btn:hover {
   color: #fff !important;

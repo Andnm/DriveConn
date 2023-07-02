@@ -32,7 +32,7 @@ const Signup = ({ open, onClose }) => {
       name: "firstName",
       type: "text",
       placeholder: "Tên hiển thị",
-      errorMessage: 
+      errorMessage:
         "Tên hiển thị phải có ít nhất 1 kí tự và không chứa kí tự đặc biệt!",
       label: "Tên hiển thị",
       pattern: "^[ a-zA-Z\-\']+$",
@@ -174,11 +174,14 @@ const Signup = ({ open, onClose }) => {
                 );
               }
             })}
-            <button type="submit" value="Register" className="btn btn-signup position-absolute bottom-0">Tạo tài khoản</button>
+            <div className='d-flex justify-content-center w-100 mt-4'>
+              <button type="submit" value="Register" className="btn-signup position-absolute bottom-0">Tạo tài khoản</button>
+
+            </div>
           </form>
 
           <div className='other-option d-flex flex-column justify-content-center align-items-center'>
-            <p className='text'>Đã có tài khoản? <Link to="/login">Đăng ký</Link></p>
+            <p className='text'>Đã có tài khoản? <Link to="#">Đăng ký</Link></p>
           </div>
         </div>
       </Modal.Body>

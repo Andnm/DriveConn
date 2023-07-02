@@ -61,7 +61,7 @@ const Sidebar = () => {
       </div>
 
       <div className='sidebar__bottom__btn d-flex justify-content-center'>
-        <Link to='/admin'>
+        <div >
           <div className='d-flex justify-content-center align-items-center'>
             <div className="sidebar__top__logo">
               <img src={logo}></img>
@@ -70,8 +70,8 @@ const Sidebar = () => {
               {userDecode.lastName + ' ' + userDecode.firstName}
             </p>
           </div>
+        </div>
 
-        </Link>
         <button className="btn logout_btn" onClick={logout}>
           <i className="ri-logout-box-r-line fs-5"></i>
         </button>

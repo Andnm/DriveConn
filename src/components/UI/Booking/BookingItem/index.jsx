@@ -28,10 +28,53 @@ const BookingItem = (props) => {
     backgroundColor: getCircleColor(status)
   };
 
-  const bookingStatusStyle = {
-    color: getBookingStatusColor(status)
-  };
+  const isOwner = userDecode?.role_id?.roleName === 'Owner';
 
+  const actionMapping = {
+    Pending: {
+      btnActionYes: {
+        isOwner: 'Đồng ý cho thuê',
+        isNotOwner: null
+      },
+      eventToContinue: {
+        isOwner: handleAgreeBookingByOwner,
+        isNotOwner: null
+      }
+    },
+    Paying: {
+      btnActionYes: {
+        isOwner: null,
+        isNotOwner: 'Tiến hành thanh toán'
+      },
+      eventToContinue: {
+        isOwner: null,
+        isNotOwner: handlePaymentModal
+      }
+    },
+    Delivering: {
+      btnActionYes: {
+        isOwner: 'Xác nhận đã bàn giao xe',
+        isNotOwner: null
+      },
+      eventToContinue: {
+        isOwner: handleConfirmDeliveryApi,
+        isNotOwner: null
+      }
+    },
+    Delivered: {
+      btnActionYes: {
+        isOwner: 'Xác nhận hoàn thành chuyến đi',
+        isNotOwner: null
+      },
+      eventToContinue: {
+        isOwner: handleConfirmCompletedBooking,
+        isNotOwner: null
+      }
+    }
+  };
+  
+  const { btnActionYes, eventToContinue } = actionMapping[status];
+  
   const handleAgreeBookingByOwner = async () => {
     setIsLoading(true)
     const response = await changeBookingStatus(currentToken, _id)
@@ -98,8 +141,6 @@ const BookingItem = (props) => {
     setIsLoading(false)
   }
 
-  const isOwner = userDecode?.role_id?.roleName === 'Owner';
-
   return (
     <Col lg="5" md="5" sm="6" className="mb-5 booking-item">
       <div className="card-booking" onClick={() => setIsOpenModalDetail(true)}>
@@ -121,9 +162,10 @@ const BookingItem = (props) => {
           </div>
         </div>
       </div>
+
       <div className="card-footer d-flex align-items-center gap-3">
         <div className='circle' style={circleStyle}></div>
-        <p style={{color: getBookingStatusColor(status).color}}>{getBookingStatusColor(status).text}</p>
+        <p style={{ color: getBookingStatusColor(status).color }}>{getBookingStatusColor(status).text}</p>
 
         {isOpenModalDetail
           &&
@@ -134,20 +176,8 @@ const BookingItem = (props) => {
             body={
               <BookingDetail data={props.item} />
             }
-            btnActionYes={
-              status === 'Pending' ? (isOwner ? 'Đồng ý cho thuê' : null) :
-                status === 'Paying' ? (isOwner ? null : 'Tiến hành thanh toán') :
-                  status === 'Delivering' ? (isOwner ? 'Xác nhận đã bàn giao xe' : null) :
-                    status === 'Delivered' ? (isOwner ? 'Xác nhận hoàn thành chuyến đi' : null) :
-                      null
-            }
-            eventToContinue={
-              status === 'Pending' && isOwner ? handleAgreeBookingByOwner :
-                status === 'Paying' && !isOwner ? handlePaymentModal :
-                  status === 'Delivering' && isOwner ? handleConfirmDeliveryApi :
-                    status === 'Delivered' && isOwner ? handleConfirmCompletedBooking :
-                      null
-            }
+            btnActionYes={btnActionYes[isOwner ? 'isOwner' : 'isNotOwner']}
+            eventToContinue={eventToContinue[isOwner ? 'isOwner' : 'isNotOwner']}
           />
         }
 

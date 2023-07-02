@@ -18,11 +18,12 @@ function Login({ open, onClose, props }) {
   const errorAlert = useRef();
   const errorPassword = useRef();
   const inputRef = useRef();
-  const [isOpenSignUpModal, setIsOpenSignUpModal] = useState(false)
 
   const [token, setToken] = useState('');
 
   const [err, setErr] = useState(false);
+
+  
 
   useEffect(() => {
     cookies?.error && toast.error(cookies?.error, toastOption);
@@ -81,11 +82,6 @@ function Login({ open, onClose, props }) {
     toast.warning('Tính năng chưa hỗ trợ', toastOption)
     onClose()
     // loginWithFacebook()
-  }
-
-  const handleOpenSignUpModal = () => {
-    onClose()
-    setIsOpenSignUpModal(true)
   }
 
   useEffect(() => {
@@ -147,10 +143,9 @@ function Login({ open, onClose, props }) {
             </button>
 
             <p className='text'>
-              Bạn chưa có sẵn tài khoản? <span className="text-signup" onClick={handleOpenSignUpModal}>Đăng ký</span>
+              Bạn chưa có sẵn tài khoản? <span className="text-signup" >Đăng ký</span>
             </p>
 
-            {isOpenSignUpModal && <Signup open={isOpenSignUpModal} onClose={() => setIsOpenSignUpModal(false)}/>}
           </div>
         </div>
       </div>

@@ -72,7 +72,7 @@ export default function AuthContextProvider({ children }) {
       setIsLoadingEvent(false);
 
       if (["Admin"].includes(user.user.roleName)) {
-        navigate("/admin");
+        navigate("/admin/dashboard");
       } else {
         navigate("/my_account");
       }
@@ -128,7 +128,7 @@ export default function AuthContextProvider({ children }) {
       const currentPath = window.location.pathname;
 
       if (["Admin"].includes(user.user.roleName)) {
-        navigate("/admin");
+        navigate("/admin/dashboard");
       } else if (currentPath.startsWith("/vehicles/")){
         navigate(currentPath, { state: { props } });
       }else {
