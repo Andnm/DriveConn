@@ -90,7 +90,7 @@ const UserInfo = () => {
                     :
                     <>
                       <p className='score'>{userDecode.rate?.toFixed(1)}</p>
-                      <StarRating rate={userDecode.rate} />
+                      <StarRating rate={Math.floor(userDecode?.rate)} />
                     </>
                   }
                 </div>

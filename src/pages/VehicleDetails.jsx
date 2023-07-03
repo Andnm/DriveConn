@@ -18,7 +18,7 @@ const VehicleDetails = () => {
 
   return (
     <Container>
-      <button className="btn btn-outline-secondary mb-3 mt-3" onClick={() => navigate(-1)}><i className="ri-arrow-go-back-line"></i></button>
+      <button className="btn btn-outline-secondary mb-3 mt-3" onClick={() => navigate('/vehicles')}><i className="ri-arrow-go-back-line"></i></button>
 
       <CarouselVehicle imagesArray={vehicle_id.images} />
 

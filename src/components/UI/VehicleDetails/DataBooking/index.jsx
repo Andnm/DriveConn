@@ -45,7 +45,7 @@ const DataBooking = ({ props }) => {
   }
 
   const handleBookingButton = () => {
-    if (!userDecode) {
+    if (!userDecode?._id) {
       setModalLoginOpen(true)
     } else {
       if (confirmDrivingLicenseModal) {
@@ -94,10 +94,10 @@ const DataBooking = ({ props }) => {
       setConfirmDrivingLicenseModal(isConfirmed);
     };
 
-    if (userDecode?.id) {
+    if (userDecode?._id) {
       fetchData();
     }
-  }, [userDecode?.id, currentToken]);
+  }, [userDecode?._id, currentToken]);
 
   useEffect(() => {
     if (dateEnd <= dateStart) {

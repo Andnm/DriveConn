@@ -1,6 +1,7 @@
 import React from 'react'
 
 const StarRating = ({ rate }) => {
+    console.log(rate)
     const filledStars = [...Array(rate)]?.map((_, index) => (
         <i key={index} className="ri-star-fill"></i>
     ));
