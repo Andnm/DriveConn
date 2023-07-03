@@ -18,6 +18,9 @@ const CreateVehicle = () => {
     if (response) {
       setVehiclesList(response)
       setIsLoading(false)
+    }else {
+      setIsLoading(false)
+      console.log(response)
     }
   }
 

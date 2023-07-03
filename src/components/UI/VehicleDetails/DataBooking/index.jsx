@@ -1,6 +1,6 @@
 import React, { useState, useContext, useEffect } from 'react'
 import './style.css'
-import DateInput from '../DateInput'
+import DateInput from '../../../DateInput'
 import ModalBox from '../../../Modal/ModalBox'
 import LoadingCar from '../../../LoadingCar/LoadingCar'
 import Login from '../../../../pages/Auth/Login/Login'
@@ -12,6 +12,8 @@ import { useParams, useNavigate } from "react-router-dom";
 import { createBooking } from '../../../../api/booking'
 import { getDrivingLicense } from '../../../../api/drivingLicense'
 import { formatPrice, formatPriceNumber, distanceDate } from '../../../../utils/utils'
+import { addDays } from 'date-fns';
+
 
 const DataBooking = ({ props }) => {
   const { autoMaker_id, category_id, fuel, model_id, otherFacilities, transmission, vehicle_id } = props
@@ -21,11 +23,9 @@ const DataBooking = ({ props }) => {
   const { currentToken, userDecode } = useContext(AuthContext);
   const navigate = useNavigate();
 
-  const [dateStart, setDateStart] = useState('');
-  const [timeStart, setTimeStart] = useState('');
+  const [dateStart, setDateStart] = useState(new Date());
 
-  const [dateEnd, setDateEnd] = useState('');
-  const [timeEnd, setTimeEnd] = useState('');
+  const [dateEnd, setDateEnd] = useState(addDays(new Date(), 1));
 
   const [openModalConfirm, setOpenModalConfirm] = useState(false)
   const [isLoading, setIsLoading] = useState(false)
@@ -64,8 +64,8 @@ const DataBooking = ({ props }) => {
 
     setIsLoading(true)
 
-    const bookingStart = new Date(dateStart + 'T' + timeStart);
-    const bookingEnd = new Date(dateEnd + 'T' + timeEnd);
+    const bookingStart = new Date(dateStart );
+    const bookingEnd = new Date(dateEnd );
 
     const response = await createBooking(currentToken, slug, bookingStart, bookingEnd);
 
@@ -99,6 +99,11 @@ const DataBooking = ({ props }) => {
     }
   }, [userDecode?.id, currentToken]);
 
+  useEffect(() => {
+    if (dateEnd <= dateStart) {
+      setDateEnd(addDays(dateStart, 1));
+    }
+  }, [dateStart, dateEnd]);
 
   return (
     <div className="data-booking-container d-flex flex-column gap-4">
@@ -111,9 +116,7 @@ const DataBooking = ({ props }) => {
         <h4>Ngày nhận xe</h4>
         <DateInput
           date={dateStart}
-          handleDateChange={(e) => { setDateStart(e.target.value); }}
-          time={timeStart}
-          handleTimeChange={(e) => { setTimeStart(e.target.value) }}
+          handleDateChange={(date) => setDateStart(date)}
         />
       </div>
 
@@ -121,9 +124,8 @@ const DataBooking = ({ props }) => {
         <h4>Ngày trả xe</h4>
         <DateInput
           date={dateEnd}
-          handleDateChange={(e) => { setDateEnd(e.target.value); }}
-          time={timeEnd}
-          handleTimeChange={(e) => { setTimeEnd(e.target.value) }}
+          handleDateChange={(date) => setDateEnd(date)}
+          dateEnd={true}
         />
       </div>
 
@@ -146,7 +148,7 @@ const DataBooking = ({ props }) => {
         <div className='price-list'>
           <div className='item'>
             <p>Đơn giá thuê</p>
-            <p>{formatPriceNumber(vehicle_id.price)} / day</p>
+            <p>{formatPriceNumber(vehicle_id.price)} / ngày</p>
           </div>
 
           <div className='item'>
@@ -165,7 +167,7 @@ const DataBooking = ({ props }) => {
         <div className="price-calculator">
           <div className='item'>
             <p>Tổng phí thuê xe</p>
-            <p>{formatPriceNumber(vehicle_id.price)} x {distanceDate(dateStart, dateEnd) || 1} day</p>
+            <p>{formatPriceNumber(vehicle_id.price)} x {distanceDate(dateStart, dateEnd) || 1} ngày</p>
           </div>
 
           <div style={{ margin: '0 auto', marginBottom: '10px', marginTop: '15px' }}>
@@ -185,9 +187,9 @@ const DataBooking = ({ props }) => {
       </div>
 
       <button
-        className={`btn ${!dateStart && !timeStart && !dateEnd && !timeEnd ? 'btn-secondary' : 'btn-primary'}`}
+        className={`btn ${!dateStart && !dateEnd ? 'btn-secondary' : 'btn-primary'}`}
         onClick={handleBookingButton}
-        style={{ pointerEvents: !dateStart && !timeStart && !dateEnd && !timeEnd ? 'none' : 'auto' }}
+        style={{ pointerEvents: !dateStart && !dateEnd ? 'none' : 'auto' }}
       >
         Đặt xe
       </button>

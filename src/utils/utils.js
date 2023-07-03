@@ -117,9 +117,10 @@ const distanceDate = (dateStart, dateEnd) => {
   const date2Obj = new Date(dateEnd);
 
   const distance = Math.abs((date2Obj - date1Obj) / (1000 * 60 * 60 * 24));
+  const roundedDistance = Math.round(distance);
 
-  return distance;
-}
+  return roundedDistance;
+};
 
 export {
   validateEmail,

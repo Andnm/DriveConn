@@ -41,7 +41,7 @@ const BookingDetail = (props) => {
         <div className='price-list'>
           <div className='item'>
             <p>Đơn giá thuê</p>
-            <p>{formatPriceNumber(vehicle_id.price)} / day</p>
+            <p>{formatPriceNumber(vehicle_id.price)} / ngày</p>
           </div>
 
           <div className='item'>
@@ -60,7 +60,7 @@ const BookingDetail = (props) => {
         <div className="price-calculator">
           <div className='item'>
             <p>Tổng phí thuê xe</p>
-            <p>{formatPriceNumber(vehicle_id.price)} x {distanceDate(bookingStart, bookingEnd) || 1} day</p>
+            <p>{formatPriceNumber(vehicle_id.price)} x {distanceDate(bookingStart, bookingEnd) || 1} ngày</p>
           </div>
         </div>
 

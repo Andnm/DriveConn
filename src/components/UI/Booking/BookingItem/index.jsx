@@ -28,53 +28,6 @@ const BookingItem = (props) => {
     backgroundColor: getCircleColor(status)
   };
 
-  const isOwner = userDecode?.role_id?.roleName === 'Owner';
-
-  const actionMapping = {
-    Pending: {
-      btnActionYes: {
-        isOwner: 'Đồng ý cho thuê',
-        isNotOwner: null
-      },
-      eventToContinue: {
-        isOwner: handleAgreeBookingByOwner,
-        isNotOwner: null
-      }
-    },
-    Paying: {
-      btnActionYes: {
-        isOwner: null,
-        isNotOwner: 'Tiến hành thanh toán'
-      },
-      eventToContinue: {
-        isOwner: null,
-        isNotOwner: handlePaymentModal
-      }
-    },
-    Delivering: {
-      btnActionYes: {
-        isOwner: 'Xác nhận đã bàn giao xe',
-        isNotOwner: null
-      },
-      eventToContinue: {
-        isOwner: handleConfirmDeliveryApi,
-        isNotOwner: null
-      }
-    },
-    Delivered: {
-      btnActionYes: {
-        isOwner: 'Xác nhận hoàn thành chuyến đi',
-        isNotOwner: null
-      },
-      eventToContinue: {
-        isOwner: handleConfirmCompletedBooking,
-        isNotOwner: null
-      }
-    }
-  };
-  
-  const { btnActionYes, eventToContinue } = actionMapping[status];
-  
   const handleAgreeBookingByOwner = async () => {
     setIsLoading(true)
     const response = await changeBookingStatus(currentToken, _id)
@@ -141,6 +94,82 @@ const BookingItem = (props) => {
     setIsLoading(false)
   }
 
+  const isOwner = userDecode?.role_id?.roleName === 'Owner';
+
+  const actionMapping = {
+    Pending: {
+      btnActionYes: {
+        isOwner: 'Đồng ý cho thuê',
+        isNotOwner: null
+      },
+      eventToContinue: {
+        isOwner: handleAgreeBookingByOwner,
+        isNotOwner: null
+      }
+    },
+    Paying: {
+      btnActionYes: {
+        isOwner: null,
+        isNotOwner: 'Tiến hành thanh toán'
+      },
+      eventToContinue: {
+        isOwner: null,
+        isNotOwner: handlePaymentModal
+      }
+    },
+    Delivering: {
+      btnActionYes: {
+        isOwner: 'Xác nhận đã bàn giao xe',
+        isNotOwner: null
+      },
+      eventToContinue: {
+        isOwner: handleConfirmDeliveryApi,
+        isNotOwner: null
+      }
+    },
+    Delivered: {
+      btnActionYes: {
+        isOwner: 'Xác nhận hoàn thành chuyến đi',
+        isNotOwner: null
+      },
+      eventToContinue: {
+        isOwner: handleConfirmCompletedBooking,
+        isNotOwner: null
+      }
+    },
+    Completed: {
+      btnActionYes: {
+        isOwner: null,
+        isNotOwner: null
+      },
+      eventToContinue: {
+        isOwner: null,
+        isNotOwner: null
+      }
+    },
+    Done: {
+      btnActionYes: {
+        isOwner: null,
+        isNotOwner: null
+      },
+      eventToContinue: {
+        isOwner: null,
+        isNotOwner: null
+      }
+    },
+  };
+
+  const { btnActionYes, eventToContinue } = actionMapping[status] || {
+    btnActionYes: {
+      isOwner: null,
+      isNotOwner: null
+    },
+    eventToContinue: {
+      isOwner: null,
+      isNotOwner: null
+    }
+  };
+
   return (
     <Col lg="5" md="5" sm="6" className="mb-5 booking-item">
       <div className="card-booking" onClick={() => setIsOpenModalDetail(true)}>
@@ -176,7 +205,7 @@ const BookingItem = (props) => {
             body={
               <BookingDetail data={props.item} />
             }
-            btnActionYes={btnActionYes[isOwner ? 'isOwner' : 'isNotOwner']}
+            btnActionYes={btnActionYes[isOwner]}
             eventToContinue={eventToContinue[isOwner ? 'isOwner' : 'isNotOwner']}
           />
         }
