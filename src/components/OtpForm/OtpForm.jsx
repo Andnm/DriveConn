@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import './style.css';
 import Message from '../shared/Message';
 
-const OtpForm = ({ verifyAction, resendOtpAction, inputsRef, error }) => {
+const OtpForm = ({ verifyAction, resendOtpAction, inputsRef, error, setError }) => {
   const [isButtonDisabled, setIsButtonDisabled] = useState(true);
 
   const handlePaste = (e) => {
@@ -27,6 +27,9 @@ const OtpForm = ({ verifyAction, resendOtpAction, inputsRef, error }) => {
   };
 
   const handleInput = (e, index) => {
+    if(setError) {
+      setError()
+    }
     const inputLength = e.target.value.length;
     const maxLength = e.target.getAttribute('maxlength');
 
@@ -65,10 +68,6 @@ const OtpForm = ({ verifyAction, resendOtpAction, inputsRef, error }) => {
     }
   };
 
-  const handleResendOtp = () => {
-    resendOtpAction()
-  }
-
   return (
     <div className="otp-Form">
       <div className="inputs">
@@ -87,13 +86,16 @@ const OtpForm = ({ verifyAction, resendOtpAction, inputsRef, error }) => {
       >
         Xác nhận
       </button>
+      
       {error && <Message text_color={'text-danger'} children={error} style={{ marginBottom: '10px' }} />}
-        
+
       <div className="d-flex bottom-content gap-2">
         <p className="resendNote">Bạn không nhận được OTP? </p>
-        <button className="resendBtn" onClick={handleResendOtp}>
-          Gửi lại mã
-        </button>
+        {resendOtpAction &&
+          <button className="resendBtn" onClick={() => resendOtpAction()}>
+            Gửi lại mã
+          </button>
+        }
       </div>
     </div>
   );

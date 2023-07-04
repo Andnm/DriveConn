@@ -143,19 +143,8 @@ export const upRole = async (token, userId) => {
   }
 };
 
-export const registerAccount = async (data) => {
-  try {
-    const response = await axios.post(`${API_URL}/api/users/register`, data)
-    return response.data;
-  }catch (error) {
-    console.error("Error to create account: ", error)
-    return null;
-  }
-}
-
 export const sendMailWhenRegisterOwner = async (data) => {
   try {
-    console.log(data)
     const response = await axios.post(`${API_URL}/api/users/sendMailWhenRegisterOwner`, data)
     return response;
   }catch (error) {
@@ -164,3 +153,35 @@ export const sendMailWhenRegisterOwner = async (data) => {
   }
 }
 
+export const registerAccount = async (data) => {
+  try {
+    const response = await axios.post(`${API_URL}/api/users/register`, data)
+    return response;
+  }catch (error) {
+    console.error("Error to create account: ", error)
+    return null;
+  }
+}
+
+export const sendOtpWhenRegister = async (email) => {
+  try {
+    const data = {
+      email: email
+    }
+    const response = await axios.post(`${API_URL}/api/users/otpRegister`, data)
+    return response;
+  }catch (error) {
+    // console.error("Error to send otp register account: ", error)
+    return error.response;
+  }
+}
+
+export const verifyOtpWhenRegister = async (data) => {
+  try {
+    const response = await axios.post(`${API_URL}/api/users/verifyOtpRegister`, data)
+    return response;
+  }catch (error) {
+    // console.error("Error to verify otp register account: ", error)
+    return error.response;
+  }
+}

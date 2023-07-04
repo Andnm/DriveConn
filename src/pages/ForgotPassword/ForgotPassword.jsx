@@ -18,7 +18,6 @@ const ForgotPassword = () => {
   const [isOpenModalConfirm, setIsOpenModalConfirm] = useState(false)
   const { logout } = useContext(AuthContext);
 
-
   const inputsOtpRef = useRef([])
 
   const confirmEmail = async () => {
@@ -56,7 +55,7 @@ const ForgotPassword = () => {
     setIsLoading(false);
     if (response) {
       setIsOpenModalConfirm(true)
-    }else {
+    } else {
       setError('OTP không đúng vui lòng nhập lại')
     }
   }
@@ -94,9 +93,11 @@ const ForgotPassword = () => {
               <OtpForm
                 verifyAction={confirmOTP}
                 resendOtpAction={resendOtp}
-                inputsRef={inputsOtpRef} 
-                error={error}/>
-            }           
+                inputsRef={inputsOtpRef}
+                error={error}
+                setError={() => setError('')}
+              />
+            }
           />
         }
 
