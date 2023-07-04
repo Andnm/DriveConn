@@ -1,5 +1,5 @@
 import React, { useRef, useState, useContext } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { ToastContainer, toast } from 'react-toastify';
 import Modal from 'react-bootstrap/Modal';
 import './signup.css';
@@ -37,8 +37,6 @@ const Signup = ({ open, onClose }) => {
 
   const { values, sendOtpData, isLoading, inputsOtpRef, isOpenModalConfirmOTP, error } = formState;
 
-  const navigate = useNavigate();
-
   const inputs = [
     {
       id: 1,
@@ -48,7 +46,7 @@ const Signup = ({ open, onClose }) => {
       errorMessage:
         "Tên hiển thị phải có ít nhất 1 kí tự và không chứa kí tự đặc biệt!",
       label: "Tên hiển thị",
-      pattern: "^[ a-zA-Z\-\']+$",
+      pattern: "^[ a-zA-Z]+$",
       required: true,
     },
     {
@@ -206,7 +204,7 @@ const Signup = ({ open, onClose }) => {
                 </div>
               </form>
               <div className='other-option d-flex flex-column justify-content-center align-items-center'>
-                <p className='text'>Đã có tài khoản? <Link to="#">Đăng ký</Link></p>
+                <p className='text'>Đã có tài khoản? <Link to="#">Đăng nhập</Link></p>
               </div>
             </>
           ) : (
