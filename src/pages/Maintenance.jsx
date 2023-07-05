@@ -6,12 +6,6 @@ import logo_contact from '../assets/phone.png'
 
 const Maintenance = () => {
 
-    const [showEmail, setShowEmail] = useState(false);
-
-    const handleClick = () => {
-        setShowEmail(true);
-    };
-
     return (
         <div className='background-maintenance'>
             <div className='logo another-css-logo'>
