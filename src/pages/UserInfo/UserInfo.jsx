@@ -82,19 +82,32 @@ const UserInfo = () => {
                 <RenderRole role={userDecode.role_id?.roleName} />
               </div>
 
-              <div className='rate-section'>
-                <p className='title-rate'>Lượt đánh giá</p>
-                <div className='d-flex rate-data'>
-                  {userDecode.rate === 0
-                    ? <p className='h6'><em>Chưa có lượt đánh giá nào</em></p>
-                    :
-                    <>
-                      <p className='score'>{userDecode.rate?.toFixed(1)}</p>
-                      <StarRating rate={Math.floor(userDecode?.rate)} />
-                    </>
-                  }
+              <div className='d-flex gap-5 align-items-center'>
+                <div className='rate-section'>
+                  <p className='title-rate'>Lượt đánh giá</p>
+                  <div className='d-flex rate-data'>
+                    {userDecode.rate === 0
+                      ? <p className='h6'><em>Chưa có lượt đánh giá nào</em></p>
+                      :
+                      <>
+                        <p className='score'>{userDecode.rate?.toFixed(1)}</p>
+                        <StarRating rate={Math.floor(userDecode?.rate)} />
+                      </>
+                    }
+                  </div>
                 </div>
+
+                <div className='separation-vertical-line'></div>
+
+                <div className='rate-section'>
+                  <p className='title-rate'>{userDecode.role_id?.roleName === 'Customer' ? 'Số chuyến đã đi' : 'Số chuyến đã được đặt'}</p>
+                  <div className='d-flex rate-data'>
+                    {userDecode.booked ? userDecode.booked : 0} chuyến
+                  </div>
+                </div>
+
               </div>
+
             </div>
 
             <div className="main d-flex flex-column">
@@ -139,7 +152,7 @@ const UserInfo = () => {
                     <div className="input-info d-flex flex-column">
                       <p>{userDecode.lastName || '...'}</p>
                       <p>{userDecode.firstName || '...'}</p>
-                      <p>{formatDate(userDecode.dob) || '...'}</p>
+                      <p>{userDecode.dob ? formatDate(userDecode.dob) : '...'}</p>
                       <p>{userDecode.gender === 'Male' ? 'Nam' : (userDecode.gender === 'Female' ? 'Nữ' : '...')}</p>
                     </div>
                   </div>

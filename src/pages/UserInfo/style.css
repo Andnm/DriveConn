@@ -120,6 +120,12 @@
   margin-left: 20px;
 }
 
+.profile-container .user-profile .right .header .separation-vertical-line {
+  border-left: 1px solid gray; 
+  width: 1px;
+  height: 70%;
+}
+
 .star .ri-star-fill {
   color: #2437c5;
 }
