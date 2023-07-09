@@ -4,6 +4,7 @@ import Button from 'react-bootstrap/Button';
 import './style.css';
 
 const ModalBox = (props) => {
+  console.log(props)
   const {
     open,
     onClose,

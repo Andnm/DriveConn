@@ -25,7 +25,6 @@ export const getVehicleListOfUser = async (token) => {
   try {
     const instance = createAxiosInstance(token);
     const response = await instance.get(`/api/vehicles/user`);
-    console.log(response.data)
     return response.data;
   } catch (error) {
     console.error("Error fetching all vehicles of user:", error);

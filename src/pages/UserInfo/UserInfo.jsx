@@ -102,6 +102,7 @@ const UserInfo = () => {
                 <div className='rate-section'>
                   <p className='title-rate'>{userDecode.role_id?.roleName === 'Customer' ? 'Số chuyến đã đi' : 'Số chuyến đã được đặt'}</p>
                   <div className='d-flex rate-data'>
+                    {console.log(userDecode)}
                     {userDecode.booked ? userDecode.booked : 0} chuyến
                   </div>
                 </div>

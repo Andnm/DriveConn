@@ -96,6 +96,7 @@ const BookingItem = (props) => {
 
   const isOwner = userDecode?.role_id?.roleName === 'Owner';
 
+  
   const actionMapping = {
     Pending: {
       btnActionYes: {
@@ -205,8 +206,8 @@ const BookingItem = (props) => {
             body={
               <BookingDetail data={props.item} />
             }
-            btnActionYes={btnActionYes[isOwner]}
-            eventToContinue={eventToContinue[isOwner ? 'isOwner' : 'isNotOwner']}
+            btnActionYes={isOwner ? btnActionYes.isOwner : btnActionYes.isNotOwner}
+            eventToContinue={isOwner ? eventToContinue.isOwner : eventToContinue.isNotOwner}
           />
         }
 

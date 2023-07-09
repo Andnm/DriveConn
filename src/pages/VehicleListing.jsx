@@ -70,10 +70,10 @@ const CarListing = () => {
 
       <section>
         <Container>
-          <Row>
+          <Row className="d-flex flex-columns">
             {isLoading ? (
               <>
-                {Array.from({ length: 2 }).map(() => (
+                {Array.from({ length: 4 }).map(() => (
                   <VehicleLoading />
                 ))}
               </>
@@ -82,7 +82,7 @@ const CarListing = () => {
               vehicleData?.map((item) =>
                 !item.vehicle_id.isRented ? (
                   <VehicleItem item={item} key={item.id} />
-                ) : <p></p>
+                ) : <p style={{display: 'none'}}></p>
               )
             ) : selectedFilter === 1 ? (
               motorbikeData?.length &&

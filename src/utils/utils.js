@@ -82,8 +82,8 @@ const getBookingStatusColor = (status) =>{
       return { color: 'var(--completed-color)', text: 'Đã hoàn thành' };
     case 'Done':
       return { color: 'var(--done-color)', text: 'Đã kết thúc' };
-    case 'Canceled':
-      return { color: 'var(--cancel-color)', text: 'Đã hủy' };
+    case 'Cancelled':
+      return { color: 'var(--cancelled-color)', text: 'Đã hủy' };
     default:
       return { color: '', text: '' };
   }
@@ -103,8 +103,8 @@ const getCircleColor = (status) => {
       return 'var(--delivered-color)';
     case 'Completed':
       return 'var(--completed-color)';
-    case 'Canceled':
-      return 'var(--cancel-color)';
+    case 'Cancelled':
+      return 'var(--cancelled-color)';
     case 'Done':
       return 'var(--done-color)';
     default:

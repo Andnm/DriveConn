@@ -10,6 +10,8 @@ const BookingDetail = (props) => {
     bookingStatus, isPaid, isTransferred,
     totalPrice, user_id, vehicle_id, _id } = props.data
 
+    console.log(_id)
+    
   return (
     <div className='booking-detail-container d-flex flex-column gap-4'>
       <div className='img-background'>
