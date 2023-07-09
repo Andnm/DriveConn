@@ -28,7 +28,6 @@ const Header = () => {
 
   const handleClose = () => {
     setModalLoginOpen(false);
-    console.log(headerLogin)
     setHeaderLogin(true)
   }
 

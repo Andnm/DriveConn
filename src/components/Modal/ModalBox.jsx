@@ -4,7 +4,6 @@ import Button from 'react-bootstrap/Button';
 import './style.css';
 
 const ModalBox = (props) => {
-  console.log(props)
   const {
     open,
     onClose,
@@ -14,12 +13,13 @@ const ModalBox = (props) => {
     btnActionNo,
     btnActionYes,
     eventToContinue,
+    styleModal
   } = props;
 
   const isWarning = title === 'Cảnh báo';
 
   return (
-    <Modal show={open} onHide={onClose} centered={centerAction}>
+    <Modal show={open} onHide={onClose} centered={centerAction} className={styleModal}>
       <Modal.Header closeButton>
         <Modal.Title className={isWarning ? 'text-danger d-flex gap-2' : ''}>
           {isWarning && <i className="ri-error-warning-line" />} {title}

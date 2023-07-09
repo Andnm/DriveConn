@@ -29,7 +29,6 @@ const UpdateDrivingLicense = ({ currentToken, open, onClose }) => {
         handleSubmit()
         if (urlImage) {
             const registrationResponse = await registerDrivingLicense(currentToken, licenseNo, licenseClass, expireDate, urlImage);
-            console.log(registrationResponse)
             if (registrationResponse != '') {
                 onClose()
                 toast.success('Cập nhập GPLX thành công. Đang được xác minh!', toastOption)
@@ -53,7 +52,6 @@ const UpdateDrivingLicense = ({ currentToken, open, onClose }) => {
                         setIsLoading(true)
                         setUrlImage(url);
                         const registrationResponse = await registerDrivingLicense(currentToken, licenseNo, licenseClass, expireDate, url);
-                        console.log(registrationResponse)
                         if (registrationResponse != '') {
                             onClose()
                             toast.success('Cập nhập GPLX thành công. Đang được xác minh!', toastOption)

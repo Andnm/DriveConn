@@ -122,6 +122,9 @@ const distanceDate = (dateStart, dateEnd) => {
   return roundedDistance;
 };
 
+//-----------handle upload image
+
+
 export {
   validateEmail,
   formatDate,

@@ -13,7 +13,6 @@ const BookingForm = () => {
   return (
     <Form onSubmit={submitHandler}>
       <FormGroup className="booking__form d-inline-block me-4 mb-4">
-        {console.log(userDecode)}
         <input type="text" placeholder="Họ" defaultValue={userDecode.firstName}/>
       </FormGroup>
       <FormGroup className="booking__form d-inline-block ms-1 mb-4">

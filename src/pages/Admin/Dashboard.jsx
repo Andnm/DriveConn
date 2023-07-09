@@ -35,7 +35,6 @@ const Dashboard = () => {
     });
 
     getUserList(currentToken).then((res) => {
-      console.log(res)
       const customerAccountCount = res.filter(obj => obj.role_id.roleName === 'Customer' && obj.status === true).length;
       const hotelierAccountCount = res.filter(obj => obj.role_id.roleName === 'Hotelier' && obj.status === true).length;
       

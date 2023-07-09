@@ -13,7 +13,7 @@
     padding: 0px 5px 0px 5px !important;
 } */
 
-.update-driving-license-container .custom-file-upload {
+.custom-file-upload {
   height: 200px;
   width: 300px;
   border: 2px dashed #cacaca;
@@ -23,7 +23,7 @@
   box-shadow: 0px 48px 35px -48px rgba(0, 0, 0, 0.1);
 }
 
-.update-driving-license-container .custom-file-upload label {
+.custom-file-upload label {
   width: 100%;
   height: 100%;
   display: flex;
@@ -35,29 +35,29 @@
   justify-content: center;
 }
 
-.update-driving-license-container .custom-file-upload .icon {
+.custom-file-upload .icon {
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
-.update-driving-license-container .custom-file-upload .icon svg {
+.custom-file-upload .icon svg {
   height: 80px;
   fill: rgba(75, 85, 99, 1);
 }
 
-.update-driving-license-container .custom-file-upload .text {
+.custom-file-upload .text {
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
-.update-driving-license-container .custom-file-upload .text span {
+.custom-file-upload .text span {
   font-weight: 400;
   color: rgba(75, 85, 99, 1);
 }
 
-.update-driving-license-container .custom-file-upload input {
+.custom-file-upload input {
   display: none;
 }
 

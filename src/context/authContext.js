@@ -204,6 +204,7 @@ export default function AuthContextProvider({ children }) {
     <AuthContext.Provider
       value={{
         userDecode,
+        setUserDecode,
         currentToken,
         login,
         logout,

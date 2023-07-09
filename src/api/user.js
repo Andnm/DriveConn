@@ -143,45 +143,67 @@ export const upRole = async (token, userId) => {
   }
 };
 
-export const sendMailWhenRegisterOwner = async (data) => {
+export const updateProfileImage = async (token, url) => {
+  console.log(url);
   try {
-    const response = await axios.post(`${API_URL}/api/users/sendMailWhenRegisterOwner`, data)
+    const data = {
+      imgURL: url,
+    };
+    const instance = createAxiosInstance(token);
+    const response = await instance.put(`/api/users/avatar`, data);
+    console.log(response);
     return response;
-  }catch (error) {
-    console.error("Error to send email register owner: ", error)
+  } catch (error) {
+    console.error("Error updating user role:", error);
     return null;
   }
-}
+};
+
+export const sendMailWhenRegisterOwner = async (data) => {
+  try {
+    const response = await axios.post(
+      `${API_URL}/api/users/sendMailWhenRegisterOwner`,
+      data
+    );
+    return response;
+  } catch (error) {
+    console.error("Error to send email register owner: ", error);
+    return null;
+  }
+};
 
 export const registerAccount = async (data) => {
   try {
-    const response = await axios.post(`${API_URL}/api/users/register`, data)
+    const response = await axios.post(`${API_URL}/api/users/register`, data);
     return response;
-  }catch (error) {
-    console.error("Error to create account: ", error)
+  } catch (error) {
+    console.error("Error to create account: ", error);
     return null;
   }
-}
+};
 
 export const sendOtpWhenRegister = async (email) => {
   try {
     const data = {
-      email: email
-    }
-    const response = await axios.post(`${API_URL}/api/users/otpRegister`, data)
+      email: email,
+    };
+    const response = await axios.post(`${API_URL}/api/users/otpRegister`, data);
     return response;
-  }catch (error) {
+  } catch (error) {
     // console.error("Error to send otp register account: ", error)
     return error.response;
   }
-}
+};
 
 export const verifyOtpWhenRegister = async (data) => {
   try {
-    const response = await axios.post(`${API_URL}/api/users/verifyOtpRegister`, data)
+    const response = await axios.post(
+      `${API_URL}/api/users/verifyOtpRegister`,
+      data
+    );
     return response;
-  }catch (error) {
+  } catch (error) {
     // console.error("Error to verify otp register account: ", error)
     return error.response;
   }
-}
+};

@@ -3,7 +3,7 @@ import './style.css'
 
 const LoadingCar = ({ background, className }) => {
 
-    const style={ backgroundColor: '#e5e5e5', opacity: '0.5' }
+    const style = { backgroundColor: 'rgba(255, 255, 255, 0.5)' }
 
     return (
         <div className={className}>
