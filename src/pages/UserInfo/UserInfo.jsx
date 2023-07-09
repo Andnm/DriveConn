@@ -4,7 +4,7 @@ import { AuthContext } from "../../context/authContext";
 import { toast } from 'react-toastify';
 import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import { storage } from '../../config/configFirebase';
-import { updateProfileImage } from '../../api/user';
+import { updateProfileImage, updateProfileUser } from '../../api/user';
 import { formatDate, generateFileNameImage } from '../../utils/utils';
 
 import './style.css';
@@ -14,7 +14,7 @@ import DrivingLicense from '../../components/UI/DrivingLicense/DrivingLicense';
 import StarRating from '../../components/UI/StarRating/StarRating';
 import ModalBox from '../../components/Modal/ModalBox';
 import LoadingCar from '../../components/LoadingCar/LoadingCar';
-import UpdateProfile from '../../components/Profile/UpdateProfile';
+import InputBox from '../../components/InputBox/InputBox';
 
 const UserInfo = () => {
   useEffect(() => {
@@ -24,30 +24,40 @@ const UserInfo = () => {
   const { currentToken, userDecode, setUserDecode } = useContext(AuthContext);
   const [urlAvatar, setUrlAvatar] = useState(userDecode.imgURL)
 
+  //variable state support UPLOAD IMAGE function
   const [openUploadAvatar, setOpenUploadAvatar] = useState(false)
   const [isOpenConfirmCancelAction, setIsOpenConfirmCancelAction] = useState(false)
   const [isLoading, setIsLoading] = useState(false)
   const [preImgLoad, setPreImgLoad] = useState('')
   const [imageLoad, setImageLoad] = useState('')
 
+  //variable state support UPLOAD PROFILE function
   const [openUpdateProfile, setOpenUpdateProfile] = useState(false)
+  const [newDataProfile, setNewDataProfile] = useState({
+    lastName: userDecode.lastName || " ",
+    firstName: userDecode.firstName || " ",
+    gender: userDecode.gender || " ",
+    dob: userDecode.dob || " ",
+    address: userDecode.address || " ",
+    address_details: userDecode.address_details || " ",
+    phone: userDecode.phone || " "
+  })
+  const [isProfileChanged, setIsProfileChanged] = useState(false);
 
+  //
   if (!userDecode) {
     return <Navigate to="/home" />;
   }
 
   const RenderRole = ({ role }) => {
-    let roleString = '';
+    const roles = {
+      Customer: 'Khách hàng',
+      Business: 'Doanh nghiệp',
+      Owner: 'Chủ xe'
+    };
 
-    if (role === 'Customer') {
-      roleString = 'Khách hàng';
-    } else if (role === 'Business') {
-      roleString = 'Doanh nghiệp';
-    } else if (role === 'Owner') {
-      roleString = 'Chủ xe';
-    }
-    return (<p>{roleString}</p>);
-  }
+    return <p>{roles[role] || ''}</p>;
+  };
 
   //-------handle upload image
   const actionCloseUploadAvatar = () => {
@@ -57,7 +67,6 @@ const UserInfo = () => {
       setPreImgLoad('')
       setOpenUploadAvatar(false)
     }
-
   }
 
   const handleSaveUpdateAvatar = async () => {
@@ -74,8 +83,6 @@ const UserInfo = () => {
           .then(async (url) => {
             setIsLoading(true)
             const updateImageResponse = await updateProfileImage(currentToken, url);
-
-            console.log(updateImageResponse)
 
             if (updateImageResponse.status === 200) {
               setUrlAvatar(url);
@@ -100,10 +107,21 @@ const UserInfo = () => {
       });
   };
 
-  const handleCancelConfirmUploadAvatar = () => {
+  const handleCancelConfirmModal = () => {
     setPreImgLoad('')
     setOpenUploadAvatar(false)
     setIsOpenConfirmCancelAction(false)
+    setOpenUpdateProfile(false)
+    setIsProfileChanged(false)
+    setNewDataProfile({
+      lastName: userDecode.lastName || " ",
+      firstName: userDecode.firstName || " ",
+      gender: userDecode.gender || " ",
+      dob: userDecode.dob || " ",
+      address: userDecode.address || " ",
+      address_details: userDecode.address_details || " ",
+      phone: userDecode.phone || " "
+    })
   }
 
   const handleRemoveImage = () => {
@@ -128,6 +146,31 @@ const UserInfo = () => {
   //-----------Update profile---------
   const handleUpdateProfile = () => {
     setOpenUpdateProfile(true)
+  }
+
+  const handleSaveUpdateProfile = async () => {
+    setIsLoading(true)
+    const response = await updateProfileUser(currentToken, userDecode._id, newDataProfile)
+    if(response.status === 200) {
+      toast.success('Cập nhập hồ sơ thành công!', toastOption)
+    }else {
+      toast.error('Cập nhập hồ sơ thất bại!', toastOption)
+    }
+    setUserDecode({...userDecode, ...newDataProfile})
+
+    setNewDataProfile({...userDecode, ...newDataProfile})
+
+    setIsProfileChanged(false)
+    setOpenUpdateProfile(false)
+    setIsLoading(false)
+  }
+
+  const actionCloseUploadProfile = () => {
+    if (isProfileChanged) {
+      setIsOpenConfirmCancelAction(true)
+    } else {
+      setOpenUpdateProfile(false)
+    }
   }
 
   return (
@@ -188,14 +231,14 @@ const UserInfo = () => {
               {isOpenConfirmCancelAction &&
                 <ModalBox
                   open={isOpenConfirmCancelAction}
-                  onClose={() => setIsOpenConfirmCancelAction(false)}
+                  onClose={() => { setIsOpenConfirmCancelAction(false) }}
                   centerAction={true}
                   styleModal={'cancel-modal-update-avatar'}
                   title={'Bỏ thay đổi'}
                   body={'Bạn có chắc chắn muốn bỏ các thay đổi không?'}
                   btnActionNo={'Hủy'}
                   btnActionYes={'Bỏ'}
-                  eventToContinue={handleCancelConfirmUploadAvatar}
+                  eventToContinue={handleCancelConfirmModal}
                 />
               }
             </div>
@@ -204,18 +247,6 @@ const UserInfo = () => {
 
             <div className="another-info d-flex flex-column gap-4">
               <DrivingLicense />
-              {/* <div className="citizen-identification">
-                <div className='header'>
-                  <div className="text">CCCD</div>
-                  <div className='line'></div>
-                </div>
-                <div className="content d-flex justify-content-center">
-                  <div className='verified-box d-flex gap-1'>
-                    <p className='mb-0'>Đã xác thực</p>
-                    <i className="ri-checkbox-circle-fill"></i>
-                  </div>
-                </div>
-              </div> */}
             </div>
           </div>
 
@@ -223,24 +254,122 @@ const UserInfo = () => {
             <div className="header d-flex flex-column">
               <div className='top-header d-flex justify-content-between align-items-center gap-3'>
                 <div className="left-top-header d-flex justify-content-center align-items-center gap-3">
-                  <p className='user-name'>{userDecode.firstName || '...'}</p>
+                  <p className='user-name'>{userDecode?.firstName !== ' ' && userDecode?.firstName ? userDecode?.firstName :  '(Chưa cập nhập thông tin)'}</p>
                   <div className='user-location d-flex'>
                     <i className="ri-map-pin-line"></i>
-                    <p className=''>{userDecode.address || '...'}</p>
+                    <p className=''>{userDecode?.address !== ' ' && userDecode?.address ? userDecode?.address : '(Chưa cập nhập thông tin)'}</p>
                   </div>
                 </div>
 
                 <div className='edit-profile d-flex gap-2' onClick={handleUpdateProfile}>
                   <i className="ri-edit-line"></i>
                   <p>Sửa trang cá nhân</p>
-                  {openUpdateProfile
-                    &&
-                    <UpdateProfile
-                      open={openUpdateProfile}
-                      onClose={() => setOpenUpdateProfile(false)}
-                    />
-                  }
                 </div>
+
+                {openUpdateProfile
+                  &&
+                  <ModalBox
+                    open={openUpdateProfile}
+                    onClose={actionCloseUploadProfile}
+                    centerAction={true}
+                    title={'Cập nhập hồ sơ cá nhân'}
+                    body={
+                      <div>
+                        <InputBox
+                          type={'text'}
+                          value={newDataProfile.lastName}
+                          onChangeFunction={(e) => {
+                            setNewDataProfile((prevData) => ({
+                              ...prevData,
+                              lastName: e.target.value
+                            }));
+                            setIsProfileChanged(true)
+                          }}
+                          label={'Họ'}
+                        />
+
+                        <InputBox
+                          type={'text'}
+                          value={newDataProfile.firstName}
+                          onChangeFunction={(e) => {
+                            setNewDataProfile((prevData) => ({
+                              ...prevData,
+                              firstName: e.target.value
+                            }));
+                            setIsProfileChanged(true)
+                          }}
+                          label={'Tên'}
+                        />
+
+                        <InputBox
+                          type={'text'}
+                          value={newDataProfile.gender}
+                          onChangeFunction={(e) => {
+                            setNewDataProfile((prevData) => ({
+                              ...prevData,
+                              gender: e.target.value
+                            }));
+                            setIsProfileChanged(true)
+                          }}
+                          label={'Giới tính'}
+                        />
+
+                        <InputBox
+                          type={'text'}
+                          value={newDataProfile.dob}
+                          onChangeFunction={(e) => {
+                            setNewDataProfile((prevData) => ({
+                              ...prevData,
+                              dob: e.target.value
+                            }));
+                            setIsProfileChanged(true)
+                          }}
+                          label={'Ngày sinh'}
+                        />
+                        <InputBox
+                          type={'text'}
+                          value={newDataProfile.address}
+                          onChangeFunction={(e) => {
+                            setNewDataProfile((prevData) => ({
+                              ...prevData,
+                              address: e.target.value
+                            }));
+                            setIsProfileChanged(true)
+                          }}
+                          label={'Địa chỉ'}
+                        />
+                        <InputBox
+                          type={'text'}
+                          value={newDataProfile.address_details}
+                          onChangeFunction={(e) => {
+                            setNewDataProfile((prevData) => ({
+                              ...prevData,
+                              address_details: e.target.value
+                            }));
+                            setIsProfileChanged(true)
+                          }}
+                          label={'Địa chỉ chi tiết'}
+                        />
+                        <InputBox
+                          type={'text'}
+                          value={newDataProfile.phone}
+                          onChangeFunction={(e) => {
+                            setNewDataProfile((prevData) => ({
+                              ...prevData,
+                              phone: e.target.value
+                            }));
+                            setIsProfileChanged(true)
+                          }}
+                          label={'Số điện thoại'}
+                        />
+                      </div>
+                    }
+                    btnActionNo={'Hủy'}
+                    btnActionYes={'Xác nhận'}
+                    eventToContinue={handleSaveUpdateProfile}
+                    isChanged={isProfileChanged}
+                  />
+                }
               </div>
 
               <div className='role-name'>
@@ -298,9 +427,9 @@ const UserInfo = () => {
                       <p>Email: </p>
                     </div>
                     <div className="input-info d-flex flex-column">
-                      <p>{userDecode.phone || '...'}</p>
-                      <p>{userDecode.address_detail || '...'}</p>
-                      <p>{userDecode.email || '...'}</p>
+                      <p>{userDecode?.phone !== " " && userDecode?.phone ? userDecode?.phone : '(Chưa cập nhập thông tin)'}</p>
+                      <p>{userDecode?.address_details !== " " && userDecode?.address_details ? userDecode?.address_details : '(Chưa cập nhập thông tin)'}</p>
+                      <p>{userDecode?.email !== " " && userDecode?.email ? userDecode?.email : '(Chưa cập nhập thông tin)'}</p>
                     </div>
                   </div>
                 </div>
@@ -315,10 +444,10 @@ const UserInfo = () => {
                       <p>Giới tính: </p>
                     </div>
                     <div className="input-info d-flex flex-column">
-                      <p>{userDecode.lastName || '...'}</p>
-                      <p>{userDecode.firstName || '...'}</p>
-                      <p>{userDecode.dob ? formatDate(userDecode.dob) : '...'}</p>
-                      <p>{userDecode.gender === 'Male' ? 'Nam' : (userDecode.gender === 'Female' ? 'Nữ' : '...')}</p>
+                      <p>{userDecode?.lastName !== " " && userDecode?.lastName ? userDecode?.lastName : '(Chưa cập nhập thông tin)'}</p>
+                      <p>{userDecode?.firstName !== " " && userDecode?.firstName ? userDecode?.firstName : '(Chưa cập nhập thông tin)'}</p>
+                      <p>{userDecode?.dob !== " " && userDecode?.dob ? formatDate(userDecode?.dob) : '(Chưa cập nhập thông tin)'}</p>
+                      <p>{userDecode?.gender === 'Male' ? 'Nam' : (userDecode?.gender === 'Female' ? 'Nữ' : '(Chưa cập nhập thông tin)')}</p>
                     </div>
                   </div>
                 </div>

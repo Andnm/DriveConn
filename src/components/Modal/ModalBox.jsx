@@ -13,10 +13,15 @@ const ModalBox = (props) => {
     btnActionNo,
     btnActionYes,
     eventToContinue,
-    styleModal
+    styleModal,
+    isChanged
   } = props;
 
   const isWarning = title === 'Cảnh báo';
+
+  // Comperation isChanged 
+  const className = isChanged === undefined ? '' : !isChanged && title !== 'Bỏ thay đổi' ? 'custom-button' : '';
+  const btnActionYesClassName = !isChanged && title !== 'Bỏ thay đổi' ? 'btn-action-yes' : '';
 
   return (
     <Modal show={open} onHide={onClose} centered={centerAction} className={styleModal}>
@@ -32,10 +37,13 @@ const ModalBox = (props) => {
             {btnActionNo}
           </Button>
         )}
+
         {btnActionYes && (
-          <Button variant="primary" onClick={eventToContinue}>
-            {btnActionYes}
-          </Button>
+          <div className={className}>
+            <Button variant="primary" onClick={eventToContinue} className={btnActionYesClassName}>
+              {btnActionYes}
+            </Button>
+          </div>
         )}
       </Modal.Footer>
     </Modal>

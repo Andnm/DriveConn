@@ -1,19 +1,11 @@
 import React from 'react'
 import './style.css'
 
-import ModalBox from '../../Modal/ModalBox'
-
-const UpdateProfile = (open, onClose) => {
+const UpdateProfile = () => {
 
     return (
         <div>
-            {open
-                &&
-                <ModalBox 
-                open={open}
-                onClose={onClose}
-                />
-            }
+           
         </div>
     )
 }

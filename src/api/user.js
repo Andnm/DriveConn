@@ -154,8 +154,19 @@ export const updateProfileImage = async (token, url) => {
     console.log(response);
     return response;
   } catch (error) {
-    console.error("Error updating user role:", error);
+    console.error("Error updating user profile image:", error);
     return null;
+  }
+};
+
+export const updateProfileUser = async (token, user_id, data) => {
+  try {
+    const instance = createAxiosInstance(token);
+    const response = await instance.put(`/api/users/${user_id}`, data);
+    return response;
+  } catch (error) {
+    console.error("Error updating profile user:", error);
+    return error.response;
   }
 };
 
