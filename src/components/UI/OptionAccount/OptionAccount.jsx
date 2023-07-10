@@ -151,6 +151,7 @@ const OptionAccount = () => {
             title={'Đăng xuất'}
             body={'Bạn có chắc muốn đăng xuất tài khoản hay không?'}
             btnActionNo={'Hủy'}
+            eventToCancel={() => setModalLogoutOpen(false)}
             btnActionYes={'Xác nhận'}
             eventToContinue={() => { setModalLogoutOpen(false); logout() }}
           />)

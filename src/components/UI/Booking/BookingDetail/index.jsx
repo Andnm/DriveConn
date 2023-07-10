@@ -1,27 +1,56 @@
-import React from 'react'
-import './style.css'
-
-import { formatVNDateForm, formatPriceNumber, distanceDate } from '../../../../utils/utils'
-
+import React, { useContext } from 'react';
+import { AuthContext } from '../../../../context/authContext';
+import { formatVNDateForm, formatPriceNumber, distanceDate, getBookingStatusColor, getCircleColor } from '../../../../utils/utils';
+import './style.css';
 
 const BookingDetail = (props) => {
+  // console.log(props.data)
+  const { bookingEnd, bookingStart, bookingStatus, isPaid, isTransferred, totalPrice, user_id, vehicle_id, _id, cancel_reason, user_canceled } = props.data;
+  const { userDecode } = useContext(AuthContext);
 
-  const { bookingEnd, bookingStart,
-    bookingStatus, isPaid, isTransferred,
-    totalPrice, user_id, vehicle_id, _id } = props.data
+  const circleStyle = {
+    backgroundColor: getCircleColor(bookingStatus),
+    width: '15px',
+    height: '15px',
+    borderRadius: '50px'
+  };
 
-    console.log(_id)
-    
+  const renderCustomerRole = () => {
+    if (cancel_reason && user_canceled?.role_id !== userDecode?.role_id._id) {
+      return <p style={{ color: getBookingStatusColor(bookingStatus).color }}>Khách hàng</p>;
+    } else if (cancel_reason) {
+      return <p style={{ color: getBookingStatusColor(bookingStatus).color }}>Bạn</p>;
+    } else {
+      return null;
+    }
+  };
+
   return (
     <div className='booking-detail-container d-flex flex-column gap-4'>
       <div className='img-background'>
-        <img src={vehicle_id?.images[0]}></img>
+        <img src={vehicle_id?.images[0]} alt='Vehicle' />
+      </div>
+
+      <div className='booking-info'>
+        <div className='d-flex align-items-center gap-3'>
+          <div style={circleStyle}></div>
+          <div>
+            <div className='d-flex gap-1'>
+              {renderCustomerRole()}
+              <p style={{ color: getBookingStatusColor(bookingStatus).color }}>
+                {cancel_reason ? getBookingStatusColor(bookingStatus).text.toLowerCase() : getBookingStatusColor(bookingStatus).text}
+              </p>
+            </div>
+            {cancel_reason && <p style={{ color: '#808080' }}>Lý do: {cancel_reason}</p>}
+          </div>
+        </div>
+        <div className='w-100' style={{ height: '10px', backgroundColor: '#808080', opacity: '0.3' }}></div>
       </div>
 
       <div className='vehicle-info'>
         <h4>Thông tin xe</h4>
         <div className='info-detail'>
-          <p style={{textTransform: 'uppercase'}}>{vehicle_id.name}</p>
+          <p style={{ textTransform: 'uppercase' }}>{vehicle_id.name}</p>
           <p>Biển số xe: {vehicle_id.licensePlate}</p>
         </div>
       </div>
@@ -79,13 +108,12 @@ const BookingDetail = (props) => {
       <div className='customer-profile'>
         <h4>Hồ sơ người thuê</h4>
         <div className='customer-info d-flex gap-3 align-items-center'>
-          <img src={user_id.imgURL}></img>
+          <img src={user_id.imgURL} alt='Customer' />
           <p>{user_id.lastName + ' ' + user_id.firstName}</p>
         </div>
       </div>
-
     </div>
-  )
-}
+  );
+};
 
-export default BookingDetail
+export default BookingDetail;

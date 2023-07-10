@@ -7,7 +7,7 @@ const LayoutAdmin = () => {
     return (
         <div className='d-flex'>
             <SideBar />
-            <div className="main flex-grow-1 p-5">
+            <div className="main flex-grow-1 p-5 main-admin">
                 <Outlet />
             </div>
         </div>

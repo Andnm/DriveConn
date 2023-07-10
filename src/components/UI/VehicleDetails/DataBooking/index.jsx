@@ -203,6 +203,7 @@ const DataBooking = ({ props }) => {
           title={'Xác nhận'}
           body={'Bạn có chắc muốn thuê chiếc xe này?'}
           btnActionNo={'Không'}
+          eventToCancel={() => setOpenModalConfirm(false)}
           btnActionYes={'Xác nhận'}
           eventToContinue={handleBookingApi}
         />

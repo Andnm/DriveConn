@@ -4,12 +4,16 @@ import { Col } from "reactstrap";
 import { formatVNDateForm, formatPrice, getBookingStatusColor, getCircleColor } from '../../../../utils/utils';
 import ModalBox from '../../../Modal/ModalBox'
 import BookingDetail from '../BookingDetail'
-import { changeBookingStatus } from '../../../../api/booking'
+import { changeBookingStatus, cancelBookingByCustomer, cancelBookingByOwner } from '../../../../api/booking'
 import { toast } from 'react-toastify';
 import toastOption from '../../../../config/toast'
 import LoadingCar from '../../../LoadingCar/LoadingCar';
 import { AuthContext } from '../../../../context/authContext'
 import Payment from '../Payment';
+import FloatingLabel from 'react-bootstrap/FloatingLabel';
+import Form from 'react-bootstrap/Form';
+import Message from '../../../shared/Message';
+
 
 const BookingItem = (props) => {
   const { bookingEnd, bookingStart,
@@ -23,6 +27,11 @@ const BookingItem = (props) => {
   const [status, setStatus] = useState(bookingStatus)
 
   const [isOpenModalPayment, setIsOpenModalPayment] = useState(false);
+
+  //cancel variable
+  const [isOpenModalWarningCancel, setIsOpenModalWarningCancel] = useState(false);
+  const [dataCancel, setDataCancel] = useState({ bookingId: _id, cancelReason: "" })
+  const [error, setError] = useState('')
 
   const circleStyle = {
     backgroundColor: getCircleColor(status)
@@ -94,11 +103,67 @@ const BookingItem = (props) => {
     setIsLoading(false)
   }
 
+  const handleCustomerCancelBooking = async () => {
+
+    if (dataCancel.cancelReason === '') {
+      setError('Vui lòng nhập lý do hủy chuyến!')
+    } else {
+      setIsLoading(true)
+      const response = await cancelBookingByCustomer(currentToken, dataCancel)
+      if (response.status === 200) {
+        toast.success('Hủy chuyến thành công', toastOption)
+        setStatus(response.data.bookingStatus)
+      } else {
+        toast.error('Đã có lỗi xảy ra vui lòng thử lại sau!', toastOption)
+      }
+      
+      setError('')
+      setDataCancel({ bookingId: _id, cancelReason: "" })
+      setIsOpenModalWarningCancel(false)
+      setIsOpenModalDetail(false)
+      setIsLoading(false)
+    }
+
+
+  }
+
+  const handleOwnerCancelBooking = async () => {
+
+    if (dataCancel.cancelReason === "") {
+      setError('Vui lòng nhập lý do từ chối chuyến!')
+    } else {
+      setIsLoading(true)
+      const response = await cancelBookingByOwner(currentToken, dataCancel)
+      if (response.status === 200) {
+        toast.success('Từ chối chuyến thành công', toastOption)
+        setStatus(response.data.bookingStatus)
+      } else {
+        toast.error('Đã có lỗi xảy ra vui lòng thử lại sau!', toastOption)
+      }
+
+      setError('')
+      setDataCancel({ bookingId: _id, cancelReason: "" })
+      setIsOpenModalWarningCancel(false)
+      setIsOpenModalDetail(false)
+      setIsLoading(false)
+    }
+
+
+  }
+
   const isOwner = userDecode?.role_id?.roleName === 'Owner';
 
-  
+
   const actionMapping = {
     Pending: {
+      btnActionNo: {
+        isOwner: 'Từ chối cho thuê',
+        isNotOwner: 'Hủy đặt xe'
+      },
+      eventToCancel: {
+        isOwner: handleOwnerCancelBooking,
+        isNotOwner: handleCustomerCancelBooking
+      },
       btnActionYes: {
         isOwner: 'Đồng ý cho thuê',
         isNotOwner: null
@@ -109,6 +174,14 @@ const BookingItem = (props) => {
       }
     },
     Paying: {
+      btnActionNo: {
+        isOwner: null,
+        isNotOwner: 'Hủy chuyến xe'
+      },
+      eventToCancel: {
+        isOwner: null,
+        isNotOwner: handleCustomerCancelBooking
+      },
       btnActionYes: {
         isOwner: null,
         isNotOwner: 'Tiến hành thanh toán'
@@ -119,6 +192,14 @@ const BookingItem = (props) => {
       }
     },
     Delivering: {
+      btnActionNo: {
+        isOwner: null,
+        isNotOwner: 'Hủy chuyến xe'
+      },
+      eventToCancel: {
+        isOwner: null,
+        isNotOwner: handleCustomerCancelBooking
+      },
       btnActionYes: {
         isOwner: 'Xác nhận đã bàn giao xe',
         isNotOwner: null
@@ -129,6 +210,14 @@ const BookingItem = (props) => {
       }
     },
     Delivered: {
+      btnActionNo: {
+        isOwner: null,
+        isNotOwner: null
+      },
+      eventToCancel: {
+        isOwner: null,
+        isNotOwner: null
+      },
       btnActionYes: {
         isOwner: 'Xác nhận hoàn thành chuyến đi',
         isNotOwner: null
@@ -139,6 +228,14 @@ const BookingItem = (props) => {
       }
     },
     Completed: {
+      btnActionNo: {
+        isOwner: null,
+        isNotOwner: null
+      },
+      eventToCancel: {
+        isOwner: null,
+        isNotOwner: null
+      },
       btnActionYes: {
         isOwner: null,
         isNotOwner: null
@@ -149,6 +246,14 @@ const BookingItem = (props) => {
       }
     },
     Done: {
+      btnActionNo: {
+        isOwner: null,
+        isNotOwner: null
+      },
+      eventToCancel: {
+        isOwner: null,
+        isNotOwner: null
+      },
       btnActionYes: {
         isOwner: null,
         isNotOwner: null
@@ -160,7 +265,15 @@ const BookingItem = (props) => {
     },
   };
 
-  const { btnActionYes, eventToContinue } = actionMapping[status] || {
+  const { btnActionNo, eventToCancel, btnActionYes, eventToContinue } = actionMapping[status] || {
+    btnActionNo: {
+      isOwner: null,
+      isNotOwner: null
+    },
+    eventToCancel: {
+      isOwner: null,
+      isNotOwner: null
+    },
     btnActionYes: {
       isOwner: null,
       isNotOwner: null
@@ -206,6 +319,8 @@ const BookingItem = (props) => {
             body={
               <BookingDetail data={props.item} />
             }
+            btnActionNo={isOwner ? btnActionNo.isOwner : btnActionNo.isNotOwner}
+            eventToCancel={() => setIsOpenModalWarningCancel(true)}
             btnActionYes={isOwner ? btnActionYes.isOwner : btnActionYes.isNotOwner}
             eventToContinue={isOwner ? eventToContinue.isOwner : eventToContinue.isNotOwner}
           />
@@ -222,6 +337,41 @@ const BookingItem = (props) => {
             }
             btnActionYes={'Xác nhận thanh toán'}
             eventToContinue={handlePaymentApi}
+          />
+        }
+
+        {isOpenModalWarningCancel
+          &&
+          <ModalBox
+            open={isOpenModalWarningCancel}
+            onClose={() => { setIsOpenModalWarningCancel(false); setError('') }}
+            centerAction={true}
+            title={'Cảnh báo'}
+            body={
+              <>
+                <h4>Bạn có chắc muốn hủy chuyến xe này?</h4>
+                <FloatingLabel controlId="floatingTextarea2" label="Lý do" className='mt-2 mb-2'>
+                  <Form.Control
+                    as="textarea"
+                    placeholder="Leave a comment here"
+                    style={{ height: '100px' }}
+                    onChange={(e) => {
+                      setDataCancel((prevData) => ({
+                        ...prevData,
+                        cancelReason: e.target.value
+                      }))
+                    }}
+                    onFocus={() => setError('')}
+                  />
+                </FloatingLabel>
+                {error && <Message text_color={'text-danger'} children={error} style={{ marginBottom: '10px' }} />}
+              </>
+            }
+            btnActionNo={'Hủy'}
+            eventToCancel={() => { setIsOpenModalWarningCancel(false); setError('') }}
+            btnActionYes={'Xác nhận'}
+            eventToContinue={isOwner ? eventToCancel.isOwner : eventToCancel.isNotOwner}
+            styleModal={'cancel-modal-update-avatar'}
           />
         }
 

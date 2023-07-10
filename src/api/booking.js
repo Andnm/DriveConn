@@ -81,13 +81,41 @@ export const getAllOfCustomerBookings = async (token) => {
 export const changeBookingStatus = async (token, bookingId) => {
   try {
     const data = {
-      bookingId: bookingId
+      bookingId: bookingId,
     };
     const instance = createAxiosInstance(token);
-    const response = await instance.post("/api/bookings/changeBookingStatus", data);
+    const response = await instance.post(
+      "/api/bookings/changeBookingStatus",
+      data
+    );
     return response;
   } catch (error) {
     console.error("Error change booking status:", error);
     return [];
+  }
+};
+
+export const cancelBookingByCustomer = async (token, data) => {
+  // console.log(data)
+  try {
+    const instance = createAxiosInstance(token);
+    const response = await instance.post("/api/bookings/cancelCustomer", data);
+    console.log(response)
+    return response;
+  } catch (error) {
+    console.error("Error cancel booking by customer:", error);
+    return error.response;
+  }
+};
+
+export const cancelBookingByOwner = async (token, data) => {
+  try {
+    const instance = createAxiosInstance(token);
+    const response = await instance.post("/api/bookings/cancelOwner", data);
+    console.log(response);
+    return response;
+  } catch (error) {
+    console.error("Error cancel booking by owner:", error);
+    return error.response;
   }
 };

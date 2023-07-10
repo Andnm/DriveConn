@@ -224,6 +224,7 @@ const UserInfo = () => {
                     </>
                   }
                   btnActionNo={'Hủy'}
+                  eventToCancel={actionCloseUploadAvatar}
                   btnActionYes={'Lưu'}
                   eventToContinue={handleSaveUpdateAvatar}
                 />
@@ -238,6 +239,7 @@ const UserInfo = () => {
                   title={'Bỏ thay đổi'}
                   body={'Bạn có chắc chắn muốn bỏ các thay đổi không?'}
                   btnActionNo={'Hủy'}
+                  eventToCancel={() => { setIsOpenConfirmCancelAction(false) }}
                   btnActionYes={'Bỏ'}
                   eventToContinue={handleCancelConfirmModal}
                 />
@@ -376,6 +378,7 @@ const UserInfo = () => {
                       </div>
                     }
                     btnActionNo={'Hủy'}
+                    eventToCancel={actionCloseUploadProfile}
                     btnActionYes={'Xác nhận'}
                     eventToContinue={handleSaveUpdateProfile}
                     isChanged={isProfileChanged}
@@ -457,7 +460,7 @@ const UserInfo = () => {
                     <div className="input-info d-flex flex-column">
                       <p>{userDecode?.lastName !== " " && userDecode?.lastName ? userDecode?.lastName : '(Chưa cập nhập thông tin)'}</p>
                       <p>{userDecode?.firstName !== " " && userDecode?.firstName ? userDecode?.firstName : '(Chưa cập nhập thông tin)'}</p>
-                      <p>{userDecode?.dob !== " " && userDecode?.dob ? formatDate(userDecode?.dob)  : '(Chưa cập nhập thông tin)'}</p>
+                      <p>{userDecode?.dob !== " " && userDecode?.dob ? formatDate(userDecode?.dob) : '(Chưa cập nhập thông tin)'}</p>
                       <p>{userDecode?.gender === 'Male' ? 'Nam' : (userDecode?.gender === 'Female' ? 'Nữ' : '(Chưa cập nhập thông tin)')}</p>
                     </div>
                   </div>

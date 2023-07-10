@@ -11,6 +11,7 @@ const ModalBox = (props) => {
     title,
     body,
     btnActionNo,
+    eventToCancel,
     btnActionYes,
     eventToContinue,
     styleModal,
@@ -18,6 +19,7 @@ const ModalBox = (props) => {
   } = props;
 
   const isWarning = title === 'Cảnh báo';
+  const cancelBooking = title === 'Thông tin chuyến'
 
   // Comperation isChanged 
   const className = isChanged === undefined ? '' : !isChanged && title !== 'Bỏ thay đổi' ? 'custom-button' : '';
@@ -35,7 +37,7 @@ const ModalBox = (props) => {
       <Modal.Body>{body}</Modal.Body>
       <Modal.Footer>
         {btnActionNo && (
-          <Button variant="secondary" onClick={onClose}>
+          <Button variant={cancelBooking ? "outline-danger" : "secondary"} onClick={eventToCancel}>
             {btnActionNo}
           </Button>
         )}

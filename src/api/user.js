@@ -1,5 +1,6 @@
 import axios from "axios";
 import API_URL from "./Router";
+import {formatToDateType} from '../utils/utils'
 
 const createAxiosInstance = (token) => {
   return axios.create({
@@ -160,12 +161,13 @@ export const updateProfileImage = async (token, url) => {
 };
 
 export const updateProfileUser = async (token, user_id, data) => {
-  // console.log("data", data)
-  // console.log('user_id', user_id)
   try {
+    const convertData = {
+      ...data, 
+      dob: formatToDateType(data.dob)
+    }
     const instance = createAxiosInstance(token);
-    const response = await instance.put(`/api/users/${user_id}`, data);
-    console.log(response)
+    const response = await instance.put(`/api/users/${user_id}`, convertData);
     return response;
   } catch (error) {
     console.error("Error updating profile user:", error);

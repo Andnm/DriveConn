@@ -20,6 +20,12 @@ const formatDate = (dateString) => {
   }
 };
 
+const formatToDateType = (dateString) => {
+  const [day, month, year] = dateString.split('/');
+  const formattedDate = new Date(`${year}-${month}-${day}`);
+  return formattedDate.toDateString(); 
+}
+
 const formatPrice = (price) => {
   if (price >= 1000000) {
     return (price / 1000).toFixed(0);
@@ -134,6 +140,7 @@ const distanceDate = (dateStart, dateEnd) => {
 
 export {
   validateEmail,
+  formatToDateType,
   formatDate,
   generateFileNameImage,
   splitFullName,

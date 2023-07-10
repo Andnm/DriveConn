@@ -1,8 +1,4 @@
-/* .sidebar {
+.main-admin {
   height: 100vh;
+  overflow-y: auto;
 }
-
-.main {
-  flex-grow: 1;
-  overflow-y: auto; 
-} */
