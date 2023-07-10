@@ -1,4 +1,4 @@
-import React, { useState, useContext, useEffect } from 'react'
+import React, { useState, useContext, useEffect } from 'react';
 import { AuthContext } from "../../../../context/authContext";
 import {
     Chart as ChartJS,
@@ -12,9 +12,8 @@ import {
     LineController,
     BarController,
 } from 'chart.js';
-import { Chart } from 'react-chartjs-2'
-import { faker } from '@faker-js/faker'
-import "./style.css"
+import { Chart } from 'react-chartjs-2';
+import "./style.css";
 import { getBookingList } from '../../../../api/booking';
 
 ChartJS.register(
@@ -31,20 +30,85 @@ ChartJS.register(
 
 function RevenueChart() {
     const { currentToken } = useContext(AuthContext);
+    const [dataBooking, setDataBooking] = useState([]);
+    const [reportType, setReportType] = useState('quarter');
 
-    const getCount = () => {
+    const quarters = [1, 2, 3, 4];
+    const months = [...Array(12)].map((_, i) => i + 1);
 
-        getBookingList(currentToken).then((res) => {
+    const currentDate = new Date();
+    const currentMonth = currentDate.getMonth() + 1;
+    const currentQuarter = Math.floor((currentMonth + 2) / 3);
 
-        });
+    const dataRevenueHandle = reportType === 'quarter' ? (
+        quarters.map((quarter) => {
+            if (quarter <= currentQuarter) {
+                const bookingsInQuarter = dataBooking.filter((booking) => {
+                    if (
+                        (booking.bookingStatus === 'Delivered' ||
+                            booking.bookingStatus === 'Completed' ||
+                            booking.bookingStatus === 'Done') &&
+                        Math.floor((new Date(booking.createdAt).getMonth() + 3) / 3) === quarter &&
+                        booking.totalPrice
+                    ) {
+                        return true;
+                    }
+                    return false;
+                });
 
-    }
+                const total = bookingsInQuarter.reduce((acc, item) => {
+                    return acc + item.totalPrice;
+                }, 0);
+                return total;
+            }
+            return null;
+        })
+    ) : (
+        months.map((month) => {
+            if (month <= currentMonth) {
+                const bookingsInMonth = dataBooking.filter((booking) => {
+                    if (
+                        (booking.bookingStatus === 'Delivered' ||
+                            booking.bookingStatus === 'Completed' ||
+                            booking.bookingStatus === 'Done') &&
+                        new Date(booking.createdAt).getMonth() + 1 === month &&
+                        booking.totalPrice
+                    ) {
+                        return true;
+                    }
+                    return false;
+                });
+
+                const total = bookingsInMonth.reduce((acc, item) => {
+                    return acc + item.totalPrice;
+                }, 0);
+                return total;
+            }
+            return null;
+        })
+    );
 
     useEffect(() => {
-        getCount();
-    }, []);
+        getBookingList(currentToken).then((res) => {
+            setDataBooking(res);
+        });
+    }, [currentToken]);
 
-    const labels = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+    const labels = reportType === 'quarter' ? ['Q1', 'Q2', 'Q3', 'Q4'] : [
+        'January',
+        'February',
+        'March',
+        'April',
+        'May',
+        'June',
+        'July',
+        'August',
+        'September',
+        'October',
+        'November',
+        'December'
+    ];
+
     const data = {
         height: '100%',
         labels,
@@ -56,12 +120,13 @@ function RevenueChart() {
                 pointBorderColor: 'rgb(255, 99, 132)',
                 borderWidth: 2,
                 fill: false,
-                data: labels.map(() => faker.datatype.number({ min: 0, max: 100 })),
+                data: dataRevenueHandle,
                 tension: 0.1,
-                backgroundColor: "rgb(255, 99, 132)"
+                backgroundColor: 'rgb(255, 99, 132)',
             },
         ],
     };
+
     const option = {
         responsive: true,
         maintainAspectRatio: false,
@@ -70,20 +135,39 @@ function RevenueChart() {
                 position: 'top',
             },
         },
-    }
+    };
+
     return (
         <div className='barchart d-flex flex-column justify-content-center gap-1'>
-            <h4>Business situation</h4>
+            <div className='d-flex justify-content-between'>
+                <h4>Business situation</h4>
+                <button className='btn btn-outline-secondary'>2023</button>
+            </div>
+
             <div className='h-85'>
                 <Chart type='bar' data={data} options={option} />
             </div>
-            {/* <div className=' d-flex justify-content-end gap-2 pt-1'>
-                <button type="button" className="btn btn-secondary">Quarter </button>
-                <button type="button" className="btn btn-secondary">Month</button>
-                <button type="button" className="btn btn-secondary">Year</button>
-            </div> */}
+            <div className='d-flex justify-content-end gap-2 pt-1'>
+                <button
+                    type='button'
+                    className={`btn ${reportType === 'quarter' ? 'btn-outline-secondary' : 'btn-secondary'}`}
+                    onClick={() => setReportType('quarter')}
+                >
+                    Quarter
+                </button>
+                <button
+                    type='button'
+                    className={`btn ${reportType === 'month' ? 'btn-outline-secondary' : 'btn-secondary'}`}
+                    onClick={() => setReportType('month')}
+                >
+                    Month
+                </button>
+                <button type='button' className='btn btn-secondary'>
+                    Year
+                </button>
+            </div>
         </div>
-    )
+    );
 }
 
-export default RevenueChart
+export default RevenueChart;

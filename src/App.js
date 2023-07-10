@@ -7,7 +7,7 @@ import { useMediaQuery } from "react-responsive";
 import WarningSmallScreen from "./pages/WarningSmallScreen";
 
 function App() {
-  const isSmallScreen = useMediaQuery({ maxWidth: 1200 });
+  const isSmallScreen = useMediaQuery({ maxWidth: 100 });
 
   return (
     <BrowserRouter>
