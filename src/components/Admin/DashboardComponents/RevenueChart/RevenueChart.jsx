@@ -1,4 +1,5 @@
-import React from 'react'
+import React, { useState, useContext, useEffect } from 'react'
+import { AuthContext } from "../../../../context/authContext";
 import {
     Chart as ChartJS,
     LinearScale,
@@ -14,6 +15,7 @@ import {
 import { Chart } from 'react-chartjs-2'
 import { faker } from '@faker-js/faker'
 import "./style.css"
+import { getBookingList } from '../../../../api/booking';
 
 ChartJS.register(
     LinearScale,
@@ -28,6 +30,20 @@ ChartJS.register(
 );
 
 function RevenueChart() {
+    const { currentToken } = useContext(AuthContext);
+
+    const getCount = () => {
+
+        getBookingList(currentToken).then((res) => {
+
+        });
+
+    }
+
+    useEffect(() => {
+        getCount();
+    }, []);
+
     const labels = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
     const data = {
         height: '100%',
@@ -44,14 +60,6 @@ function RevenueChart() {
                 tension: 0.1,
                 backgroundColor: "rgb(255, 99, 132)"
             },
-
-            {
-                type: 'bar',
-                label: 'Customer',
-                backgroundColor: '#5fb2ff',
-                data: labels.map(() => faker.datatype.number({ min: 0, max: 100 })),
-                barPercentage: 0.6
-            },
         ],
     };
     const option = {
@@ -61,7 +69,6 @@ function RevenueChart() {
             legend: {
                 position: 'top',
             },
-
         },
     }
     return (
