@@ -1,48 +1,59 @@
-import React, { useContext, useEffect, useState } from 'react'
-import './style.css'
-import { AuthContext } from '../../../context/authContext'
-import LoadingCar from '../../../components/LoadingCar/LoadingCar'
-import { getAllOfHotelierBookings } from '../../../api/booking'
-import BookingItem from '../../../components/UI/Booking/BookingItem'
+import React, { useContext, useEffect, useState } from 'react';
+import './style.css';
+import { AuthContext } from '../../../context/authContext';
+import LoadingCar from '../../../components/LoadingCar/LoadingCar';
+import { getAllOfHotelierBookings } from '../../../api/booking';
+import BookingItem from '../../../components/UI/Booking/BookingItem';
+import Pagination from '../../../components/Pagination';
 
 const RentalHistory = () => {
-
   const { currentToken, userDecode } = useContext(AuthContext);
-  const [isLoading, setIsLoading] = useState(false)
-  const [bookingList, setBookingList] = useState([])
+  const [isLoading, setIsLoading] = useState(false);
+  const [bookingList, setBookingList] = useState([]);
+  
+  const [currentPage, setCurrentPage] = useState(1);
+  const [itemsPerPage] = useState(6);
 
   const handleGetAllBookingOfHotelier = async () => {
-    setIsLoading(true)
+    setIsLoading(true);
     const response = await getAllOfHotelierBookings(currentToken);
     if (response) {
-      setBookingList(response)
-      setIsLoading(false)
+      setBookingList(response.reverse());
+      setIsLoading(false);
     }
-  }
+  };
 
   useEffect(() => {
-    handleGetAllBookingOfHotelier()
-  }, []);
+    handleGetAllBookingOfHotelier();
+  }, [currentPage]);
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [currentPage]);
 
   return (
-    <div className="d-flex justify-content-center flex-column rental-history-container gap-3 ">
-      <div className='title'>Lịch sử cho thuê xe</div>
-      <div className='body d-flex justify-content-around flex-wrap gap-3'>
-        {isLoading
-          ?
+    <div className="d-flex justify-content-center flex-column rental-history-container gap-3">
+      <div className="title">Lịch sử cho thuê xe</div>
+      <div className="body d-flex justify-content-around flex-wrap gap-3">
+        {isLoading ? (
           <LoadingCar className={'blank-container'} />
-          :
-          (bookingList && bookingList.length ? (
-            bookingList.map((item) => (
-              !item.isRented ? <BookingItem item={item}/> : null
-            ))
-          ) : (
-            <h3>Bạn chưa có cho thuê xe lần nào cả</h3>
-          ))
-        }
+        ) : bookingList && bookingList.length ? (
+          bookingList
+            .slice((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage)
+            .map((item) => (!item.isRented ? <BookingItem item={item} /> : null))          
+        ) : (
+          <h3>Bạn chưa có cho thuê xe lần nào cả</h3>
+        )}
       </div>
+      {!isLoading && (
+        <Pagination
+          currentPage={currentPage}
+          totalPages={Math.ceil(bookingList.length / itemsPerPage)}
+          goToPage={setCurrentPage}
+        />
+      )}
     </div>
-  )
-}
+  );
+};
 
-export default RentalHistory
+export default RentalHistory;

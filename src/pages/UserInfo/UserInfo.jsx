@@ -34,13 +34,13 @@ const UserInfo = () => {
   //variable state support UPLOAD PROFILE function
   const [openUpdateProfile, setOpenUpdateProfile] = useState(false)
   const [newDataProfile, setNewDataProfile] = useState({
-    lastName: userDecode.lastName || " ",
-    firstName: userDecode.firstName || " ",
-    gender: userDecode.gender || " ",
-    dob: userDecode.dob || " ",
-    address: userDecode.address || " ",
-    address_details: userDecode.address_details || " ",
-    phone: userDecode.phone || " "
+    lastName: userDecode.lastName || "",
+    firstName: userDecode.firstName || "",
+    gender: userDecode.gender || "",
+    dob: formatDate(userDecode.dob) || "",
+    address: userDecode.address || "",
+    address_details: userDecode.address_details || "",
+    phone: userDecode.phone || ""
   })
   const [isProfileChanged, setIsProfileChanged] = useState(false);
 
@@ -114,13 +114,13 @@ const UserInfo = () => {
     setOpenUpdateProfile(false)
     setIsProfileChanged(false)
     setNewDataProfile({
-      lastName: userDecode.lastName || " ",
-      firstName: userDecode.firstName || " ",
-      gender: userDecode.gender || " ",
-      dob: userDecode.dob || " ",
-      address: userDecode.address || " ",
-      address_details: userDecode.address_details || " ",
-      phone: userDecode.phone || " "
+      lastName: userDecode.lastName || "",
+      firstName: userDecode.firstName || "",
+      gender: userDecode.gender || "",
+      dob: formatDate(userDecode?.dob) || "",
+      address: userDecode.address || "",
+      address_details: userDecode.address_details || "",
+      phone: userDecode.phone || ""
     })
   }
 
@@ -151,14 +151,15 @@ const UserInfo = () => {
   const handleSaveUpdateProfile = async () => {
     setIsLoading(true)
     const response = await updateProfileUser(currentToken, userDecode._id, newDataProfile)
-    if(response.status === 200) {
+
+    if (response.status === 200) {
       toast.success('Cập nhập hồ sơ thành công!', toastOption)
-    }else {
+      setUserDecode({ ...userDecode, ...newDataProfile })
+
+      setNewDataProfile({ ...newDataProfile })
+    } else {
       toast.error('Cập nhập hồ sơ thất bại!', toastOption)
     }
-    setUserDecode({...userDecode, ...newDataProfile})
-
-    setNewDataProfile({...userDecode, ...newDataProfile})
 
     setIsProfileChanged(false)
     setOpenUpdateProfile(false)
@@ -254,7 +255,7 @@ const UserInfo = () => {
             <div className="header d-flex flex-column">
               <div className='top-header d-flex justify-content-between align-items-center gap-3'>
                 <div className="left-top-header d-flex justify-content-center align-items-center gap-3">
-                  <p className='user-name'>{userDecode?.firstName !== ' ' && userDecode?.firstName ? userDecode?.firstName :  '(Chưa cập nhập thông tin)'}</p>
+                  <p className='user-name'>{userDecode?.firstName !== ' ' && userDecode?.firstName ? userDecode?.firstName : '(Chưa cập nhập thông tin)'}</p>
                   <div className='user-location d-flex'>
                     <i className="ri-map-pin-line"></i>
                     <p className=''>{userDecode?.address !== ' ' && userDecode?.address ? userDecode?.address : '(Chưa cập nhập thông tin)'}</p>
@@ -274,8 +275,9 @@ const UserInfo = () => {
                     centerAction={true}
                     title={'Cập nhập hồ sơ cá nhân'}
                     body={
-                      <div>
+                      <div className='d-flex flex-wrap'>
                         <InputBox
+                          styleContainer={'w-50 d-flex flex-column justify-content-center align-items-center'}
                           type={'text'}
                           value={newDataProfile.lastName}
                           onChangeFunction={(e) => {
@@ -289,6 +291,7 @@ const UserInfo = () => {
                         />
 
                         <InputBox
+                          styleContainer={'w-50 d-flex flex-column justify-content-center align-items-center'}
                           type={'text'}
                           value={newDataProfile.firstName}
                           onChangeFunction={(e) => {
@@ -302,6 +305,7 @@ const UserInfo = () => {
                         />
 
                         <InputBox
+                          styleContainer={'w-50 d-flex flex-column justify-content-center align-items-center'}
                           type={'text'}
                           value={newDataProfile.gender}
                           onChangeFunction={(e) => {
@@ -315,6 +319,7 @@ const UserInfo = () => {
                         />
 
                         <InputBox
+                          styleContainer={'w-50 d-flex flex-column justify-content-center align-items-center'}
                           type={'text'}
                           value={newDataProfile.dob}
                           onChangeFunction={(e) => {
@@ -326,7 +331,9 @@ const UserInfo = () => {
                           }}
                           label={'Ngày sinh'}
                         />
+
                         <InputBox
+                          styleContainer={'w-50 d-flex flex-column justify-content-center align-items-center'}
                           type={'text'}
                           value={newDataProfile.address}
                           onChangeFunction={(e) => {
@@ -338,7 +345,9 @@ const UserInfo = () => {
                           }}
                           label={'Địa chỉ'}
                         />
+
                         <InputBox
+                          styleContainer={'w-50 d-flex flex-column justify-content-center align-items-center'}
                           type={'text'}
                           value={newDataProfile.address_details}
                           onChangeFunction={(e) => {
@@ -350,7 +359,9 @@ const UserInfo = () => {
                           }}
                           label={'Địa chỉ chi tiết'}
                         />
+
                         <InputBox
+                          styleContainer={'w-50 d-flex flex-column justify-content-center align-items-center'}
                           type={'text'}
                           value={newDataProfile.phone}
                           onChangeFunction={(e) => {
@@ -446,7 +457,7 @@ const UserInfo = () => {
                     <div className="input-info d-flex flex-column">
                       <p>{userDecode?.lastName !== " " && userDecode?.lastName ? userDecode?.lastName : '(Chưa cập nhập thông tin)'}</p>
                       <p>{userDecode?.firstName !== " " && userDecode?.firstName ? userDecode?.firstName : '(Chưa cập nhập thông tin)'}</p>
-                      <p>{userDecode?.dob !== " " && userDecode?.dob ? formatDate(userDecode?.dob) : '(Chưa cập nhập thông tin)'}</p>
+                      <p>{userDecode?.dob !== " " && userDecode?.dob ? formatDate(userDecode?.dob)  : '(Chưa cập nhập thông tin)'}</p>
                       <p>{userDecode?.gender === 'Male' ? 'Nam' : (userDecode?.gender === 'Female' ? 'Nữ' : '(Chưa cập nhập thông tin)')}</p>
                     </div>
                   </div>

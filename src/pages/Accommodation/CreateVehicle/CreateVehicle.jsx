@@ -5,6 +5,7 @@ import { AuthContext } from '../../../context/authContext'
 import VehicleLoading from '../../../components/SkeletonLoading/VehicleLoading'
 import VehicleItem from '../../../components/UI/VehicleItem'
 import LoadingCar from '../../../components/LoadingCar/LoadingCar'
+import Pagination from '../../../components/Pagination'
 
 const CreateVehicle = () => {
 
@@ -12,13 +13,16 @@ const CreateVehicle = () => {
   const [isLoading, setIsLoading] = useState(false)
   const [vehiclesList, setVehiclesList] = useState([])
 
+  const [currentPage, setCurrentPage] = useState(1);
+  const [itemsPerPage] = useState(6);
+
   const handleGetAllVehicleOfUser = async () => {
     setIsLoading(true)
     const response = await getVehicleListOfUser(currentToken);
     if (response) {
       setVehiclesList(response)
       setIsLoading(false)
-    }else {
+    } else {
       setIsLoading(false)
       console.log(response)
     }
@@ -26,7 +30,7 @@ const CreateVehicle = () => {
 
   useEffect(() => {
     handleGetAllVehicleOfUser()
-  }, []);
+  }, [currentPage]);
 
   return (
     <div className="d-flex justify-content-center flex-column manage-vehicle-container gap-3">
@@ -61,14 +65,23 @@ const CreateVehicle = () => {
           <LoadingCar className={'blank-container'} />
           :
           (vehiclesList && vehiclesList.length ? (
-            vehiclesList.map((item) => (
-              !item.isRented ? <VehicleItem item={item} action={'Sửa thông tin'} /> : null
-            ))
+            vehiclesList
+              .slice((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage)
+              .map((item) => (
+                !item.isRented ? <VehicleItem item={item} action={'Sửa thông tin'} /> : null
+              ))
           ) : (
             <h3>Bạn chưa đăng chiếc xe nào cả</h3>
           ))
         }
       </div>
+      {!isLoading && (
+        <Pagination
+          currentPage={currentPage}
+          totalPages={Math.ceil(vehiclesList.length / itemsPerPage)}
+          goToPage={setCurrentPage}
+        />
+      )}
     </div>
   )
 }

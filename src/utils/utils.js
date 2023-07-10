@@ -9,8 +9,15 @@ const validateEmail = (email) => {
 };
 
 const formatDate = (dateString) => {
-  const formattedDate = moment(dateString).format("DD/MM/YYYY");
-  return formattedDate;
+  const desiredFormat = "DD/MM/YYYY";
+  const currentFormat = moment(dateString, [desiredFormat], true).format();
+
+  if (moment(currentFormat).isValid()) {
+    return dateString;
+  } else {
+    const formattedDate = moment(dateString).format(desiredFormat);
+    return formattedDate;
+  }
 };
 
 const formatPrice = (price) => {

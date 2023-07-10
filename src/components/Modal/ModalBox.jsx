@@ -23,8 +23,10 @@ const ModalBox = (props) => {
   const className = isChanged === undefined ? '' : !isChanged && title !== 'Bỏ thay đổi' ? 'custom-button' : '';
   const btnActionYesClassName = !isChanged && title !== 'Bỏ thay đổi' ? 'btn-action-yes' : '';
 
+  const isBigSize = title === 'Cập nhập hồ sơ cá nhân'
+
   return (
-    <Modal show={open} onHide={onClose} centered={centerAction} className={styleModal}>
+    <Modal show={open} onHide={onClose} size={isBigSize ? "xl" : null} centered={centerAction} className={styleModal}>
       <Modal.Header closeButton>
         <Modal.Title className={isWarning ? 'text-danger d-flex gap-2' : ''}>
           {isWarning && <i className="ri-error-warning-line" />} {title}

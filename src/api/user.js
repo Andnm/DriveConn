@@ -160,9 +160,12 @@ export const updateProfileImage = async (token, url) => {
 };
 
 export const updateProfileUser = async (token, user_id, data) => {
+  // console.log("data", data)
+  // console.log('user_id', user_id)
   try {
     const instance = createAxiosInstance(token);
     const response = await instance.put(`/api/users/${user_id}`, data);
+    console.log(response)
     return response;
   } catch (error) {
     console.error("Error updating profile user:", error);
