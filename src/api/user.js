@@ -135,8 +135,14 @@ export const blockUserById = async (token, userId) => {
 
 export const upRole = async (token, userId) => {
   try {
+    const data = {
+      user_id: userId.toString(),
+      roleName: "Owner"
+    }
+    console.log(data)
     const instance = createAxiosInstance(token);
-    const response = await instance.get(`/api/users/upRole/${userId}`);
+    const response = await instance.post(`/api/users/upRole`, data);
+    console.log(response)
     return response.data;
   } catch (error) {
     console.error("Error updating user role:", error);

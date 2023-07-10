@@ -4,17 +4,43 @@ import SearchBar from "../../components/UI/SearchBar";
 import { AuthContext } from "../../context/authContext";
 import Pagination from "../../components/UI/Pagination";
 import 'react-confirm-alert/src/react-confirm-alert.css';
-import empty from "../../assets/all-images/empty.png";
 import { getVehicleList } from "../../api/vehicle";
 import LoadingCar from '../../components/LoadingCar/LoadingCar'
 
-const filterableFields = [];
+const filterableFields = [
+    {
+        label: "Type vehicle",
+        options: [
+            { value: 'Motorbike', label: "Motorbike" },
+            { value: 'Car', label: "Car" },
+        ],
+        field: "type vehicle",
+    },
+    {
+        label: "Automaker",
+        options: [
+            { value: "Honda", label: "Honda" },
+            { value: "Yamaha", label: "Yamaha" },
+        ],
+        field: "automaker",
+    },
+    {
+        label: "Category",
+        options: [
+            { value: "Sedan", label: "Sedan" },
+            { value: "Automatic transmission", label: "Automatic transmission" },
+        ],
+        field: "category",
+    }
+];
 
 const messageKey = "ADMIN_VEHICLE_MANAGEMENT";
 const itemsPerPage = 10;
 
+
+
 const VehicleManagement = () => {
-    const { currentvehicle } = useContext(AuthContext);
+    const { currentToken } = useContext(AuthContext);
     const [vehicles, setVehicles] = useState([]);
     const [page, setPage] = useState(1);
     const [maxPage, setMaxPage] = useState(1);
@@ -28,7 +54,7 @@ const VehicleManagement = () => {
     }, [page]);
 
     const handleSearchBar = (criteria = {}) => {
-        getVehicleList(currentvehicle).then((res) => {          
+        getVehicleList(currentToken).then((res) => {
             const filteredList = res.filter(item => {
                 if (criteria?.filter?.field) {
                     const { field, value } = criteria.filter;
@@ -58,7 +84,7 @@ const VehicleManagement = () => {
     }
 
     const inlineStyle = {
-        
+
     }
 
     return (
@@ -72,11 +98,17 @@ const VehicleManagement = () => {
                     <table className="table table-striped">
                         <thead>
                             <tr>
-                                <th scope="col" style={{ width: '20%' }}>
-                                    Description
+                                <th scope="col">
+                                    Actions
                                 </th>
                                 <th scope="col">
-                                    Insurance
+                                    Type Vehicle
+                                </th>
+                                <th scope="col" style={{ width: '20%' }}>
+                                    Automaker
+                                </th>
+                                <th scope="col">
+                                    Category
                                 </th>
                                 <th scope="col">
                                     License plate
@@ -89,12 +121,15 @@ const VehicleManagement = () => {
                         <tbody>
                             <>
                                 {vehicles.map((vehicle) => (<tr key={vehicle._id}>
-                                    <td>
-                                        {vehicle.description ?? "N/A"}
+                                    <td className="d-flex">
+                                        <i className="ri-file-info-line cursor-pointer mx-2" title="Detail">
+                                        </i>
                                     </td>
-                                    <td>{vehicle.insurance ?? 'N/A'}</td>
-                                    <td>{vehicle.licensePlate ?? 'N/A'}</td>
-                                    <td>{`${vehicle.user_id?.firstName} ${vehicle.user_id?.lastName}`}</td>
+                                    <td>{vehicle.transmission ? 'Car' : 'Motorbike'}</td>
+                                    <td>{vehicle.autoMaker_id.name ?? "N/A"}</td>
+                                    <td>{vehicle.category_id.name ?? 'N/A'}</td>
+                                    <td>{vehicle.vehicle_id.licensePlate ?? 'N/A'}</td>
+                                    <td>{vehicle.vehicle_id.user_id?.lastName} {vehicle.vehicle_id.user_id?.firstName}</td>
                                 </tr>))}
                             </>
                         </tbody>
@@ -102,7 +137,7 @@ const VehicleManagement = () => {
                     <Pagination maxPage={maxPage} onChangePage={onChangePage} />
                 </>
                 : <LoadingCar />
-         
+
             }
         </div>
     )

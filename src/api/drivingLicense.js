@@ -42,3 +42,25 @@ export const registerDrivingLicense = async (token,
     return [];
   }
 };
+
+export const getAllDrivingLicenseForAdmin = async (token) => {
+  try {
+    const instance = createAxiosInstance(token)
+    const response = await instance.get(`/api/users/drivingLicense`);
+    return response;
+  } catch (error) {
+    console.error("Error fetching driving license:", error.response);
+    return [];
+  }
+};
+
+export const confirmLicensePlate = async (token, drivingLicense) => {
+  try {
+    const instance = createAxiosInstance(token)
+    const response = await instance.put(`/api/users/confirmedLicense/${drivingLicense}`);
+    return response;
+  } catch (error) {
+    console.error("Error fetching driving license:", error.response);
+    return [];
+  }
+};

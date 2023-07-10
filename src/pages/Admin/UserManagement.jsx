@@ -8,13 +8,11 @@ import { blockUserById, deleteUserById, getUserList, upRole } from "../../api/us
 import Pagination from "../../components/UI/Pagination";
 import 'react-confirm-alert/src/react-confirm-alert.css';
 import LoadingCar from '../../components/LoadingCar/LoadingCar'
-import { formatVNDateForm, formatDate } from '../../utils/utils'; 
+import { formatVNDateForm, formatDate } from '../../utils/utils';
 
 const filterableFields = [{
     label: "Status", options: [{ value: true, label: "ACTIVE" }, { value: false, label: "INACTIVE" },], field: "status",
-}, {
-    label: "Gender", options: [{ value: "Male", label: "Male" }, { value: "Female", label: "Female" },], field: "gender",
-},];
+}];
 
 const messageKey = "ADMIN_USER_MANAGEMENT";
 const itemsPerPage = 10;
@@ -98,7 +96,7 @@ const UserManagement = () => {
 
     const upRoleToHotelier = (userId) => {
         confirmAlert({
-            message: "Do you want to up this user's role to Hotelier?", buttons: [{
+            message: "Do you want to up this user's role?", buttons: [{
                 label: 'Yes', onClick: () => {
                     upRole(currentToken, userId).then(res => {
                         if (res) {
@@ -135,31 +133,19 @@ const UserManagement = () => {
                     <table className="table table-striped">
                         <thead>
                             <tr>
-                                <th scope="col">
+                                <th scope="col" style={{ width: '20%' }}>
                                     Actions
                                 </th>
                                 <th scope="col" style={{ width: '20%' }}>
                                     Name
                                 </th>
-                                <th scope="col">
+                                <th scope="col" style={{ width: '20%' }}>
                                     Role
-                                </th>
-                                <th scope="col">
-                                    Gender
-                                </th>
-                                <th scope="col">
-                                    Date of birth
-                                </th>
-                                <th scope="col" style={{ width: '15%' }}>
-                                    Address
-                                </th>
-                                <th scope="col">
-                                    Phone
                                 </th>
                                 <th scope="col" style={{ width: '20%' }}>
                                     Email
                                 </th>
-                                <th scope="col">
+                                <th scope="col" >
                                     Status
                                 </th>
                             </tr>
@@ -170,29 +156,24 @@ const UserManagement = () => {
                                     <td className="d-flex">
                                         <i className="ri-delete-bin-6-line cursor-pointer mx-2" title="Delete"
                                             onClick={() => deleteUser(user._id)}></i>
+
                                         {user.status ? <i className="ri-lock-line cursor-pointer mx-2" title="Block"
                                             onClick={() => blockUser(user._id)}></i> :
                                             <i className="ri-lock-unlock-line cursor-pointer mx-2" title="Unblock"></i>}
+
                                         {user.role_id?.roleName === 'Customer' &&
-                                            <i className="ri-group-line cursor-pointer mx-2" title="Up role to Hotelier"
+                                            <i className="ri-group-line cursor-pointer mx-2" title="Up role to Owner"
                                                 onClick={() => upRoleToHotelier(user._id)}></i>}
+
+                                        <i className="ri-file-info-line cursor-pointer mx-2" title="Detail"></i>
                                     </td>
                                     <td
                                         className="text-truncate"
-                                        title={`${user.firstName} ${user.lastName}`}
+                                        title={`${user.lastName} ${user.firstName}`}
                                     >
                                         {`${user.firstName} ${user.lastName}`}
                                     </td>
                                     <td>{user.role_id?.roleName ?? 'N/A'}</td>
-                                    <td>{user.gender ?? 'N/A'}</td>
-                                    <td>{formatDate(user.dob) ?? 'N/A'}</td>
-                                    <td
-                                        className="text-truncate"
-                                        title={user.address ?? 'N/A'}
-                                    >
-                                        {user.address ?? 'N/A'}
-                                    </td>
-                                    <td>{user.phone ?? 'N/A'}</td>
                                     <td
                                         className="text-truncate"
                                         title={user.email || "N/A"}

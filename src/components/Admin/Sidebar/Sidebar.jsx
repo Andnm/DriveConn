@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from 'react'
-import logo from "../../../assets/all-images/avatar.jpg";
+import logo from "../../../assets/all-images/logo/Final_DriveConn_logo.png";
 import './sidebar.css'
 import { AuthContext } from "../../../context/authContext";
 
@@ -15,19 +15,14 @@ const Sidebar = () => {
       icon: "ri-dashboard-line"
     },
     {
-      path: "/admin/vehicle_management",
-      name: "Vehicle Management",
-      icon: "ri-car-line"
-    },
-    {
-      path: "/admin/blog_management",
-      name: "Blog Management",
-      icon: "ri-file-line"
-    },
-    {
       path: "/admin/user_management",
       name: "User Management",
       icon: "ri-user-line"
+    },
+    {
+      path: "/admin/vehicle_management",
+      name: "Vehicle Management",
+      icon: "ri-car-line"
     },
     {
       path: "/admin/drivingLicense_management",
@@ -38,6 +33,11 @@ const Sidebar = () => {
       path: "/admin/booking_management",
       name: "Booking Management",
       icon: "ri-user-line"
+    },
+    {
+      path: "/admin/blog_management",
+      name: "Blog Management",
+      icon: "ri-file-line"
     },
   ];
 

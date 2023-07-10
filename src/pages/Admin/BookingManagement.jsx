@@ -14,13 +14,16 @@ import LoadingCar from '../../components/LoadingCar/LoadingCar'
 const filterableFields = [{
     label: "Status",
     options: [
-        { value: "Completed", label: "Completed" },
+        { value: "Pending", label: "Pending" },
+        { value: "Paying", label: "Paying" },
         { value: "Processing", label: "Processing" },
+        { value: "Delivering", label: "Delivering" },
+        { value: "Delivered", label: "Delivered" },
+        { value: "Completed", label: "Completed" },
         { value: "Cancelled", label: "Cancelled" },
-        { value: "Done", label: "Done" }],
+        { value: "Done", label: "Done" }
+    ],
     field: "bookingStatus",
-}, {
-    label: "Has driver", options: [{ value: true, label: "Yes" }, { value: false, label: "No" },], field: "hasDriver",
 },];
 
 const messageKey = "ADMIN_USER_MANAGEMENT";
@@ -124,25 +127,25 @@ const BookingManagement = () => {
                         <thead>
                             <tr>
                                 <th scope="col">
-                                    Thao tác
+                                    Actions
                                 </th>
                                 <th scope="col" style={{ width: '15%' }}>
-                                    Biển số xe
+                                    License Plate
                                 </th>
                                 <th scope="col">
-                                    Từ
+                                    Booking Start
                                 </th>
                                 <th scope="col">
-                                    Đến
+                                    Booking End
                                 </th>
                                 <th scope="col" style={{ width: '15%' }}>
-                                    Khách hàng
+                                    Customer
                                 </th>
                                 <th scope="col">
-                                    Tổng tiền
+                                    Total Price
                                 </th>
                                 <th scope="col">
-                                    Trạng thái
+                                    Status
                                 </th>
                             </tr>
                         </thead>
@@ -162,9 +165,10 @@ const BookingManagement = () => {
                                                     <i className="ri-wallet-3-line cursor-pointer mx-2" title="Confirm"
                                                         onClick={() => confirmTransferred(booking._id)}>
                                                     </i>
-                                                    : 'N/A'
+                                                    : null
                                                 )
                                         }
+                                        <i className="ri-file-info-line cursor-pointer mx-2" title="Detail"></i>
                                     </td>
                                     <td>{booking.vehicle_id.licensePlate ?? 'N/A'}</td>
                                     <td>{moment(booking.bookingStart).format(DATE_FORMAT) ?? 'N/A'}</td>

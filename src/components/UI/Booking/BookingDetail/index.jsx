@@ -41,7 +41,7 @@ const BookingDetail = (props) => {
                 {cancel_reason ? getBookingStatusColor(bookingStatus).text.toLowerCase() : getBookingStatusColor(bookingStatus).text}
               </p>
             </div>
-            {cancel_reason && <p style={{ color: '#808080' }}>Lý do: {cancel_reason}</p>}
+            {cancel_reason && bookingStatus === 'Cancelled' && <p style={{ color: '#808080' }}>Lý do: {cancel_reason}</p>}
           </div>
         </div>
         <div className='w-100' style={{ height: '10px', backgroundColor: '#808080', opacity: '0.3' }}></div>
