@@ -16,9 +16,9 @@ const BookingDetail = (props) => {
   };
 
   const renderCustomerRole = () => {
-    if (cancel_reason && user_canceled?.role_id !== userDecode?.role_id._id) {
+    if (cancel_reason && bookingStatus === 'Cancelled' && user_canceled?.role_id !== userDecode?.role_id._id) {
       return <p style={{ color: getBookingStatusColor(bookingStatus).color }}>Khách hàng</p>;
-    } else if (cancel_reason) {
+    } else if (cancel_reason && bookingStatus === 'Cancelled') {
       return <p style={{ color: getBookingStatusColor(bookingStatus).color }}>Bạn</p>;
     } else {
       return null;
@@ -38,7 +38,7 @@ const BookingDetail = (props) => {
             <div className='d-flex gap-1'>
               {renderCustomerRole()}
               <p style={{ color: getBookingStatusColor(bookingStatus).color }}>
-                {cancel_reason ? getBookingStatusColor(bookingStatus).text.toLowerCase() : getBookingStatusColor(bookingStatus).text}
+                {cancel_reason && bookingStatus === 'Cancelled' ? getBookingStatusColor(bookingStatus).text.toLowerCase() : getBookingStatusColor(bookingStatus).text}
               </p>
             </div>
             {cancel_reason && bookingStatus === 'Cancelled' && <p style={{ color: '#808080' }}>Lý do: {cancel_reason}</p>}

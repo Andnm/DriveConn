@@ -66,7 +66,7 @@ const Sidebar = () => {
             <div className="sidebar__top__logo">
               <img src={logo}></img>
             </div>
-            <p className="sidebar__top__text fs-4">
+            <p className="sidebar__top__text fs-5">
               {userDecode.lastName + ' ' + userDecode.firstName}
             </p>
           </div>

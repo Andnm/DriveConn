@@ -1,0 +1,70 @@
+.drawer {
+  position: fixed;
+  top: 0;
+  right: -300px;
+  width: 30vw;
+  height: 100%;
+  background-color: #f0f0f0;
+  transition: right 0.3s ease-in-out;
+  z-index: 1;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+}
+
+.drawer.open {
+  right: 0;
+}
+
+.drawer-content {
+  padding: 20px;
+}
+
+.img {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.img img {
+  max-width: 80%;
+  height: auto;
+  object-fit: contain;
+}
+
+.toggle-button {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  z-index: 2;
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  outline: none;
+}
+
+.toggle-icon {
+  display: inline-block;
+  font-size: 20px;
+  transition: transform 0.3s ease-in-out;
+}
+
+.toggle-icon.open {
+  transform: rotate(180deg);
+}
+
+.overlay_drawer {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 1;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s ease-in-out, visibility 0s linear 0.3s;
+}
+
+.drawer.open ~ .overlay {
+  opacity: 1;
+  visibility: visible;
+  transition: opacity 0.3s ease-in-out;
+}

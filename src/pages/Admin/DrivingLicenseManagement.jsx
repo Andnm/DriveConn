@@ -4,45 +4,36 @@ import SearchBar from "../../components/UI/SearchBar";
 import { AuthContext } from "../../context/authContext";
 import Pagination from "../../components/UI/Pagination";
 import 'react-confirm-alert/src/react-confirm-alert.css';
-import { getAllDrivingLicenseForAdmin, confirmLicensePlate} from "../../api/drivingLicense";
+import { getAllDrivingLicenseForAdmin, confirmLicensePlate } from "../../api/drivingLicense";
 import LoadingCar from '../../components/LoadingCar/LoadingCar'
+import { formatDate } from '../../utils/utils';
+import { toast } from "react-toastify";
+import { confirmAlert } from 'react-confirm-alert';
+import Drawer from '../../components/Drawer';
 
 const filterableFields = [
   {
-    label: "Type vehicle",
+    label: "License Class",
     options: [
-      { value: 'Motorbike', label: "Motorbike" },
-      { value: 'Car', label: "Car" },
+      { value: 'A1', label: "A1" },
+      { value: 'A2', label: "A2" },
+      { value: 'B2', label: "B1" },
+      { value: 'B2', label: "B2" },
     ],
-    field: "type vehicle",
+    field: "License Class",
   },
-  {
-    label: "Automaker",
-    options: [
-      { value: "Honda", label: "Honda" },
-      { value: "Yamaha", label: "Yamaha" },
-    ],
-    field: "automaker",
-  },
-  {
-    label: "Category",
-    options: [
-      { value: "Sedan", label: "Sedan" },
-      { value: "Automatic transmission", label: "Automatic transmission" },
-    ],
-    field: "category",
-  }
 ];
 
 const messageKey = "ADMIN_DRIVING_LICENSE_MANAGEMENT";
 const itemsPerPage = 10;
 
-
 const DrivingLicenseManagement = () => {
   const { currentToken } = useContext(AuthContext);
-  const [vehicles, setVehicles] = useState([]);
+  const [drivingLicenseList, setDrivingLicenseList] = useState([]);
   const [page, setPage] = useState(1);
   const [maxPage, setMaxPage] = useState(1);
+  const [isDrawerOpen, setIsDrawerOpen] = useState(false);
+  const [displayedImage, setDisplayedImage] = useState(null);
 
   useEffect(() => {
     handleSearchBar();
@@ -70,9 +61,33 @@ const DrivingLicenseManagement = () => {
 
       setMaxPage(filteredList.length % itemsPerPage === 0 && filteredList.length !== 0 ? filteredList.length / itemsPerPage : Math.floor(filteredList.length / itemsPerPage) + 1);
 
-      setVehicles(filteredList.slice(itemsPerPage * (page - 1), itemsPerPage * page));
+      setDrivingLicenseList(filteredList.slice(itemsPerPage * (page - 1), itemsPerPage * page));
     });
   };
+
+  const confirmDrivingLicense = (licenseNo) => {
+    confirmAlert({
+      message: 'Do you want to confirm driving license this user?', buttons: [{
+        label: 'Yes', onClick: () => {
+          confirmLicensePlate(currentToken, licenseNo).then(res => {
+            if (res) {
+              toast.success("Confirm driving license successfully!");
+              handleSearchBar();
+            }
+          }).catch(e => {
+            toast.error(e.message);
+          });
+        },
+      }, {
+        label: 'No', onClick: null,
+      }]
+    });
+  }
+
+  const clickToViewDrivingLicenseImage = (image) => {
+    setIsDrawerOpen(true);
+    setDisplayedImage(image)
+  }
 
   const getColor = (status) => {
     return status ? "text-success" : "text-danger";
@@ -86,13 +101,17 @@ const DrivingLicenseManagement = () => {
 
   }
 
+  const handleToggleDrawer = () => {
+    setIsDrawerOpen(!isDrawerOpen);
+  };
+
   return (
     <div className="pt-5"><SearchBar
       filterableFields={filterableFields}
       onSearch={handleSearchBar}
       messageKey={messageKey}
     />
-      {vehicles.length > 0
+      {drivingLicenseList.length > 0
         ? <>
           <table className="table table-striped">
             <thead>
@@ -100,36 +119,49 @@ const DrivingLicenseManagement = () => {
                 <th scope="col">
                   Actions
                 </th>
-                <th scope="col">
-                  Type Vehicle
+                <th scope="col" style={{ width: '20%' }}>
+                  Full name
                 </th>
                 <th scope="col" style={{ width: '20%' }}>
-                  Automaker
-                </th>
-                <th scope="col">
-                  Category
-                </th>
-                <th scope="col">
-                  License plate
+                  License Class
                 </th>
                 <th scope="col" style={{ width: '20%' }}>
-                  Owner
+                  License No
+                </th>
+                <th scope="col" style={{ width: '20%' }}>
+                  Expired Date
+                </th>
+                <th scope="col" >
+                  Status
                 </th>
               </tr>
             </thead>
             <tbody>
               <>
-                {vehicles.map((vehicle) => (<tr key={vehicle._id}>
+                {drivingLicenseList.map((drivingLicense) => (<tr key={drivingLicense?._id}>
                   <td className="d-flex">
-                    <i className="ri-file-info-line cursor-pointer mx-2" title="Detail">
-                    </i>
+                    <i className="ri-image-line cursor-pointer mx-2"
+                      title="Click to view image"
+                      onClick={() => clickToViewDrivingLicenseImage(drivingLicense?.image)}
+                    />
+                    {!drivingLicense.isConfirmed
+                      ? <i className="ri-check-line  cursor-pointer mx-2"
+                        title="Click to confirm"
+                        onClick={() => confirmDrivingLicense(drivingLicense.licenseNo)}
+                      />
+                      : null
+                    }
                   </td>
-                  <td>{vehicle.transmission ? 'Car' : 'Motorbike'}</td>
-                  <td>{vehicle.autoMaker_id.name ?? "N/A"}</td>
-                  <td>{vehicle.category_id.name ?? 'N/A'}</td>
-                  <td>{vehicle.vehicle_id.licensePlate ?? 'N/A'}</td>
-                  <td>{vehicle.vehicle_id.user_id?.lastName} {vehicle.vehicle_id.user_id?.firstName}</td>
+                  <td>{(drivingLicense?.user_id?.firstName) ? (drivingLicense?.user_id?.firstName + ' ' + drivingLicense?.user_id?.lastName) : "N/A"}</td>
+                  <td>{drivingLicense?.licenseClass ?? "N/A"}</td>
+                  <td>{drivingLicense?.licenseNo ?? 'N/A'}</td>
+                  <td>{formatDate(drivingLicense?.expireDate) ?? 'N/A'}</td>
+                  <td className={getColor(drivingLicense?.isConfirmed)}>
+                    {drivingLicense?.isConfirmed ? 'Confirmed' : 'Unconfirmed'}
+                  </td>
                 </tr>))}
+
+                {isDrawerOpen && <Drawer isOpen={isDrawerOpen} toggleDrawer={handleToggleDrawer} content={displayedImage}/>}
               </>
             </tbody>
           </table>
