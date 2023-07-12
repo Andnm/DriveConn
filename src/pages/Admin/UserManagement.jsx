@@ -44,7 +44,7 @@ const UserManagement = () => {
                 })
                 .filter(item => {
                     if (criteria?.keyword) {
-                        return item.email?.toLowerCase().includes(criteria?.keyword?.toLowerCase()) || `${item.firstName} ${item.lastName}`.toLowerCase().includes(criteria?.keyword.toLowerCase());
+                        return item.email?.toLowerCase().includes(criteria?.keyword?.toLowerCase()) || `${item.lastName} ${item.firstName}`.toLowerCase().includes(criteria?.keyword.toLowerCase());
                     }
                     return true;
                 })
@@ -171,7 +171,7 @@ const UserManagement = () => {
                                         className="text-truncate"
                                         title={`${user.lastName} ${user.firstName}`}
                                     >
-                                        {`${user.firstName} ${user.lastName}`}
+                                        {`${user.lastName} ${user.firstName}`}
                                     </td>
                                     <td>{user.role_id?.roleName ?? 'N/A'}</td>
                                     <td

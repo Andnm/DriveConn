@@ -10,6 +10,7 @@ import 'react-confirm-alert/src/react-confirm-alert.css';
 import { cancelBookingById, getBookingList, changeBookingStatus } from "../../api/booking";
 import { DATE_FORMAT } from "../../constants/default";
 import LoadingCar from '../../components/LoadingCar/LoadingCar'
+import { formatPriceNumber } from '../../utils/utils';
 
 const filterableFields = [{
     label: "Status",
@@ -175,11 +176,11 @@ const BookingManagement = () => {
                                     <td>{moment(booking.bookingEnd).format(DATE_FORMAT) ?? 'N/A'}</td>
                                     <td
                                         className="text-truncate"
-                                        title={`${booking.user_id?.firstName} ${booking.user_id?.lastName}`}
+                                        title={`${booking.user_id?.lastName} ${booking.user_id?.firstName}`}
                                     >
-                                        {`${booking.user_id?.firstName} ${booking.user_id?.lastName}`}
+                                        {`${booking.user_id?.lastName} ${booking.user_id?.firstName}`}
                                     </td>
-                                    <td>{booking.totalPrice ?? 0}</td>
+                                    <td>{formatPriceNumber(booking.totalPrice) ?? 0}</td>
                                     <td className={getColor(booking.bookingStatus)}>
                                         {booking.bookingStatus ?? 'N/A'}
                                     </td>

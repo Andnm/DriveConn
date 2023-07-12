@@ -38,7 +38,8 @@ function RevenueChart() {
                     if (
                         (booking.bookingStatus === 'Delivered' ||
                             booking.bookingStatus === 'Completed' ||
-                            booking.bookingStatus === 'Done') &&
+                            booking.bookingStatus === 'Done' || 
+                            booking.bookingStatus === 'Delivering') &&
                         Math.floor((new Date(booking.createdAt).getMonth() + 3) / 3) === quarter &&
                         booking.totalPrice
                     ) {
@@ -61,7 +62,8 @@ function RevenueChart() {
                         if (
                             (booking.bookingStatus === 'Delivered' ||
                                 booking.bookingStatus === 'Completed' ||
-                                booking.bookingStatus === 'Done') &&
+                                booking.bookingStatus === 'Done' ||
+                                booking.bookingStatus === 'Delivering') &&
                             new Date(booking.createdAt).getMonth() + 1 === month &&
                             booking.totalPrice
                         ) {
@@ -83,7 +85,8 @@ function RevenueChart() {
                         if (
                             (booking.bookingStatus === 'Delivered' ||
                                 booking.bookingStatus === 'Completed' ||
-                                booking.bookingStatus === 'Done') &&
+                                booking.bookingStatus === 'Done' ||
+                                booking.bookingStatus === 'Delivering') &&
                             new Date(booking.createdAt).getFullYear() === parseInt(year) &&
                             booking.totalPrice
                         ) {

@@ -40,13 +40,13 @@
 
 .booking-item .card-booking .body .img-car {
   width: 30%;
-  border: 1px solid black;
+  /* border: 1px solid black; */
   border-radius: 10px;
 }
 
 .booking-item .card-booking .body .img-car img {
   width: 100%;
-  height: auto;
+  height: 100%;
   object-fit: contain;
 }
 

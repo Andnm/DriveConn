@@ -21,7 +21,7 @@
 }
 
 .vehicle-item .card .car__img img:first-child {
-  object-fit: contain;
+  object-fit: cover;
   height: 270px;
   width: 100%;
   border: 1px solid gray;

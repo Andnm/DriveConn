@@ -152,7 +152,7 @@ const DrivingLicenseManagement = () => {
                       : null
                     }
                   </td>
-                  <td>{(drivingLicense?.user_id?.firstName) ? (drivingLicense?.user_id?.firstName + ' ' + drivingLicense?.user_id?.lastName) : "N/A"}</td>
+                  <td>{(drivingLicense?.user_id?.firstName) ? (drivingLicense?.user_id?.lastName + ' ' + drivingLicense?.user_id?.firstName) : "N/A"}</td>
                   <td>{drivingLicense?.licenseClass ?? "N/A"}</td>
                   <td>{drivingLicense?.licenseNo ?? 'N/A'}</td>
                   <td>{formatDate(drivingLicense?.expireDate) ?? 'N/A'}</td>
