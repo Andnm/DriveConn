@@ -18,7 +18,7 @@ ChartJS.register(
 );
 
 function RevenueChart() {
-    const { currentToken } = useContext(AuthContext);
+    const { currentToken, userDecode } = useContext(AuthContext);
     const [dataBooking, setDataBooking] = useState([]);
     const [reportType, setReportType] = useState('quarter');
 
@@ -31,14 +31,16 @@ function RevenueChart() {
     const currentQuarter = Math.floor((currentMonth + 2) / 3);
     const currentYear = currentDate.getFullYear();
 
-    const dataRevenueHandle = reportType === 'quarter'
+    console.log(userDecode)
+
+    const dataTotalPriceBookingsHandle = reportType === 'quarter'
         ? quarters.map((quarter) => {
             if (quarter <= currentQuarter) {
                 const bookingsInQuarter = dataBooking.filter((booking) => {
                     if (
                         (booking.bookingStatus === 'Delivered' ||
                             booking.bookingStatus === 'Completed' ||
-                            booking.bookingStatus === 'Done' || 
+                            booking.bookingStatus === 'Done' ||
                             booking.bookingStatus === 'Delivering') &&
                         Math.floor((new Date(booking.createdAt).getMonth() + 3) / 3) === quarter &&
                         booking.totalPrice
@@ -80,7 +82,7 @@ function RevenueChart() {
                 return null;
             })
             : years.map((year) => {
-                if (year <= currentYear ) {  // Thay "years" bằng "year"
+                if (year <= currentYear) {  
                     const bookingsInYear = dataBooking.filter((booking) => {
                         if (
                             (booking.bookingStatus === 'Delivered' ||
@@ -126,7 +128,33 @@ function RevenueChart() {
                 'November',
                 'December'
             ]
-            : years.map(String);  // Sử dụng map để chuyển các giá trị trong mảng "years" thành chuỗi
+            : years.map(String); 
+
+
+    let dataRevenueHandle;
+
+    if (reportType === 'quarter') {
+        dataRevenueHandle = quarters.map((quarter, index) => {
+            if (quarter <= currentQuarter) {
+                return dataTotalPriceBookingsHandle[index] * 0.1;
+            }
+            return null;
+        });
+    } else if (reportType === 'month') {
+        dataRevenueHandle = months.map((month, index) => {
+            if (month <= currentMonth) {
+                return dataTotalPriceBookingsHandle[index] * 0.1;
+            }
+            return null;
+        });
+    } else {
+        dataRevenueHandle = years.map((year, index) => {
+            if (year <= currentYear) {
+                return dataTotalPriceBookingsHandle[index] * 0.1;
+            }
+            return null;
+        });
+    }
 
     const data = {
         height: '100%',
@@ -134,14 +162,25 @@ function RevenueChart() {
         datasets: [
             {
                 type: 'line',
-                label: 'Revenue',
+                label: 'Total price of bookings',
                 borderColor: 'rgb(255, 99, 132)',
                 pointBorderColor: 'rgb(255, 99, 132)',
                 borderWidth: 2,
                 fill: false,
-                data: dataRevenueHandle,
+                data: dataTotalPriceBookingsHandle,
                 tension: 0.1,
                 backgroundColor: 'rgb(255, 99, 132)',
+            },
+            {
+                type: 'line',
+                label: 'Revenue',
+                borderColor: 'rgb(162, 210, 255)',
+                pointBorderColor: 'rgb(162, 210, 255)',
+                borderWidth: 2,
+                fill: false,
+                data: dataRevenueHandle,
+                tension: 0.1,
+                backgroundColor: "rgb(162, 210, 255)"
             },
         ],
     };
