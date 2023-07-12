@@ -80,21 +80,21 @@ const CarListing = () => {
             ) : selectedFilter === 0 ? (
               vehicleData?.length &&
               vehicleData?.map((item) =>
-                !item.vehicle_id.isRented ? (
+                !item.vehicle_id?.isRented ? (
                   <VehicleItem item={item} key={item.id} />
                 ) : <p style={{display: 'none'}}></p>
               )
             ) : selectedFilter === 1 ? (
               motorbikeData?.length &&
               motorbikeData?.map((item) =>
-                !item.vehicle_id.isRented ? (
+                !item.vehicle_id?.isRented ? (
                   <VehicleItem item={item} key={item.id} />
                 ) : <p style={{textAlign:'center'}}>Không có xe nào phù hợp nhu cầu bạn muốn!</p>
               )
             ) : (
               carData?.length &&
               carData?.map((item) =>
-                !item.vehicle_id.isRented ? (
+                !item.vehicle_id?.isRented ? (
                   <VehicleItem item={item} key={item.id} />
                 ) : <p style={{textAlign:'center'}}>Không có xe nào phù hợp nhu cầu bạn muốn!</p>
               )

@@ -58,7 +58,7 @@ const OptionAccount = () => {
       icon: "ri-user-line"
     },
     {
-      path: "/create_vehicle",
+      path: "/manage_vehicle",
       display: "Quản lý xe của tôi",
       icon: "ri-car-line"
     },
@@ -86,7 +86,7 @@ const OptionAccount = () => {
       icon: "ri-user-line"
     },
     {
-      path: "/create_vehicle",
+      path: "/manage_vehicle",
       display: "Quản lý xe của tôi",
       icon: "ri-car-line"
     },

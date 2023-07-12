@@ -18,7 +18,7 @@ const RentalHistory = () => {
     setIsLoading(true);
     const response = await getAllOfHotelierBookings(currentToken);
     if (response) {
-      setBookingList(response.reverse());
+      setBookingList(response);
       setIsLoading(false);
     }
   };

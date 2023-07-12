@@ -1,6 +1,6 @@
 import React from 'react'
 import './style.css'
-import qr_code from '../../../../assets/all-images/qr_code_Cong.jpg'
+import qr_code from '../../../../assets/all-images/momo.jpg'
 
 const Payment = () => {
   return (

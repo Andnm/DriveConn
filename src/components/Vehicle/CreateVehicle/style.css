@@ -1,0 +1,74 @@
+.create-vehicle-body {
+  display: flex;
+  flex-direction: row;
+}
+
+.create-vehicle-body > div {
+  margin-bottom: 10px;
+}
+
+.create-vehicle-body label {
+  font-weight: bold;
+}
+
+.create-vehicle-body .input,
+.create-vehicle-body select,
+.create-vehicle-body textarea {
+  width: 100%;
+  padding: 5px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.multi-select input {
+  border: none !important;
+  outline: none;
+}
+
+.multi-select li {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 3px;
+}
+
+.create-vehicle-body .file-uploader {
+  border: 2px dashed #ccc;
+  padding: 20px;
+  text-align: center;
+}
+
+.create-vehicle-body .file-uploader p {
+  margin-bottom: 10px;
+}
+
+.create-vehicle-body .file-uploader.drag-active {
+  background-color: #f7f7f7;
+  border-color: #999;
+}
+
+.create-vehicle-body .file-uploader input {
+  display: none;
+}
+
+.create-vehicle-body {
+  display: flex;
+  gap: 20px;
+}
+
+.create-vehicle-body .left-section,
+.create-vehicle-body .right-section {
+  flex: 1;
+}
+
+@media (max-width: 768px) {
+  .create-vehicle-body {
+    flex-direction: column;
+  }
+
+  .create-vehicle-body .left-section,
+  .create-vehicle-body .right-section {
+    flex: none;
+  }
+}
+

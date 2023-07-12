@@ -30,7 +30,7 @@ import ForgotPassword from "../pages/ForgotPassword/ForgotPassword";
 
 import BookingHistory from "../pages/Customer/BookingHistory/BookingHistory";
 
-import CreateVehicle from "../pages/Accommodation/CreateVehicle/CreateVehicle";
+import ManageVehicle from "../pages/Accommodation/ManageVehicle";
 import RentalHistory from "../pages/Accommodation/RentalHistory/RentalHistory";
 
 import NotFound from "../pages/NotFound/NotFound";
@@ -65,7 +65,7 @@ const UserRouter = () => {
             <Route path="/booking_history" element={<BookingHistory />} />
 
             {/* --------Accommodation-------- */}
-            <Route path="/create_vehicle" element={<CreateVehicle />} />
+            <Route path="/manage_vehicle" element={<ManageVehicle />} />
             <Route path="/rental_history" element={<RentalHistory />} />
 
             {/* --------Owner-------- */}

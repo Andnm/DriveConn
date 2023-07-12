@@ -18,7 +18,7 @@ const BookingHistory = () => {
     setIsLoading(true);
     const response = await getAllOfCustomerBookings(currentToken);
     if (response) {
-      setBookingList(response.reverse());
+      setBookingList(response);
       setIsLoading(false);
     }
   };

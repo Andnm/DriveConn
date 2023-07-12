@@ -31,3 +31,18 @@ export const getAllMotorbikes = async (token) => {
     return null;
   }
 };
+
+export const registerMotorbike = async (token, data, url) => {
+  try {
+    const addData = { ...data, images: [...data.images, url] };
+    delete addData.transmission;
+
+    const instance = createAxiosInstance(token);
+    const response = await instance.post(`/api/motorbikes`, addData);
+    console.log(response);
+    return response;
+  } catch (error) {
+    console.error("Error register motorbike:", error);
+    return error;
+  }
+};

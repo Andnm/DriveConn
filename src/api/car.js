@@ -31,3 +31,16 @@ export const getAllCars = async (token) => {
     return null;
   }
 };
+
+export const registerCar = async (token, data, url) => {
+  try {
+    const addData = { ...data, images: [...data.images, url] };
+    const instance = createAxiosInstance(token);
+    const response = await instance.post(`/api/cars`, addData);
+    console.log(response)
+    return response;
+  } catch (error) {
+    console.error("Error fetching all car:", error);
+    return error;
+  }
+};
