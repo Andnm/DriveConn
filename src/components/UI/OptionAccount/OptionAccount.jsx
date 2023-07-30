@@ -25,7 +25,6 @@ const OptionAccount = () => {
     } else {
       setTitle('Chào sáng sớm!')
     }
-
   };
 
   const navLinksCustomer = [

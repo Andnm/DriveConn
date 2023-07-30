@@ -50,7 +50,7 @@ const HeaderDashBoard = () => {
         })
 
         getBookingList(currentToken).then((res) => {
-            const completedBooking = res.filter(obj => obj.bookingStatus === 'Completed').length;
+            const completedBooking = res.filter(obj => obj.bookingStatus === 'Completed' ||  obj.bookingStatus === 'Done').length;
             const cancelledBooking = res.filter(obj => obj.bookingStatus === 'Cancelled').length;
 
             setBookingCount(res.length)

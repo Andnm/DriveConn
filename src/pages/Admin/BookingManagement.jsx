@@ -61,7 +61,11 @@ const BookingManagement = () => {
                     }
                     return true;
                 })
-                .reverse();
+                .sort((a, b) => {
+                    if (a.createdAt < b.createdAt) return 1;
+                    if (a.createdAt > b.createdAt) return -1;
+                    return 0;
+                });
 
             setMaxPage(filteredList.length % itemsPerPage === 0 && filteredList.length !== 0 ? filteredList.length / itemsPerPage : Math.floor(filteredList.length / itemsPerPage) + 1);
 
@@ -134,6 +138,9 @@ const BookingManagement = () => {
                                     License Plate
                                 </th>
                                 <th scope="col">
+                                    Booking Creation
+                                </th>
+                                <th scope="col">
                                     Booking Start
                                 </th>
                                 <th scope="col">
@@ -172,6 +179,7 @@ const BookingManagement = () => {
                                         <i className="ri-file-info-line cursor-pointer mx-2" title="Detail"></i>
                                     </td>
                                     <td>{booking.vehicle_id.licensePlate ?? 'N/A'}</td>
+                                    <td>{moment(booking.createdAt).format(DATE_FORMAT) ?? 'N/A'}</td>
                                     <td>{moment(booking.bookingStart).format(DATE_FORMAT) ?? 'N/A'}</td>
                                     <td>{moment(booking.bookingEnd).format(DATE_FORMAT) ?? 'N/A'}</td>
                                     <td
