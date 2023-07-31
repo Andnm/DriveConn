@@ -186,7 +186,7 @@ const HeaderDashBoard = () => {
                                         </div>
                                         <div className='d-flex gap-2'>
                                             <i style={{ color: 'green' }} className="ri-checkbox-circle-line"></i>
-                                            <p style={{ color: 'green' }}>Completed</p>
+                                            <p style={{ color: 'green' }}>Done</p>
                                         </div>
                                         <div className='d-flex gap-2'>
                                             <i style={{ color: 'red' }} className="ri-indeterminate-circle-line"></i>

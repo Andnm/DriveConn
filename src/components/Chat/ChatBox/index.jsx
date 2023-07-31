@@ -45,7 +45,7 @@ const ChatBox = () => {
           {!userDecode?.firstName
             ?
             <div className="d-flex justify-content-center align-items-center flex-column">
-              <p>Vui lòng đăng nhập để đặt câu hỏi cho chúng tôi!</p>
+              <p>Bạn có thắc mắc? Vui lòng đăng nhập để đặt câu hỏi cho chúng tôi!</p>
               <button
                 onClick={() => {
                   setModalLoginOpen(true);
