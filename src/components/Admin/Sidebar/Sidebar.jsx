@@ -39,6 +39,11 @@ const Sidebar = () => {
       name: "Blog Management",
       icon: "ri-file-line"
     },
+    {
+      path: "/admin/chat_management",
+      name: "Chatbox Management",
+      icon: "ri-chat-4-line"
+    },
   ];
 
   return (

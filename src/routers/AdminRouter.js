@@ -9,6 +9,7 @@ import WelcomeAdmin from "../pages/Admin/WelcomeAdmin";
 import BookingManagement from "../pages/Admin/BookingManagement";
 import Dashboard from "../pages/Admin/Dashboard";
 import DrivingLicenseManagement from '../pages/Admin/DrivingLicenseManagement'
+import ChatBoxManagement from "../pages/Admin/ChatBoxManagement"; 
 
 import { AuthContext } from "../context/authContext";
 
@@ -27,6 +28,7 @@ const AdminRouter = () => {
             <Route path="user_management" element={<UserManagement />} />
             <Route path="booking_management" element={<BookingManagement />} />
             <Route path="drivingLicense_management" element={<DrivingLicenseManagement />} />
+            <Route path="chat_management" element={<ChatBoxManagement />} />
           </Route>
         </>
       </Route>

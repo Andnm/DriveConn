@@ -1,0 +1,43 @@
+/* Converted to CSS */
+.input-chatbox {
+  height: 60px;
+  background-color: white;
+  padding: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid gray;
+  border-right: 1px solid gray;
+  border-bottom-right-radius: 10px;
+}
+
+.input-chatbox input {
+  width: 100%;
+  border: none;
+  outline: none;
+  color: #2f2d52;
+  font-size: 18px;
+}
+
+.input-chatbox input::placeholder {
+  color: lightgray;
+}
+
+.input-chatbox .send {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.input-chatbox .send img {
+  height: 24px;
+  cursor: pointer;
+}
+
+.input-chatbox .send button {
+  border: none;
+  padding: 10px 15px;
+  color: white;
+  background-color: #8da4f1;
+  cursor: pointer;
+}
