@@ -158,7 +158,7 @@ const UserManagement = () => {
             <SearchBar
                 filterableFields={filterableFields}
                 onSearch={handleSearchBar}
-                FmessageKey={messageKey} />
+                messageKey={messageKey} />
 
             {!isLoading
                 ? users.length > 0

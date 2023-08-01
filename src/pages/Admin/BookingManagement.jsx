@@ -7,7 +7,7 @@ import SearchBar from "../../components/UI/SearchBar";
 import { AuthContext } from "../../context/authContext";
 import Pagination from "../../components/UI/Pagination";
 import 'react-confirm-alert/src/react-confirm-alert.css';
-import { cancelBookingById, getBookingList, changeBookingStatus } from "../../api/booking";
+import { getBookingList, changeBookingStatus } from "../../api/booking";
 import { DATE_FORMAT } from "../../constants/default";
 import LoadingCar from '../../components/LoadingCar/LoadingCar'
 import { formatPriceNumber } from '../../utils/utils';
@@ -15,6 +15,7 @@ import { formatPriceNumber } from '../../utils/utils';
 const filterableFields = [{
     label: "Status",
     options: [
+        { value: "All", label: "All" },
         { value: "Pending", label: "Pending" },
         { value: "Paying", label: "Paying" },
         { value: "Processing", label: "Processing" },
@@ -24,7 +25,7 @@ const filterableFields = [{
         { value: "Cancelled", label: "Cancelled" },
         { value: "Done", label: "Done" }
     ],
-    field: "bookingStatus",
+    field: "status",
 },];
 
 const messageKey = "ADMIN_USER_MANAGEMENT";
@@ -35,6 +36,7 @@ const BookingManagement = () => {
     const [bookings, setBookings] = useState([]);
     const [page, setPage] = useState(1);
     const [maxPage, setMaxPage] = useState(1);
+    const [isLoading, setIsLoading] = useState(false);
 
     useEffect(() => {
         handleSearchBar();
@@ -45,19 +47,26 @@ const BookingManagement = () => {
     }, [page]);
 
     const handleSearchBar = (criteria = {}) => {
+        setIsLoading(true)
         getBookingList(currentToken).then((res) => {
             const filteredList = res
-                .filter(item => item.role_id?.roleName !== 'Admin')
-                .filter(item => {
+                .filter((item) => item.role_id?.roleName !== "Admin")
+                .filter((item) => {
                     if (criteria?.filter?.field) {
                         const { field, value } = criteria.filter;
+                        if (field === "status") {
+                            return value === "All" ? true : item?.bookingStatus === value;
+                        }
                         return String(item[field]) === value;
                     }
                     return true;
                 })
-                .filter(item => {
+                .filter((item) => {
                     if (criteria?.keyword) {
-                        return item.email?.toLowerCase().includes(criteria?.keyword?.toLowerCase()) || `${item.firstName} ${item.lastName}`.toLowerCase().includes(criteria?.keyword.toLowerCase());
+                        return (
+                            item.email?.toLowerCase().includes(criteria?.keyword?.toLowerCase()) ||
+                            `${item.firstName} ${item.lastName}`.toLowerCase().includes(criteria?.keyword.toLowerCase())
+                        );
                     }
                     return true;
                 })
@@ -67,9 +76,14 @@ const BookingManagement = () => {
                     return 0;
                 });
 
-            setMaxPage(filteredList.length % itemsPerPage === 0 && filteredList.length !== 0 ? filteredList.length / itemsPerPage : Math.floor(filteredList.length / itemsPerPage) + 1);
+            setMaxPage(
+                filteredList.length % itemsPerPage === 0 && filteredList.length !== 0
+                    ? filteredList.length / itemsPerPage
+                    : Math.floor(filteredList.length / itemsPerPage) + 1
+            );
 
             setBookings(filteredList.slice(itemsPerPage * (page - 1), itemsPerPage * page));
+            setIsLoading(false);
         });
     };
 
@@ -139,85 +153,123 @@ const BookingManagement = () => {
     }
 
     return (
-        <div className="pt-5"><SearchBar
-            filterableFields={filterableFields}
-            onSearch={handleSearchBar}
-            messageKey={messageKey}
-        />
-            {bookings.length > 0
-                ?
-                <>
-                    <table className="table table-striped">
-                        <thead>
-                            <tr>
-                                <th scope="col">
-                                    Actions
-                                </th>
-                                <th scope="col" style={{ width: '15%' }}>
-                                    License Plate
-                                </th>
-                                <th scope="col">
-                                    Booking Creation
-                                </th>
-                                <th scope="col">
-                                    Booking Start
-                                </th>
-                                <th scope="col">
-                                    Booking End
-                                </th>
-                                <th scope="col" style={{ width: '15%' }}>
-                                    Customer
-                                </th>
-                                <th scope="col">
-                                    Total Price
-                                </th>
-                                <th scope="col">
-                                    Status
-                                </th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <>
-                                {bookings.map((booking) => (<tr key={booking._id}>
-                                    <td className="d-flex">
-                                        {
-                                            booking.bookingStatus === "Processing"
-                                                ?
-                                                <i className="ri-bank-card-line cursor-pointer mx-2" title="Confirm"
-                                                    onClick={() => confirmPayment(booking._id)}>
-                                                </i>
-                                                :
-                                                (booking.bookingStatus === "Completed"
+        <div className="pt-5">
+            <SearchBar
+                filterableFields={filterableFields}
+                onSearch={(criteria) => handleSearchBar(criteria)}
+                messageKey={messageKey}
+            />
+            {!isLoading ?
+                bookings.length > 0
+                    ?
+                    <>
+                        <table className="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th scope="col">
+                                        Actions
+                                    </th>
+                                    <th scope="col" style={{ width: '15%' }}>
+                                        License Plate
+                                    </th>
+                                    <th scope="col">
+                                        Booking Creation
+                                    </th>
+                                    <th scope="col">
+                                        Booking Start
+                                    </th>
+                                    <th scope="col">
+                                        Booking End
+                                    </th>
+                                    <th scope="col" style={{ width: '15%' }}>
+                                        Customer
+                                    </th>
+                                    <th scope="col">
+                                        Total Price
+                                    </th>
+                                    <th scope="col">
+                                        Status
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <>
+                                    {bookings.map((booking) => (<tr key={booking._id}>
+                                        <td className="d-flex">
+                                            {
+                                                booking.bookingStatus === "Processing"
                                                     ?
-                                                    <i className="ri-wallet-3-line cursor-pointer mx-2" title="Confirm"
-                                                        onClick={() => confirmTransferred(booking._id)}>
+                                                    <i className="ri-bank-card-line cursor-pointer mx-2" title="Confirm"
+                                                        onClick={() => confirmPayment(booking._id)}>
                                                     </i>
-                                                    : null
-                                                )
-                                        }
-                                        <i className="ri-file-info-line cursor-pointer mx-2" title="Detail"></i>
-                                    </td>
-                                    <td>{booking.vehicle_id.licensePlate ?? 'N/A'}</td>
-                                    <td>{moment(booking.createdAt).format(DATE_FORMAT) ?? 'N/A'}</td>
-                                    <td>{moment(booking.bookingStart).format(DATE_FORMAT) ?? 'N/A'}</td>
-                                    <td>{moment(booking.bookingEnd).format(DATE_FORMAT) ?? 'N/A'}</td>
-                                    <td
-                                        className="text-truncate"
-                                        title={`${booking.user_id?.lastName} ${booking.user_id?.firstName}`}
-                                    >
-                                        {`${booking.user_id?.lastName} ${booking.user_id?.firstName}`}
-                                    </td>
-                                    <td>{formatPriceNumber(booking.totalPrice) ?? 0}</td>
-                                    <td className={getColor(booking.bookingStatus)}>
-                                        {booking.bookingStatus ?? 'N/A'}
-                                    </td>
-                                </tr>))}
-                            </>
-                        </tbody>
-                    </table>
+                                                    :
+                                                    (booking.bookingStatus === "Completed"
+                                                        ?
+                                                        <i className="ri-wallet-3-line cursor-pointer mx-2" title="Confirm"
+                                                            onClick={() => confirmTransferred(booking._id)}>
+                                                        </i>
+                                                        : null
+                                                    )
+                                            }
+                                            <i className="ri-file-info-line cursor-pointer mx-2" title="Detail"></i>
+                                        </td>
+                                        <td>{booking.vehicle_id.licensePlate ?? 'N/A'}</td>
+                                        <td>{moment(booking.createdAt).format(DATE_FORMAT) ?? 'N/A'}</td>
+                                        <td>{moment(booking.bookingStart).format(DATE_FORMAT) ?? 'N/A'}</td>
+                                        <td>{moment(booking.bookingEnd).format(DATE_FORMAT) ?? 'N/A'}</td>
+                                        <td
+                                            className="text-truncate"
+                                            title={`${booking.user_id?.lastName} ${booking.user_id?.firstName}`}
+                                        >
+                                            {`${booking.user_id?.lastName} ${booking.user_id?.firstName}`}
+                                        </td>
+                                        <td>{formatPriceNumber(booking.totalPrice) ?? 0}</td>
+                                        <td className={getColor(booking.bookingStatus)}>
+                                            {booking.bookingStatus ?? 'N/A'}
+                                        </td>
+                                    </tr>))}
+                                </>
+                            </tbody>
+                        </table>
 
-                    <Pagination maxPage={maxPage} onChangePage={onChangePage} />
-                </>
+                        <Pagination maxPage={maxPage} onChangePage={onChangePage} />
+                    </>
+                    :
+                    <>
+                        <table className="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th scope="col">
+                                        Actions
+                                    </th>
+                                    <th scope="col" style={{ width: '15%' }}>
+                                        License Plate
+                                    </th>
+                                    <th scope="col">
+                                        Booking Creation
+                                    </th>
+                                    <th scope="col">
+                                        Booking Start
+                                    </th>
+                                    <th scope="col">
+                                        Booking End
+                                    </th>
+                                    <th scope="col" style={{ width: '15%' }}>
+                                        Customer
+                                    </th>
+                                    <th scope="col">
+                                        Total Price
+                                    </th>
+                                    <th scope="col">
+                                        Status
+                                    </th>
+                                </tr>
+                            </thead>
+                        </table>
+                        <div className='w-100 d-flex justify-content-center'>
+                            No data matching
+                        </div>
+                    </>
                 :
                 <LoadingCar />
             }
