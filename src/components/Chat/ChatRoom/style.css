@@ -20,7 +20,8 @@
 
 .chat-room .messages-chat-room {
   height: calc(100% - 82px);
-  padding: 10px
+  padding: 10px;
+  overflow-y: auto;
 }
 
 .chat-room .messages-chat-room .message {

@@ -1,43 +1,89 @@
-import React, { useContext } from 'react'
+import React, { useContext, useEffect, useState, useRef } from 'react'
 import './style.css'
 import { AuthContext } from '../../../context/authContext';
-import logo from "../../../assets/all-images/logo/Final_DriveConn_logo.png"
+import { collection, query, onSnapshot, orderBy, limit, addDoc, serverTimestamp } from "firebase/firestore";
+import { db } from '../../../config/configFirebase';
 
 const ChatRoom = (onClick) => {
+  const [messages, setMassages] = useState([]);
+  const { currentToken, userDecode, adminId } = useContext(AuthContext);
+  const [valueText, setValueText] = useState("");
+  const compareCombinedId = userDecode._id > adminId
+    ? userDecode._id + adminId
+    : adminId + userDecode._id;
 
-  const { currentToken, userDecode } = useContext(AuthContext);
+  const messagesEndRef = useRef();
+  const scrollToBottom = () => {
+    messagesEndRef.current.scrollIntoView({ behavior: "smooth" })
+  };
 
-  const Message = () => {
+  useEffect(scrollToBottom, [messages])
+
+  useEffect(() => {
+    const q = query(
+      collection(db, "messages"),
+      orderBy("createdAt"),
+      // limit(50),
+    );
+    const unsubscribe = onSnapshot(q, (querySnapshot) => {
+      const messages = [];
+      querySnapshot.forEach((doc) => {
+        const docData = doc.data();
+        
+        if (docData.combinedId === compareCombinedId) {
+          messages.push({ ...docData, id: doc.id });
+        }
+      });
+      setMassages(messages);
+    });
+
+    return () => unsubscribe;
+  }, []);
+
+  const Message = ({ message }) => {
     return (
-      <div className='message'>
+      <div className={userDecode._id === message.senderId ? 'message owner' : 'message'}>
         <div className="messageInfo border-img">
           <img
-            src={logo}
+            src={message.avatar}
             alt=""
           />
         </div>
         <div className="messageContent">
-          <p>hello</p>
+          <p>{message.text}</p>
         </div>
       </div>
     )
   }
 
-  const MessageOwner = () => {
-    return (
-      <div className='message owner'>
-        <div className="messageInfo">
-          <img
-            src={userDecode?.imgURL}
-            alt=""
-          />
-        </div>
-        <div className="messageContent">
-          <p>hello</p>
-        </div>
-      </div>
-    )
+  const handleSendMessage = async (e) => {
+    e.preventDefault();
+
+    if (valueText.trim() === "") {
+      return;
+    }
+
+    try {
+      await addDoc(collection(db, "messages"), {
+        text: valueText,
+        name: userDecode.lastName + ' ' + userDecode.firstName,
+        avatar: userDecode.imgURL,
+        createdAt: serverTimestamp(),
+        combinedId: compareCombinedId,
+        senderId: userDecode._id
+      })
+    } catch (error) {
+      // console.log(error);
+    }
+    setValueText("");
   }
+
+  const handleKeyPress = (e) => {
+    if (e.key === 'Enter') {
+      handleSendMessage(e);
+      setValueText("");
+    }
+  };
 
   return (
     <div className='chat-room'>
@@ -47,18 +93,24 @@ const ChatRoom = (onClick) => {
       </div>
 
       <div className='messages-chat-room'>
-        <Message />
-        <MessageOwner />
+        {messages.map((m) => (
+          <Message message={m} key={m.id} />
+        ))}
+        <div ref={messagesEndRef}></div>
+
       </div>
 
       <div className='input'>
         <input
           type="text"
           placeholder="Gõ tin nhắn..."
+          onChange={(e) => setValueText(e.target.value)}
+          onKeyPress={handleKeyPress}
+          value={valueText}
         />
-
-        <i class="ri-send-plane-2-line"></i>
+        <i class="ri-send-plane-2-line" onClick={handleSendMessage}></i>
       </div>
+
     </div>
   )
 }

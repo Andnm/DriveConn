@@ -1,49 +1,63 @@
-import React from 'react'
+import React, { useContext, useEffect, useState, useRef } from 'react'
 import './style.css'
 import logo from "../../../../../assets/all-images/logo/Final_DriveConn_logo.png";
+import { collection, query, onSnapshot, orderBy, limit } from "firebase/firestore";
+import { db } from "../../../../../config/configFirebase"
+import { AuthContext } from '../../../../../context/authContext';
 
 const Messages = () => {
+  const messagesEndRef = useRef();
+  const [messages, setMassages] = useState([]);
+  const { userDecode, adminId } = useContext(AuthContext);
 
-  const Message = ({ content }) => {
-    return (
-      <div className='message'>
-        <div className="messageInfo">
-          <img
-            src="https://lh3.googleusercontent.com/a/AAcHTtcoZvEXILPbjMQGMBBwAHbx1r4lZvOf3nGO6Uen9fouFQ=s96-c"
-            alt=""
-          />
-        </div>
-        <div className="messageContent">
-          <p>{content}</p>
-        </div>
-      </div>
-    )
-  }
 
-  const MessageOwner = ({ content }) => {
+
+  const scrollToBottom = () => {
+    messagesEndRef.current.scrollIntoView({ behavior: "smooth" })
+  };
+
+  useEffect(scrollToBottom, [messages])
+
+  useEffect(() => {
+    const q = query(
+      collection(db, "messages"),
+      orderBy("createdAt"),
+      // limit(50),
+    );
+    const unsubscribe = onSnapshot(q, (querySnapshot) => {
+      const messages = [];
+      querySnapshot.forEach((doc) => {
+        messages.push({ ...doc.data(), id: doc.id });
+      });
+      setMassages(messages);
+    });
+
+    return () => unsubscribe;
+  }, []);
+
+  const Message = ({ message }) => {
     return (
-      <div className='message owner'>
+      <div className={userDecode._id === message.senderId ? 'message owner' : 'message'}>
         <div className="messageInfo">
           <img
             className='logo-owner'
-            src={logo}
+            src={message.avatar}
             alt=""
           />
         </div>
         <div className="messageContent">
-          <p>{content}</p>
+          <p>{message.text}</p>
         </div>
       </div>
     )
   }
 
   return (
-    <div className='messages'>
-      <Message content={'Admin ơi cho mình hỏi vài cái với'} />
-      <MessageOwner content={'Dạ Driveconn xin nghe'} />
-      <Message content={'Thì mình có biết Driveconn thông qua facebook ấy và có quan tâm đến việc đăng xe ở đây thì bạn có thể nói kĩ hơn cho mình nghe được không ạ?'} />
-      <MessageOwner content={'Dạ Driveconn xin nghe'} />
-      
+    <div className="messages">
+      {messages.map((m) => (
+        <Message message={m} key={m.id} />
+      ))}
+      <div ref={messagesEndRef}></div>
     </div>
   )
 }

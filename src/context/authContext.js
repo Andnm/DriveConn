@@ -20,6 +20,8 @@ export default function AuthContextProvider({ children }) {
   const [currentToken, setCurrentToken] = useState(Cookies.get("token"));
   const [isLoadingEvent, setIsLoadingEvent] = useState(false);
 
+  const adminId = '64880a53c69630e5c5d24331'
+
   const [userDecode, setUserDecode] = useState(() => {
     const storedItem = localStorage.getItem("user");
     return storedItem ? JSON.parse(storedItem) : {};
@@ -211,6 +213,7 @@ export default function AuthContextProvider({ children }) {
         loginWithGoogle,
         isLoadingEvent,
         loginWithFacebook,
+        adminId
       }}
     >
       {children}
