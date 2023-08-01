@@ -4,36 +4,15 @@ const UsersChat = () => {
   return (
     <div>
       <div className="userChat" >
-        <img src="https://img.freepik.com/free-photo/purple-osteospermum-daisy-flower_1373-16.jpg?w=2000" alt="" />
+        <img
+          src="https://lh3.googleusercontent.com/a/AAcHTtcoZvEXILPbjMQGMBBwAHbx1r4lZvOf3nGO6Uen9fouFQ=s96-c"
+          alt="" />
         <div className="userChatInfo">
-          <span>Xin chao</span>
-          <p>Hello</p>
-        </div>
-      </div>
-      
-      <div className="userChat" >
-        <img src="https://img.freepik.com/free-photo/purple-osteospermum-daisy-flower_1373-16.jpg?w=2000" alt="" />
-        <div className="userChatInfo">
-          <span>Xin chao</span>
+          <span>Khưu Xuân Uyên</span>
           <p>Hello</p>
         </div>
       </div>
 
-      <div className="userChat" >
-        <img src="https://img.freepik.com/free-photo/purple-osteospermum-daisy-flower_1373-16.jpg?w=2000" alt="" />
-        <div className="userChatInfo">
-          <span>Xin chao</span>
-          <p>Hello</p>
-        </div>
-      </div>
-
-      <div className="userChat" >
-        <img src="https://img.freepik.com/free-photo/purple-osteospermum-daisy-flower_1373-16.jpg?w=2000" alt="" />
-        <div className="userChatInfo">
-          <span>Xin chao</span>
-          <p>Hello</p>
-        </div>
-      </div>
     </div>
   )
 }

@@ -2,7 +2,7 @@
   --pending-color: orange;
   --paying-color: purple;
   --processing-color: blue;
-  --delivering-color: gray;
+  --delivering-color: #0dcaf0;
   --delivered-color: brown;
   --completed-color: green;
   --cancelled-color: red;

@@ -7,7 +7,7 @@ const SidebarChat = () => {
   return (
     <div className='sidebar-chat'>
       <div className='navbar'>
-        <span className="logo">DriveConn</span>
+        <span>Driveconn Chat</span>
       </div>
 
       <Search/>

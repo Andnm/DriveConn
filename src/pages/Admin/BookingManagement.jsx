@@ -112,7 +112,26 @@ const BookingManagement = () => {
     }
 
     const getColor = (status) => {
-        return status === 'Completed' ? "text-success" : (status === 'Processing' ? "text-warning" : (status === 'Done') ? "text-secondary" : "text-danger");
+        switch (status) {
+            case 'Pending':
+                return "text-warning";
+            case 'Paying':
+                return "text-warning";
+            case 'Processing':
+                return "text-primary";
+            case 'Delivering':
+                return "text-info";
+            case 'Delivered':
+                return "text-warning";
+            case 'Completed':
+                return "text-success";
+            case 'Done':
+                return "text-dark";
+            case 'Cancelled':
+                return "text-danger";
+            default:
+                return "text-warning";
+        }
     };
 
     const onChangePage = (page) => {

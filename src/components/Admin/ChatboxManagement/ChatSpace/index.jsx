@@ -10,7 +10,7 @@ const ChatSpace = () => {
   return (
     <div className="chat-space">
       <div className="chatInfo">
-        <span>Xin chao</span>
+        <span>Khưu Xuân Uyên</span>
         <div className="chatIcons">
           <img src={Cam} alt="" />
           <img src={Add} alt="" />
