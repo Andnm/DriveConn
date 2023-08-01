@@ -12,6 +12,20 @@
   color: lightgray;
 }
 
+.chat-space .emptyConversation {
+  height: 100%;
+  width: 100%;
+  background-color: #ddddf7;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.chat-space .emptyConversation p{
+  font-size: 30px;
+  color: darkorchid;
+}
+
 .chat-space .chatIcons {
   display: flex;
   gap: 10px;

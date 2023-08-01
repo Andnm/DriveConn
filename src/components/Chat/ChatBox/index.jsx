@@ -44,8 +44,8 @@ const ChatBox = () => {
         <div className="chat-popup d-flex justify-content-center align-items-center" onClick={handlePopupClick}>
           {!userDecode?.firstName
             ?
-            <div className="d-flex justify-content-center align-items-center flex-column">
-              <p>Bạn có thắc mắc? Vui lòng đăng nhập để đặt câu hỏi cho chúng tôi!</p>
+            <div className="d-flex justify-content-center align-items-center flex-column p-3">
+              <p className="text-center mb-3">Bạn có thắc mắc? Vui lòng đăng nhập để đặt câu hỏi cho chúng tôi!</p>
               <button
                 onClick={() => {
                   setModalLoginOpen(true);

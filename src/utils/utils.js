@@ -137,6 +137,14 @@ const distanceDate = (dateStart, dateEnd) => {
 
 //-----------handle upload image
 
+//------------get last messages
+const getLastMessages = (inputString) => {
+  if (inputString.length > 20) {
+    return inputString.substring(0, 20) + '...';
+  } else {
+    return inputString;
+  }
+}
 
 export {
   validateEmail,
@@ -149,5 +157,6 @@ export {
   formatVNDateForm,
   getCircleColor,
   getBookingStatusColor,
-  distanceDate
+  distanceDate,
+  getLastMessages
 };

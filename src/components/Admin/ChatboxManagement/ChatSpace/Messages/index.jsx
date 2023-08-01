@@ -8,9 +8,11 @@ import { AuthContext } from '../../../../../context/authContext';
 const Messages = () => {
   const messagesEndRef = useRef();
   const [messages, setMassages] = useState([]);
-  const { userDecode, adminId } = useContext(AuthContext);
+  const { userDecode, adminId, selectedUserChat } = useContext(AuthContext);
 
-
+  const compareCombinedId = selectedUserChat.userId > adminId
+    ? selectedUserChat.userId + adminId
+    : adminId + selectedUserChat.userId;
 
   const scrollToBottom = () => {
     messagesEndRef.current.scrollIntoView({ behavior: "smooth" })
@@ -27,13 +29,17 @@ const Messages = () => {
     const unsubscribe = onSnapshot(q, (querySnapshot) => {
       const messages = [];
       querySnapshot.forEach((doc) => {
-        messages.push({ ...doc.data(), id: doc.id });
+        const docData = doc.data();
+
+        if (docData.combinedId === compareCombinedId) {
+          messages.push({ ...docData, id: doc.id });
+        }
       });
       setMassages(messages);
     });
 
     return () => unsubscribe;
-  }, []);
+  }, [selectedUserChat]);
 
   const Message = ({ message }) => {
     return (

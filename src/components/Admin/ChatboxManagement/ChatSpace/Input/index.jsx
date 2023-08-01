@@ -1,4 +1,4 @@
-import React, {useContext, useState} from 'react'
+import React, { useContext, useState } from 'react'
 import './style.css'
 import { addDoc, collection, serverTimestamp } from "firebase/firestore";
 
@@ -9,16 +9,16 @@ import { db } from '../../../../../config/configFirebase';
 
 const Input = () => {
   const [valueText, setValueText] = useState("");
-  const { userDecode, adminId } = useContext(AuthContext);
-  const userTmp = '6487ce3fe2c09142810ff413'
-  const compareCombinedId = userTmp > adminId
-  ? userTmp + adminId
-  : adminId + userTmp;
+  const { userDecode, adminId, selectedUserChat } = useContext(AuthContext);
+
+  const compareCombinedId = selectedUserChat.userId > adminId
+    ? selectedUserChat.userId + adminId
+    : adminId + selectedUserChat.userId;
 
   const handleSendMessage = async (e) => {
     e.preventDefault();
 
-    if(valueText.trim() === "") {
+    if (valueText.trim() === "") {
       return;
     }
 
@@ -29,10 +29,10 @@ const Input = () => {
         avatar: userDecode.imgURL,
         createdAt: serverTimestamp(),
         combinedId: compareCombinedId,
-        senderId: userDecode._id
+        senderId: adminId
       })
-    } catch(error) {
-      // console.log(error);
+    } catch (error) {
+      console.error("Error send messages from admin to customer:", error);
     }
     setValueText("");
   }
@@ -40,6 +40,7 @@ const Input = () => {
   const handleKeyPress = (e) => {
     if (e.key === 'Enter') {
       handleSendMessage(e);
+      setValueText("");
     }
   };
 

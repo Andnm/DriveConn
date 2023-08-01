@@ -1,10 +1,11 @@
 import React, { useContext, useEffect, useState, useRef } from 'react'
 import './style.css'
 import { AuthContext } from '../../../context/authContext';
-import { collection, query, onSnapshot, orderBy, limit, addDoc, serverTimestamp } from "firebase/firestore";
+import { collection, query, onSnapshot, orderBy, limit, addDoc, serverTimestamp, setDoc, doc, getDoc, updateDoc } from "firebase/firestore";
 import { db } from '../../../config/configFirebase';
+import { getLastMessages } from '../../../utils/utils';
 
-const ChatRoom = (onClick) => {
+const ChatRoom = ({onClick}) => {
   const [messages, setMassages] = useState([]);
   const { currentToken, userDecode, adminId } = useContext(AuthContext);
   const [valueText, setValueText] = useState("");
@@ -13,6 +14,7 @@ const ChatRoom = (onClick) => {
     : adminId + userDecode._id;
 
   const messagesEndRef = useRef();
+
   const scrollToBottom = () => {
     messagesEndRef.current.scrollIntoView({ behavior: "smooth" })
   };
@@ -29,7 +31,7 @@ const ChatRoom = (onClick) => {
       const messages = [];
       querySnapshot.forEach((doc) => {
         const docData = doc.data();
-        
+
         if (docData.combinedId === compareCombinedId) {
           messages.push({ ...docData, id: doc.id });
         }
@@ -39,22 +41,6 @@ const ChatRoom = (onClick) => {
 
     return () => unsubscribe;
   }, []);
-
-  const Message = ({ message }) => {
-    return (
-      <div className={userDecode._id === message.senderId ? 'message owner' : 'message'}>
-        <div className="messageInfo border-img">
-          <img
-            src={message.avatar}
-            alt=""
-          />
-        </div>
-        <div className="messageContent">
-          <p>{message.text}</p>
-        </div>
-      </div>
-    )
-  }
 
   const handleSendMessage = async (e) => {
     e.preventDefault();
@@ -72,8 +58,17 @@ const ChatRoom = (onClick) => {
         combinedId: compareCombinedId,
         senderId: userDecode._id
       })
+
+      await setDoc(doc(db, "userChats", compareCombinedId), {
+        name: userDecode.lastName + ' ' + userDecode.firstName,
+        avatar: userDecode.imgURL,
+        lastMessages: getLastMessages(valueText),
+        senderId: userDecode._id,
+        createdAt: serverTimestamp(),
+      })
+
     } catch (error) {
-      // console.log(error);
+      console.error("Error handling the message:", error);
     }
     setValueText("");
   }
@@ -85,11 +80,27 @@ const ChatRoom = (onClick) => {
     }
   };
 
+  const Message = ({ message }) => {
+    return (
+      <div className={userDecode._id === message.senderId ? 'message owner' : 'message'}>
+        <div className="messageInfo border-img">
+          <img
+            src={message.avatar}
+            alt=""
+          />
+        </div>
+        <div className="messageContent">
+          <p>{message.text}</p>
+        </div>
+      </div>
+    )
+  }
+
   return (
     <div className='chat-room'>
       <div className='header'>
         {/* <p>DriveConn</p> */}
-        <i class="ri-close-line" onClick={onClick}></i>
+        <i className="ri-close-line" onClick={onClick}></i>
       </div>
 
       <div className='messages-chat-room'>
@@ -108,7 +119,7 @@ const ChatRoom = (onClick) => {
           onKeyPress={handleKeyPress}
           value={valueText}
         />
-        <i class="ri-send-plane-2-line" onClick={handleSendMessage}></i>
+        <i className="ri-send-plane-2-line" onClick={handleSendMessage}></i>
       </div>
 
     </div>

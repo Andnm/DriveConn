@@ -1,6 +1,6 @@
-import { useState, createContext, useEffect, useContext } from "react";
+import { useState, createContext, useEffect } from "react";
 import axios from "axios";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import jwt_decode from "jwt-decode";
 import Cookies from "js-cookie";
@@ -19,6 +19,7 @@ export default function AuthContextProvider({ children }) {
   const navigate = useNavigate();
   const [currentToken, setCurrentToken] = useState(Cookies.get("token"));
   const [isLoadingEvent, setIsLoadingEvent] = useState(false);
+  const [selectedUserChat, setSelectedUserChat] = useState([]);
 
   const adminId = '64880a53c69630e5c5d24331'
 
@@ -26,8 +27,6 @@ export default function AuthContextProvider({ children }) {
     const storedItem = localStorage.getItem("user");
     return storedItem ? JSON.parse(storedItem) : {};
   });
-
-  const location = useLocation();
 
   // Side Effects
 
@@ -213,7 +212,9 @@ export default function AuthContextProvider({ children }) {
         loginWithGoogle,
         isLoadingEvent,
         loginWithFacebook,
-        adminId
+        adminId,
+        selectedUserChat,
+        setSelectedUserChat
       }}
     >
       {children}
