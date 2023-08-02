@@ -96,22 +96,22 @@ const DetailInfo = ({ props }) => {
 
         <div className="car-rental-documents m-4">
           <h4>Giấy tờ xe</h4>
-          <img src="https://scontent.fsgn19-1.fna.fbcdn.net/v/t1.15752-9/355741070_589697909897997_3347119866354177015_n.png?_nc_cat=105&ccb=1-7&_nc_sid=ae9488&_nc_ohc=PI0bBn3koJIAX-6sJYV&_nc_ht=scontent.fsgn19-1.fna&oh=03_AdT7BqEgn0jqBG2OrQOvBMSMHJMIr8mvu5ZkJNDEM9sDBg&oe=64B9FC09"></img>
+          <img src="https://live.staticflickr.com/65535/53088196509_93109006fd_b.jpg"></img>
         </div>
 
         <div className="mortgage m-4">
           <h4>Tài sản thế chấp</h4>
-          <img src="https://scontent.fsgn19-1.fna.fbcdn.net/v/t1.15752-9/355796931_5824678424304805_6764203593921554258_n.png?_nc_cat=100&ccb=1-7&_nc_sid=ae9488&_nc_ohc=FRjTWFgYfBsAX8GFjC1&_nc_ht=scontent.fsgn19-1.fna&oh=03_AdRykBgeqfNveIZwoVKEB-1byjwZF1RkcoTr92d3QXvXpw&oe=64B9EA9C"></img>
+          <img src="https://live.staticflickr.com/65535/53088412895_51fcab6898_b.jpg"></img>
         </div>
 
         <div className="rules m-4">
           <h4>Các quy định khác</h4>
-          <img src='https://scontent.fsgn19-1.fna.fbcdn.net/v/t1.15752-9/355807356_967729924267668_3007285587427635364_n.png?_nc_cat=104&ccb=1-7&_nc_sid=ae9488&_nc_ohc=wObv4DTWCnUAX9KEYYQ&_nc_ht=scontent.fsgn19-1.fna&oh=03_AdTS9Ud1xqB5uNk_GFHdcQknty6rDVKRZynoS2JIYtK3Gg&oe=64B9F88A'></img>
+          <img src='https://live.staticflickr.com/65535/53088196514_540997fabb_b.jpg'></img>
         </div>
 
         <div className="cancel-booking-policy m-4">
           <h4>Chính sách hủy truyến</h4>
-          <img src='https://scontent.fsgn19-1.fna.fbcdn.net/v/t1.15752-9/353503097_586924310222010_6217897559197281080_n.png?_nc_cat=107&ccb=1-7&_nc_sid=ae9488&_nc_ohc=8IF0mnm1JIcAX8Uj_rf&_nc_ht=scontent.fsgn19-1.fna&oh=03_AdS3lj90Rp6_XhPNxn24C5vQhsRdgZMN6DcbUWNQmWcBHg&oe=64B9F7A9'></img>
+          <img src='https://live.staticflickr.com/65535/53088412910_195acd2d98_b.jpg'></img>
         </div>
       </div>
 
@@ -119,7 +119,7 @@ const DetailInfo = ({ props }) => {
 
       <div className="map">
         <h3>Vị trí xe</h3>
-        <img className="w-100" src="https://scontent.fsgn19-1.fna.fbcdn.net/v/t1.15752-9/355754085_188439897525705_7523887877261689213_n.png?_nc_cat=110&ccb=1-7&_nc_sid=ae9488&_nc_ohc=KHMzBym7PJAAX-Ued5a&_nc_ht=scontent.fsgn19-1.fna&oh=03_AdQU8IlJJhX2h6bbUzZuiZPStFxfI35ybaZU0SO94kSGDw&oe=64B9EF84"></img>
+        <img className="w-100" src="https://live.staticflickr.com/65535/53088010711_97532c0383_b.jpg"></img>
       </div>
 
       <div className='separation-line'></div>

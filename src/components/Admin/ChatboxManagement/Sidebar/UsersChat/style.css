@@ -5,6 +5,7 @@
   gap: 10px;
   color: white;
   cursor: pointer;
+  overflow-y: auto;
 }
 
 .userChat:hover {

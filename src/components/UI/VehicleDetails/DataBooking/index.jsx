@@ -139,7 +139,7 @@ const DataBooking = ({ props }) => {
 
       <div className="surcharge">
         <h4>Phụ thu có thể phát sinh</h4>
-        <img className="w-100" src="https://scontent.fsgn19-1.fna.fbcdn.net/v/t1.15752-9/355450726_262915966389356_7833825725190722698_n.png?_nc_cat=105&ccb=1-7&_nc_sid=ae9488&_nc_ohc=cE44kAblOYAAX-gH7V1&_nc_ht=scontent.fsgn19-1.fna&oh=03_AdQ953DCNsMwDzYojELvSlBM7c0-qGLgdry1cMFUh8pkTA&oe=64B9DAB2"></img>
+        <img className="w-100" src="https://live.staticflickr.com/65535/53088504738_65af5d8534.jpg"></img>
       </div>
 
       <div className="price-details">
@@ -171,7 +171,7 @@ const DataBooking = ({ props }) => {
           </div>
 
           <div style={{ margin: '0 auto', marginBottom: '10px', marginTop: '15px' }}>
-            <img className='w-100' style={{ height: '25px', objectFit: 'contain', cursor: 'pointer' }} src="https://scontent.fsgn19-1.fna.fbcdn.net/v/t1.15752-9/355688047_766563338594122_6997880366937339016_n.png?_nc_cat=100&ccb=1-7&_nc_sid=ae9488&_nc_ohc=CC2_6-AG9cMAX_3Pdpf&_nc_ht=scontent.fsgn19-1.fna&oh=03_AdQKzOcHM8qf_BgvCQo50WvwvTWsTOVm-U6gvI2fSMMLkQ&oe=64BA0B44"></img>
+            <img className='w-100' style={{  objectFit: 'contain', cursor: 'pointer' }} src="https://live.staticflickr.com/65535/53088504733_275cba1b69_w.jpg"></img>
           </div>
         </div>
 

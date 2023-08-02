@@ -7,6 +7,7 @@ import avatar from '../../assets/all-images/avatar.jpg'
 import { formatPrice } from "../../utils/utils";
 
 const VehicleItem = (props) => {
+  console.log(props)
   const { autoMaker_id, category_id, fuel, model_id, otherFacilities, transmission, vehicle_id } = props.item;
   const action = props.action
   const navigate = useNavigate();
@@ -16,7 +17,7 @@ const VehicleItem = (props) => {
   }
 
   const handleToOpenUpdateVehicleDetail = () => {
-    
+
   }
 
   return (
@@ -35,9 +36,15 @@ const VehicleItem = (props) => {
                 ?
                 <button className="transmission">Số sàn</button>
                 :
-                (transmission === 'Auto'
+                (transmission === 'Automatic'
                   ? <button className="transmission">Số tự động</button>
-                  : <></>
+                  : (category_id.name === 'Automatic transmission' ?
+                    <button className="transmission">Xe tay ga</button>
+                    : (category_id.name === 'Manual transmission' ?
+                      <button className="transmission">Xe số</button>
+                      : (category_id.name === 'Manual clutch' ?
+                        <button className="transmission">Xe tay côn</button>
+                        : <></>)))
                 )
               }
             </div>
