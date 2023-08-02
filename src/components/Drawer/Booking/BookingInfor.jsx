@@ -53,8 +53,10 @@ const BookingInfor = (props) => {
                         <p>Booking Creation:</p>
                         <p>Booking Start:</p>
                         <p>Booking End:</p>
+                        <p>Address: </p>
                     </div>
                     <div className="d-flex flex-column">
+                        <p>Thủ Đức, Hồ Chí Minh </p>
                         <p>{formatVNDateForm(createdAt)}</p>
                         <p>{formatVNDateForm(bookingStart)}</p>
                         <p>{formatVNDateForm(bookingEnd)}</p>
