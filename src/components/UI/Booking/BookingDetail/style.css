@@ -25,10 +25,12 @@
 
 .booking-detail-container .img-background {
   width: auto;
+  display: flex;
+  justify-content: center;
 }
 
 .booking-detail-container .img-background img {
-  width: 100%;
+  width: 80%;
 }
 
 .booking-detail-container .vehicle-info .info-detail,
@@ -46,6 +48,12 @@
 .booking-detail-container .customer-info img {
     width: 50px;
     height: 50px;
+    object-fit: cover;
+}
+
+.booking-detail-container .customer-info-drawer img {
+    width: 75px;
+    height: 75px;
     object-fit: cover;
 }
 

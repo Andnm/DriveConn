@@ -31,8 +31,6 @@ function RevenueChart() {
     const currentQuarter = Math.floor((currentMonth + 2) / 3);
     const currentYear = currentDate.getFullYear();
 
-    console.log(userDecode)
-
     const dataTotalPriceBookingsHandle = reportType === 'quarter'
         ? quarters.map((quarter) => {
             if (quarter <= currentQuarter) {
@@ -82,7 +80,7 @@ function RevenueChart() {
                 return null;
             })
             : years.map((year) => {
-                if (year <= currentYear) {  
+                if (year <= currentYear) {
                     const bookingsInYear = dataBooking.filter((booking) => {
                         if (
                             (booking.bookingStatus === 'Delivered' ||
@@ -128,7 +126,7 @@ function RevenueChart() {
                 'November',
                 'December'
             ]
-            : years.map(String); 
+            : years.map(String);
 
 
     let dataRevenueHandle;
@@ -196,38 +194,78 @@ function RevenueChart() {
     };
 
     return (
-        <div className='barchart d-flex flex-column justify-content-center gap-1'>
-            <div className='d-flex justify-content-between'>
-                <h4>Business situation</h4>
-                <button className='btn btn-outline-secondary'>{currentYear}</button>
+        <div className="row">
+            <div className="col-3 col-sm-3 col-xxl-3 justify-content-center align-items-center d-flex">
+                <div className="card flex-fill">
+                    <div className="card-body pt-4">
+                        <div className="d-flex align-items-start">
+                            <div className="flex-grow-1">
+                                <div className="mb-0 d-flex mt-4">
+                                    <div className='title'>
+                                        <div className='d-flex gap-2 title-price-dashboard'>
+                                            <p >Booking Transaction: </p>
+                                        </div>
+                                        <div className='d-flex justify-content-center'>
+                                            <p className="price-dashboard">5.430.000 VND</p>
+                                        </div>
+
+                                        <div className='d-flex gap-2 title-price-dashboard'>
+                                            <p >Revenue: </p>
+                                        </div>
+                                        <div className='d-flex justify-content-center'>
+                                            <p className="price-dashboard">543.000 VND</p>
+                                        </div>
+                                    </div>
+
+
+                                </div>
+                            </div>
+                            <div className="d-inline-block ms-3">
+                                <div className="stat">
+                                    {/* <SlUser /> */}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <div className='h-85'>
-                <Chart type='bar' data={data} options={options} />
-            </div>
-            <div className='d-flex justify-content-end gap-2 pt-1'>
-                <button
-                    type='button'
-                    className={`btn ${reportType === 'quarter' ? 'btn-outline-secondary' : 'btn-secondary'}`}
-                    onClick={() => setReportType('quarter')}
-                >
-                    Quarter
-                </button>
-                <button
-                    type='button'
-                    className={`btn ${reportType === 'month' ? 'btn-outline-secondary' : 'btn-secondary'}`}
-                    onClick={() => setReportType('month')}
-                >
-                    Month
-                </button>
-                <button
-                    type='button'
-                    className={`btn ${reportType === 'year' ? 'btn-outline-secondary' : 'btn-secondary'}`}
-                    onClick={() => setReportType('year')}
-                >
-                    Year
-                </button>
+
+            <div className="col-9 col-sm-9 col-xxl-9 d-flex">
+                <div className='barchart d-flex flex-column justify-content-center gap-1'>
+                    <div className='d-flex justify-content-between'>
+                        <h4>Business situation</h4>
+                        <button className='btn btn-outline-secondary'>{currentYear}</button>
+                    </div>
+                    <div className='h-85'>
+                        <Chart type='bar' data={data} options={options} />
+                    </div>
+                    <div className='d-flex justify-content-end gap-2 pt-1'>
+                        <button
+                            type='button'
+                            className={`btn ${reportType === 'quarter' ? 'btn-outline-secondary' : 'btn-secondary'}`}
+                            onClick={() => setReportType('quarter')}
+                        >
+                            Quarter
+                        </button>
+                        <button
+                            type='button'
+                            className={`btn ${reportType === 'month' ? 'btn-outline-secondary' : 'btn-secondary'}`}
+                            onClick={() => setReportType('month')}
+                        >
+                            Month
+                        </button>
+                        <button
+                            type='button'
+                            className={`btn ${reportType === 'year' ? 'btn-outline-secondary' : 'btn-secondary'}`}
+                            onClick={() => setReportType('year')}
+                        >
+                            Year
+                        </button>
+                    </div>
+                </div>
             </div>
         </div>
+
     );
 }
 

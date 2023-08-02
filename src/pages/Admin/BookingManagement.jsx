@@ -11,6 +11,7 @@ import { getBookingList, changeBookingStatus } from "../../api/booking";
 import { DATE_FORMAT } from "../../constants/default";
 import LoadingCar from '../../components/LoadingCar/LoadingCar'
 import { formatPriceNumber } from '../../utils/utils';
+import DrawerBooking from '../../components/Drawer/DrawerBooking';
 
 const filterableFields = [{
     label: "Status",
@@ -37,6 +38,8 @@ const BookingManagement = () => {
     const [page, setPage] = useState(1);
     const [maxPage, setMaxPage] = useState(1);
     const [isLoading, setIsLoading] = useState(false);
+    const [isDrawerOpen, setIsDrawerOpen] = useState(false);
+    const [bookingDetail, setBookingDetail] = useState("");
 
     useEffect(() => {
         handleSearchBar();
@@ -152,6 +155,15 @@ const BookingManagement = () => {
         setPage(page);
     }
 
+    const clickToViewDetailBooking = (booking) => {
+        setIsDrawerOpen(true);
+        setBookingDetail(booking)
+    }
+
+    const handleToggleDrawer = () => {
+        setIsDrawerOpen(!isDrawerOpen);
+    };
+
     return (
         <div className="pt-5">
             <SearchBar
@@ -211,7 +223,10 @@ const BookingManagement = () => {
                                                         : null
                                                     )
                                             }
-                                            <i className="ri-file-info-line cursor-pointer mx-2" title="Detail"></i>
+                                            <i className="ri-file-info-line cursor-pointer mx-2"
+                                                title="Detail"
+                                                onClick={() => clickToViewDetailBooking(booking)}
+                                            />
                                         </td>
                                         <td>{booking.vehicle_id.licensePlate ?? 'N/A'}</td>
                                         <td>{moment(booking.createdAt).format(DATE_FORMAT) ?? 'N/A'}</td>
@@ -231,6 +246,7 @@ const BookingManagement = () => {
                                 </>
                             </tbody>
                         </table>
+                        {isDrawerOpen && <DrawerBooking isOpen={isDrawerOpen} toggleDrawer={handleToggleDrawer} content={bookingDetail} />}
 
                         <Pagination maxPage={maxPage} onChangePage={onChangePage} />
                     </>

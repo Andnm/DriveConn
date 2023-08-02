@@ -14,6 +14,7 @@
   align-items: center;
   cursor: pointer;
   border: 7px solid #aedffd;
+  z-index: 9999;
 }
 
 .chat-icon {
@@ -34,6 +35,7 @@
   box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
   border-radius: 5px;
   /* padding: 10px; */
+  z-index: 9999;
 }
 
 .chat-popup p {

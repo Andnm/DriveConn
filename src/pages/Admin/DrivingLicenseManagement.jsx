@@ -161,11 +161,12 @@ const DrivingLicenseManagement = () => {
                   </td>
                 </tr>))}
 
-                {isDrawerOpen && <Drawer isOpen={isDrawerOpen} toggleDrawer={handleToggleDrawer} content={displayedImage}/>}
               </>
             </tbody>
           </table>
           <Pagination maxPage={maxPage} onChangePage={onChangePage} />
+          {isDrawerOpen && <Drawer isOpen={isDrawerOpen} toggleDrawer={handleToggleDrawer} content={displayedImage} />}
+
         </>
         : <LoadingCar />
 

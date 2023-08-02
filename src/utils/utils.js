@@ -102,6 +102,29 @@ const getBookingStatusColor = (status) =>{
   }
 }
 
+const getBookingStatusColorEnglish = (status) =>{
+  switch (status) {
+    case 'Pending':
+      return { color: 'var(--pending-color)', text: 'Pending' };
+    case 'Paying':
+      return { color: 'var(--paying-color)', text: 'Paying' };
+    case 'Processing':
+      return { color: 'var(--processing-color)', text: 'Processing' };
+    case 'Delivering':
+      return { color: 'var(--delivering-color)', text: 'Delivering' };
+    case 'Delivered':
+      return { color: 'var(--delivered-color)', text: 'Delivered' };
+    case 'Completed':
+      return { color: 'var(--completed-color)', text: 'Completed' };
+    case 'Done':
+      return { color: 'var(--done-color)', text: 'Done' };
+    case 'Cancelled':
+      return { color: 'var(--cancelled-color)', text: 'Cancelled' };
+    default:
+      return { color: '', text: '' };
+  }
+}
+
 const getCircleColor = (status) => {
   switch (status) {
     case 'Pending':
@@ -157,6 +180,7 @@ export {
   formatVNDateForm,
   getCircleColor,
   getBookingStatusColor,
+  getBookingStatusColorEnglish,
   distanceDate,
   getLastMessages
 };
