@@ -34,7 +34,7 @@
 }
 
 .messages .message .messageContent {
-  max-width: 80%;
+  max-width: 60%;
   display: flex;
   flex-direction: column;
   gap: 10px;
