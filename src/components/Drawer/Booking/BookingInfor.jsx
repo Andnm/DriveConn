@@ -50,10 +50,11 @@ const BookingInfor = (props) => {
                 <h4>Booking Information</h4>
                 <div className='time-detail d-flex align-items-start gap-5'>
                     <div className="d-flex flex-column">
+                        <p>Address: </p>
                         <p>Booking Creation:</p>
                         <p>Booking Start:</p>
                         <p>Booking End:</p>
-                        <p>Address: </p>
+
                     </div>
                     <div className="d-flex flex-column">
                         <p>Thủ Đức, Hồ Chí Minh </p>
