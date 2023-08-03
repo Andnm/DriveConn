@@ -206,14 +206,14 @@ function RevenueChart() {
                                             <p >Booking Transaction: </p>
                                         </div>
                                         <div className='d-flex justify-content-center'>
-                                            <p className="price-dashboard">5.430.000 VND</p>
+                                            <p className="price-dashboard">5.580.000 VND</p>
                                         </div>
 
                                         <div className='d-flex gap-2 title-price-dashboard'>
                                             <p >Revenue: </p>
                                         </div>
                                         <div className='d-flex justify-content-center'>
-                                            <p className="price-dashboard">543.000 VND</p>
+                                            <p className="price-dashboard">558.000 VND</p>
                                         </div>
                                     </div>
 
