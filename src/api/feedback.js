@@ -16,7 +16,6 @@ export const createFeedbacks = async (token, data) => {
     const response = await instance.post(`/api/feedbacks`, data);
     return response;
   } catch (error) {
-    console.error("Error create feedbacks:", error.response);
     return [];
   }
 };
@@ -27,7 +26,6 @@ export const getFeedbacks = async (token) => {
     const response = await instance.get(`/api/feedbacks`);
     return response.data;
   } catch (error) {
-    console.error("Error get feedbacks:", error.response);
     return [];
   }
 };
@@ -41,7 +39,6 @@ export const updateNewFeedback = async (token, id) => {
     const response = await instance.put(`/api/feedbacks`, data);
     return response.data;
   } catch (error) {
-    console.error("Error update feedbacks:", error.response);
     return [];
   }
 };

@@ -33,11 +33,6 @@ const Input = () => {
         senderId: adminId
       })
 
-      await updateDoc(doc(db, "userChats", compareCombinedId), {
-        lastMessages: getLastMessages(valueText),
-        senderId: userDecode._id,
-        createdAt: serverTimestamp(),
-      })
     } catch (error) {
       console.error("Error send messages from admin to customer:", error);
     }
