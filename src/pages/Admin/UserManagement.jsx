@@ -75,11 +75,8 @@ const UserManagement = () => {
                 })
                 .reverse();
 
-            setMaxPage(
-                filteredList.length % itemsPerPage === 0 && filteredList.length !== 0
-                    ? filteredList.length / itemsPerPage
-                    : Math.floor(filteredList.length / itemsPerPage) + 1
-            );
+            setMaxPage(filteredList.length % itemsPerPage === 0 && filteredList.length !== 0 ? filteredList.length / itemsPerPage : Math.floor(filteredList.length / itemsPerPage) + 1);
+
 
             setUsers(filteredList.slice(itemsPerPage * (page - 1), itemsPerPage * page));
             setIsLoading(false)

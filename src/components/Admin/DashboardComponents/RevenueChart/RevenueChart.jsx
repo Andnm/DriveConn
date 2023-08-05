@@ -4,6 +4,7 @@ import { Chart as ChartJS, LinearScale, CategoryScale, BarElement, PointElement,
 import { Chart } from 'react-chartjs-2';
 import "./style.css";
 import { getBookingList } from '../../../../api/booking';
+import { formatNumberToDecimalString } from '../../../../utils/utils';
 
 ChartJS.register(
     LinearScale,
@@ -18,7 +19,7 @@ ChartJS.register(
 );
 
 function RevenueChart() {
-    const { currentToken, userDecode } = useContext(AuthContext);
+    const { currentToken } = useContext(AuthContext);
     const [dataBooking, setDataBooking] = useState([]);
     const [reportType, setReportType] = useState('quarter');
 
@@ -102,6 +103,12 @@ function RevenueChart() {
                 }
                 return null
             });
+
+    const totalBookingTransaction = () => {
+        let total = 0
+        dataBooking.map((item) => item.bookingStatus !== 'Cancelled' ? total += item.totalPrice : total == total)
+        return total
+    }
 
     useEffect(() => {
         getBookingList(currentToken).then((res) => {
@@ -206,14 +213,14 @@ function RevenueChart() {
                                             <p >Booking Transaction: </p>
                                         </div>
                                         <div className='d-flex justify-content-center'>
-                                            <p className="price-dashboard">5.580.000 VND</p>
+                                            <p className="price-dashboard">{formatNumberToDecimalString(totalBookingTransaction())} VND</p>
                                         </div>
 
                                         <div className='d-flex gap-2 title-price-dashboard'>
                                             <p >Revenue: </p>
                                         </div>
                                         <div className='d-flex justify-content-center'>
-                                            <p className="price-dashboard">558.000 VND</p>
+                                            <p className="price-dashboard">{formatNumberToDecimalString(totalBookingTransaction() * 0.1)} VND</p>
                                         </div>
                                     </div>
 

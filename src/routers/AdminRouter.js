@@ -12,6 +12,7 @@ import DrivingLicenseManagement from '../pages/Admin/DrivingLicenseManagement'
 import ChatBoxManagement from "../pages/Admin/ChatBoxManagement"; 
 
 import { AuthContext } from "../context/authContext";
+import FeedbackManagement from "../pages/Admin/FeedbackManagement";
 
 const AdminRouter = () => {
   const { currentToken } = useContext(AuthContext);
@@ -29,6 +30,7 @@ const AdminRouter = () => {
             <Route path="booking_management" element={<BookingManagement />} />
             <Route path="drivingLicense_management" element={<DrivingLicenseManagement />} />
             <Route path="chat_management" element={<ChatBoxManagement />} />
+            <Route path="feedback_management" element={<FeedbackManagement />}/>
           </Route>
         </>
       </Route>

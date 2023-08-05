@@ -20,6 +20,21 @@ const formatDate = (dateString) => {
   }
 };
 
+function formatNumberToDecimalString(number) {
+  if (isNaN(number) || typeof number !== 'number') {
+    return '';
+  }
+
+  const formattedNumber = number.toLocaleString();
+
+  if (number < 1000) {
+    return formattedNumber;
+  }
+
+  return formattedNumber;
+}
+
+
 const formatToDateType = (dateString) => {
   const [day, month, year] = dateString.split('/');
   const formattedDate = new Date(`${year}-${month}-${day}`);
@@ -170,6 +185,7 @@ const getLastMessages = (inputString) => {
 }
 
 export {
+  formatNumberToDecimalString,
   validateEmail,
   formatToDateType,
   formatDate,

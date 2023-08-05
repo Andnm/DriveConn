@@ -1,0 +1,112 @@
+.feedback-list {
+  display: grid;
+  grid-gap: 20px;
+}
+
+.feedback-item {
+  border: 1px solid #ccc;
+  padding: 10px;
+  border-radius: 5px;
+  box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+  transition: box-shadow 0.3s ease-in-out;
+  cursor: pointer;
+}
+
+.feedback-item:hover {
+  box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.3);
+}
+
+.feedback-item .avatar {
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+  overflow: hidden;
+  margin-right: 10px; 
+  border: 2px solid #ccc
+}
+
+.feedback-item .avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.content-feedback {
+  font-size: 25px;
+  margin-bottom: 0px !important;
+}
+
+.feedback-info {
+  flex: 1; 
+}
+
+.feedback-info p {
+  margin: 5px 0;
+  color: #666;
+  font-size: 22px;
+}
+
+.feedback-item.unread-feedback {
+  background-color: #dddddd;
+  font-weight: 600; 
+}
+
+.feedback-item.read-feedback {
+  background-color: #f2f2f2;
+  font-weight: normal; 
+}
+
+.feedback-header {
+  margin-bottom: 20px;
+}
+
+.feedback-header button {
+  background-color: #fff;
+  border: 1px solid #ccc;
+  color: #333;
+  padding: 8px 16px;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-right: 10px;
+  transition: background-color 0.3s ease-in-out, color 0.3s ease-in-out;
+}
+
+.feedback-header button:hover {
+  background-color: #e5e5e5 !important;
+}
+
+.feedback-header button.active {
+  background-color: #007bff !important;
+  color: #fff !important;
+}
+
+.feedback-header button.all {
+  background-color: #fff;
+  color: #333;
+}
+
+.feedback-header button.unseen {
+  background-color: #fff;
+  color: #333;
+}
+
+.feedback-header button.all:hover,
+.feedback-header button.unseen:hover,
+.feedback-header button.all.active,
+.feedback-header button.unseen.active {
+  background-color: #e5e5e5 !important;
+}
+
+.feedback-header button.all.active,
+.feedback-header button.unseen.active {
+  background-color: #007bff !important;
+  color: #fff !important;
+}
+
+.empty-feedback {
+  text-align: center;
+  font-size: 18px;
+  font-weight: bold;
+  color: #666;
+  margin-top: 20px;
+}

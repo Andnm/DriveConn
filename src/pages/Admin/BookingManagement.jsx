@@ -79,11 +79,7 @@ const BookingManagement = () => {
                     return 0;
                 });
 
-            setMaxPage(
-                filteredList.length % itemsPerPage === 0 && filteredList.length !== 0
-                    ? filteredList.length / itemsPerPage
-                    : Math.floor(filteredList.length / itemsPerPage) + 1
-            );
+            setMaxPage(filteredList.length % itemsPerPage === 0 && filteredList.length !== 0 ? filteredList.length / itemsPerPage : Math.floor(filteredList.length / itemsPerPage) + 1);
 
             setBookings(filteredList.slice(itemsPerPage * (page - 1), itemsPerPage * page));
             setIsLoading(false);

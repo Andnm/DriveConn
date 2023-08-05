@@ -7,12 +7,12 @@ import { Container, Row, Col } from "reactstrap";
 import FindCarForm from "../components/UI/FindCarForm";
 import AboutSection from "../components/UI/AboutSection";
 import ServicesList from "../components/UI/ServicesList";
-import VehicleItem from "../components/UI/VehicleItem";
 import BecomeDriverSection from "../components/UI/BecomeDriverSection";
 import Testimonial from "../components/UI/Testimonial";
 import BlogList from "../components/UI/BlogList";
 import axios from 'axios'
 import API_URL from "../api/Router";
+import FeedbackIcon from "../components/FeedbackIcon";
 
 const Home = () => {
 
@@ -34,9 +34,10 @@ const Home = () => {
     getAllVehicles()
   }, [])
 
-
   return (
     <Helmet title="Home">
+      {/* ================== feedback =============== */}
+      <FeedbackIcon/>
       {/* ============= hero section =========== */}
       <section className="p-0 hero__slider-section">
         <HeroSlider />

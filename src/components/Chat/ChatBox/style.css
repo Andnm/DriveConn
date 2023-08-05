@@ -14,7 +14,7 @@
   align-items: center;
   cursor: pointer;
   border: 7px solid #aedffd;
-  z-index: 9999;
+  z-index: 999;
 }
 
 .chat-icon {

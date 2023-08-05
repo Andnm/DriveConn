@@ -3,10 +3,10 @@ import logo from "../../../assets/all-images/logo/Final_DriveConn_logo.png";
 import './sidebar.css'
 import { AuthContext } from "../../../context/authContext";
 
-import { Link, NavLink } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 
 const Sidebar = () => {
-  const { userDecode, currentToken, logout } = useContext(AuthContext);
+  const { userDecode, logout } = useContext(AuthContext);
 
   const menuItem = [
     {
@@ -42,7 +42,12 @@ const Sidebar = () => {
     {
       path: "/admin/chat_management",
       name: "Chatbox Management",
-      icon: "ri-chat-4-line"
+      icon: "ri-message-2-line"
+    },
+    {
+      path: "/admin/feedback_management",
+      name: "Feedback Management",
+      icon: "ri-feedback-line"
     },
   ];
 

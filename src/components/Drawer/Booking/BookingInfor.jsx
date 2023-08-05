@@ -1,10 +1,10 @@
 import React, { useContext } from 'react';
 import { AuthContext } from '../../../context/authContext';
-import { formatVNDateForm, formatPriceNumber, distanceDate, getBookingStatusColorEnglish, getCircleColor, formatToDateType, formatDate } from '../../../utils/utils'
+import { formatVNDateForm, formatPriceNumber, getBookingStatusColorEnglish, getCircleColor, formatDate } from '../../../utils/utils'
 
 const BookingInfor = (props) => {
     console.log(props.data)
-    const { bookingEnd, bookingStart, bookingStatus, createdAt, isPaid, isTransferred, totalPrice, user_id, vehicle_id, _id, cancel_reason, user_canceled } = props.data;
+    const { bookingEnd, bookingStart, bookingStatus, createdAt, totalPrice, user_id, vehicle_id, cancel_reason, user_canceled } = props.data;
     const { userDecode } = useContext(AuthContext);
 
     const circleStyle = {
