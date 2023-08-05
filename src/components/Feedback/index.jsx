@@ -23,7 +23,8 @@ const Feedback = ({ onClose }) => {
         const data = {
             email: email,
             fullName: name,
-            contentFeedback: msgFeedback
+            contentFeedback: msgFeedback,
+            avatar: userDecode?.imgURL ? userDecode?.imgURL : ""
         }
 
         const response = await createFeedbacks(currentToken, data)

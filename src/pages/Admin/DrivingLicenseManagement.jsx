@@ -37,10 +37,6 @@ const DrivingLicenseManagement = () => {
 
   useEffect(() => {
     handleSearchBar();
-  }, []);
-
-  useEffect(() => {
-    handleSearchBar();
   }, [page]);
 
   const handleSearchBar = (criteria = {}) => {
@@ -95,10 +91,6 @@ const DrivingLicenseManagement = () => {
 
   const onChangePage = (page) => {
     setPage(page);
-  }
-
-  const inlineStyle = {
-
   }
 
   const handleToggleDrawer = () => {

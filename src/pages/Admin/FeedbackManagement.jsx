@@ -74,7 +74,7 @@ const FeedbackManagement = () => {
                                     <div className='d-flex justify-content-center align-items-center'>
                                         <div className="avatar">
                                             {feedback?.avatar ? (
-                                                <img src={feedback?.avatar} alt="Avatar" />
+                                                <img src={feedback?.avatar} alt="Avatar User" />
                                             ) : (
                                                 <img src={avatar} alt="Avatar Sample" />
                                             )}

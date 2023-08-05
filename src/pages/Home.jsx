@@ -13,6 +13,7 @@ import BlogList from "../components/UI/BlogList";
 import axios from 'axios'
 import API_URL from "../api/Router";
 import FeedbackIcon from "../components/FeedbackIcon";
+import VehicleItem from "../components/UI/VehicleItem"
 
 const Home = () => {
 
@@ -65,8 +66,8 @@ const Home = () => {
         <Container>
           <Row>
             <Col lg="12" className="mb-5 text-center">
-              <h6 className="section__subtitle">See our</h6>
-              <h2 className="section__title">Popular Services</h2>
+              <h6 className="section__subtitle">Cùng đến</h6>
+              <h2 className="section__title">Dịch vụ phổ biến</h2>
             </Col>
 
             <ServicesList />
@@ -78,13 +79,13 @@ const Home = () => {
         <Container>
           <Row>
             <Col lg="12" className="text-center mb-5">
-              <h6 className="section__subtitle">Come with</h6>
-              <h2 className="section__title">Hot Offers</h2>
+              <h6 className="section__subtitle">Đến với</h6>
+              <h2 className="section__title">Lựa chọn tốt nhất</h2>
             </Col>
 
-            {/* {carData?.slice(0, 6).map((item) => (
+            {carData?.slice(0, 4).map((item) => (
               <VehicleItem item={item} key={item.id} />
-            ))} */}
+            ))}
           </Row>
         </Container>
       </section>
@@ -96,8 +97,7 @@ const Home = () => {
         <Container>
           <Row>
             <Col lg="12" className="mb-4 text-center">
-              <h6 className="section__subtitle">Our customer says</h6>
-              <h2 className="section__title">Testimonials</h2>
+              <h2 className="section__title">Khách hàng nói gì về chúng tôi?</h2>
             </Col>
 
             <Testimonial />
@@ -110,8 +110,8 @@ const Home = () => {
         <Container>
           <Row>
             <Col lg="12" className="mb-5 text-center">
-              <h6 className="section__subtitle">Explore our blogs</h6>
-              <h2 className="section__title">Latest Blogs</h2>
+              <h6 className="section__subtitle">Khám phá các bài viết</h6>
+              <h2 className="section__title">Bài viết mới nhất</h2>
             </Col>
 
             <BlogList />

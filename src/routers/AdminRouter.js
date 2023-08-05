@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React from "react";
 import { Routes, Route } from "react-router-dom";
 
 import LayoutAdmin from "../components/Admin/LayoutAdmin/LayoutAdmin";
@@ -11,12 +11,9 @@ import Dashboard from "../pages/Admin/Dashboard";
 import DrivingLicenseManagement from '../pages/Admin/DrivingLicenseManagement'
 import ChatBoxManagement from "../pages/Admin/ChatBoxManagement"; 
 
-import { AuthContext } from "../context/authContext";
 import FeedbackManagement from "../pages/Admin/FeedbackManagement";
 
 const AdminRouter = () => {
-  const { currentToken } = useContext(AuthContext);
-
   return (
     <Routes>
       <Route path="/admin/*">

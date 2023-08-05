@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from 'react'
+import React, { useContext } from 'react'
 import logo from "../../../assets/all-images/logo/Final_DriveConn_logo.png";
 import './sidebar.css'
 import { AuthContext } from "../../../context/authContext";
@@ -74,7 +74,7 @@ const Sidebar = () => {
         <div >
           <div className='d-flex justify-content-center align-items-center'>
             <div className="sidebar__top__logo">
-              <img src={logo}></img>
+              <img src={logo} alt=""></img>
             </div>
             <p className="sidebar__top__text fs-5">
               {userDecode.lastName + ' ' + userDecode.firstName}

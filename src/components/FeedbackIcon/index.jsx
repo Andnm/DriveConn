@@ -2,7 +2,6 @@ import React, { useState } from 'react'
 import './style.css'
 import Modal from 'react-bootstrap/Modal';
 import Feedback from '../Feedback'
-import { Button } from 'react-bootstrap';
 
 const FeedbackIcon = () => {
 

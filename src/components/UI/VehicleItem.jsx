@@ -1,14 +1,13 @@
 import React from "react";
 import { Col } from "reactstrap";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import "../../styles/vehicle-item.css";
 import icon_oto from '../../assets/all-images/icon_oto.png'
 import avatar from '../../assets/all-images/avatar.jpg'
 import { formatPrice } from "../../utils/utils";
 
 const VehicleItem = (props) => {
-  console.log(props)
-  const { autoMaker_id, category_id, fuel, model_id, otherFacilities, transmission, vehicle_id } = props.item;
+  const { category_id, transmission, vehicle_id } = props.item;
   const action = props.action
   const navigate = useNavigate();
 

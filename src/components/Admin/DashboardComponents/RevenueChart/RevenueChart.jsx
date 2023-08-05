@@ -105,10 +105,15 @@ function RevenueChart() {
             });
 
     const totalBookingTransaction = () => {
-        let total = 0
-        dataBooking.map((item) => item.bookingStatus !== 'Cancelled' ? total += item.totalPrice : total == total)
-        return total
-    }
+        let total = 0;
+        dataBooking.forEach((item) => {
+            if (item.bookingStatus !== 'Cancelled') {
+                total += item.totalPrice;
+            }
+        });
+        return total;
+    };
+
 
     useEffect(() => {
         getBookingList(currentToken).then((res) => {

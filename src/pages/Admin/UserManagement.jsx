@@ -43,10 +43,6 @@ const UserManagement = () => {
 
     useEffect(() => {
         handleSearchBar();
-    }, []);
-
-    useEffect(() => {
-        handleSearchBar();
     }, [page]);
 
     const handleSearchBar = (criteria = {}) => {

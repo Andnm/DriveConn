@@ -1,10 +1,15 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { Container } from "reactstrap";
 import RegisterForm from "../components/UI/CarOwnerRegisterForm"
 import "../styles/vehicle-owner.css"
 
 
 const VehicleOwner = () => {
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
   return (
     <div className="vehicle_owner">
       <div className="vehicle_owner_header">

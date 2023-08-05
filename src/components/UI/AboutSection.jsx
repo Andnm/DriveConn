@@ -20,35 +20,26 @@ const AboutSection = ({ aboutClass }) => {
               <h4 className="section__subtitle">Thông tin chúng tôi</h4>
               <h2 className="section__title">Chào mừng tới dịch vụ cho thuê xe</h2>
               <p className="section__description">
-                Lorem ipsum dolor sit amet consectetur, adipisicing elit.
-                Voluptatum blanditiis esse accusantium dignissimos labore
-                laborum. Veniam, corporis mollitia temporibus, in quaerat vero
-                deleniti amet dolorem repudiandae, pariatur nam dolore! Impedit
-                neque sit ad temporibus quam similique dolor ipsam praesentium
-                sunt.
+                Các dịch vụ thuê xe thường cung cấp nhiều loại xe đa dạng để phù hợp với nhu cầu và ngân sách của khách hàng. Chúng bao gồm các dòng xe từ tiết kiệm nhiên liệu như xe hạng nhẹ và xe tải nhỏ, đến các loại xe sang trọng như xe hạng sang và SUV. Khách hàng có thể lựa chọn từ các loại xe khác nhau để phù hợp với số lượng hành khách, mục đích di chuyển và các yêu cầu cụ thể khác.
               </p>
 
               <div className="about__section-item d-flex align-items-center">
                 <p className="section__description d-flex align-items-center gap-2">
-                  <i className="ri-checkbox-circle-line"></i> Lorem ipsum dolor sit
-                  amet.
+                  <i className="ri-checkbox-circle-line"></i> Linh hoạt
                 </p>
 
                 <p className="section__description d-flex align-items-center gap-2">
-                  <i className="ri-checkbox-circle-line"></i> Lorem ipsum dolor sit
-                  amet.
+                  <i className="ri-checkbox-circle-line"></i> Dịch vụ chuyên nghiệp
                 </p>
               </div>
 
               <div className="about__section-item d-flex align-items-center">
                 <p className="section__description d-flex align-items-center gap-2">
-                  <i className="ri-checkbox-circle-line"></i> Lorem ipsum dolor sit
-                  amet.
+                  <i className="ri-checkbox-circle-line"></i> Sự đa dạng và lựa chọn
                 </p>
 
                 <p className="section__description d-flex align-items-center gap-2">
-                  <i className="ri-checkbox-circle-line"></i> Lorem ipsum dolor sit
-                  amet.
+                  <i className="ri-checkbox-circle-line"></i> Hỗ trợ 24/7
                 </p>
               </div>
             </div>

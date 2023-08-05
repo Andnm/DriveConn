@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Form, FormGroup, Row, Col, Input, Button, InputGroup, Label } from "reactstrap";
+import { Form, Row, Col, Button } from "reactstrap";
 import "../../styles/car-owner-register-form.css"
 import InputBox from "../InputBox/InputBox";
 import { toast } from 'react-toastify';

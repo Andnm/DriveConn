@@ -1,44 +1,44 @@
 const serviceData = [
   {
     id: 1,
-    title: "City Transfer",
+    title: "Trung chuyển thành phố",
     icon: "ri-map-pin-2-line",
-    desc: "Tempor tempor sadipscing vero lorem sea, invidunt sed et eos ipsum et erat. Dolor ut duo sadipscing lorem. Gubergren gub",
+    desc: "Vận chuyển phương tiện đáng tin cậy và nhanh chóng. Đặt niềm tin vào chúng tôi để đưa hàng hóa của bạn đến nơi đích một cách an toàn và tiện lợi.",
   },
 
   {
     id: 2,
-    title: "Whole  City Tour",
+    title: "Tour Toàn Thành Phố",
     icon: "ri-community-line",
-    desc: "Tempor tempor sadipscing vero lorem sea, invidunt sed et eos ipsum et erat. Dolor ut duo sadipscing lorem. Gubergren gub",
+    desc: "Cùng chúng tôi trải qua những kỷ niệm đáng nhớ và những cung đường đa dạng, đồng thời được hướng dẫn bởi đội ngũ hướng dẫn viên chuyên nghiệp, mang đến cho bạn trải nghiệm đi xe không thể tuyệt vời hơn.",
   },
 
   {
     id: 3,
-    title: "Unlimited Miles Car Rental",
+    title: "Thuê Xe Không Giới Hạn",
     icon: "ri-roadster-line",
-    desc: "Tempor tempor sadipscing vero lorem sea, invidunt sed et eos ipsum et erat. Dolor ut duo sadipscing lorem. Gubergren gub",
+    desc: "Cho phép bạn di chuyển thoải mái và tự do, mà không cần lo lắng về giới hạn số km. Khám phá những địa điểm mới mỗi ngày và tận hưởng chuyến du lịch hoàn hảo cùng với xe thuê không giới hạn km.",
   },
 
   {
     id: 4,
-    title: "Fast & Easy Booking",
+    title: "Đặt chỗ nhanh chóng và dễ dàng",
     icon: "ri-timer-flash-line",
-    desc: "Tempor tempor sadipscing vero lorem sea, invidunt sed et eos ipsum et erat. Dolor ut duo sadipscing lorem. Gubergren gub",
+    desc: "Với dịch vụ đặt chỗ của chúng tôi, quá trình đặt xe sẽ trở nên vô cùng đơn giản và nhanh chóng. Chỉ cần vài bước đơn giản, bạn đã có thể sở hữu một chiếc xe hoàn hảo cho hành trình của mình.",
   },
 
   {
     id: 5,
-    title: "Many Pickup Locations",
+    title: "Nhiều địa điểm đón",
     icon: "ri-map-pin-line",
-    desc: "Tempor tempor sadipscing vero lorem sea, invidunt sed et eos ipsum et erat. Dolor ut duo sadipscing lorem. Gubergren gub",
+    desc: "Với nhiều điểm thuê xe, bạn có thể dễ dàng chọn điểm thuê gần nhất và tiện lợi nhất cho chuyến du lịch của mình. Chúng tôi đáp ứng nhu cầu thuê xe của bạn tại nhiều địa điểm khắp nơi, đảm bảo bạn luôn có lựa chọn phù hợp và tiết kiệm thời gian.",
   },
 
   {
     id: 6,
-    title: "Airport Transfer",
+    title: "Đưa đón sân bay",
     icon: "ri-flight-takeoff-line",
-    desc: "Tempor tempor sadipscing vero lorem sea, invidunt sed et eos ipsum et erat. Dolor ut duo sadipscing lorem. Gubergren gub",
+    desc: "Chúng tôi sẽ đón bạn ngay tại sân bay và đưa bạn đến đích một cách an toàn và nhanh chóng. Không cần lo lắng về việc di chuyển sau khi hạ cánh, hãy để chúng tôi lo cho bạn và bắt đầu hành trình của bạn một cách dễ dàng và thoải mái.",
   },
 ];
 
