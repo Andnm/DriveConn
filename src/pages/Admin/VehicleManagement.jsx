@@ -6,6 +6,7 @@ import Pagination from "../../components/UI/Pagination";
 import 'react-confirm-alert/src/react-confirm-alert.css';
 import { getVehicleList } from "../../api/vehicle";
 import LoadingCar from '../../components/LoadingCar/LoadingCar'
+import DrawerVehicle from '../../components/Drawer/DrawerVehicle';
 
 const filterableFields = [
     {
@@ -14,7 +15,7 @@ const filterableFields = [
             { value: 'Motorbike', label: "Motorbike" },
             { value: 'Car', label: "Car" },
         ],
-        field: "transmission", 
+        field: "transmission",
     },
     {
         label: "Automaker",
@@ -22,7 +23,7 @@ const filterableFields = [
             { value: "Honda", label: "Honda" },
             { value: "Yamaha", label: "Yamaha" },
         ],
-        field: "autoMaker_id.name", 
+        field: "autoMaker_id.name",
     },
     {
         label: "Category",
@@ -30,10 +31,9 @@ const filterableFields = [
             { value: "Sedan", label: "Sedan" },
             { value: "Automatic transmission", label: "Automatic transmission" },
         ],
-        field: "category_id.name", 
+        field: "category_id.name",
     },
 ];
-
 
 const messageKey = "ADMIN_VEHICLE_MANAGEMENT";
 const itemsPerPage = 10;
@@ -44,10 +44,8 @@ const VehicleManagement = () => {
     const [page, setPage] = useState(1);
     const [maxPage, setMaxPage] = useState(1);
     const [isLoading, setIsLoading] = useState(false)
-
-    useEffect(() => {
-        handleSearchBar();
-    }, []);
+    const [isDrawerOpen, setIsDrawerOpen] = useState(false);
+    const [vehicleDetail, setVehicleDetail] = useState('');
 
     useEffect(() => {
         handleSearchBar();
@@ -87,16 +85,17 @@ const VehicleManagement = () => {
         });
     };
 
-    const getColor = (status) => {
-        return status ? "text-success" : "text-danger";
-    };
-
     const onChangePage = (page) => {
         setPage(page);
     }
 
-    const inlineStyle = {
+    const handleToggleDrawer = () => {
+        setIsDrawerOpen(!isDrawerOpen);
+    };
 
+    const clickToViewDetailVehicle = (vehicle) => {
+        setIsDrawerOpen(true);
+        setVehicleDetail(vehicle)
     }
 
     return (
@@ -140,10 +139,10 @@ const VehicleManagement = () => {
                                 <>
                                     {vehicles.map((vehicle) => (<tr key={vehicle._id}>
                                         <td className="d-flex">
-                                            <i className="ri-file-info-line cursor-pointer mx-2" title="Detail">
-                                            </i>
+                                            <i className="ri-file-info-line cursor-pointer mx-2"
+                                                title="Detail"
+                                                onClick={() => clickToViewDetailVehicle(vehicle)} />
                                         </td>
-                                        {console.log(vehicle)}
                                         <td>{vehicle.transmission ? 'Car' : 'Motorbike'}</td>
                                         <td>{vehicle.autoMaker_id.name ?? "N/A"}</td>
                                         <td>{vehicle.model_id.name ?? 'N/A'}</td>
@@ -154,6 +153,9 @@ const VehicleManagement = () => {
                                 </>
                             </tbody>
                         </table>
+
+                        {isDrawerOpen && <DrawerVehicle isOpen={isDrawerOpen} toggleDrawer={handleToggleDrawer} content={vehicleDetail} />}
+
                         <Pagination maxPage={maxPage} onChangePage={onChangePage} />
                     </>
                     :

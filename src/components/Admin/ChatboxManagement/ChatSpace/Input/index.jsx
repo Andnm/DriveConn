@@ -1,11 +1,12 @@
 import React, { useContext, useState } from 'react'
 import './style.css'
-import { addDoc, collection, serverTimestamp } from "firebase/firestore";
+import { addDoc, collection, doc, serverTimestamp, setDoc, updateDoc } from "firebase/firestore";
 
 import Img from "../../../../../assets/all-images/chat/img.png";
 import Attach from "../../../../../assets/all-images/chat/attach.png";
 import { AuthContext } from '../../../../../context/authContext';
 import { db } from '../../../../../config/configFirebase';
+import { getLastMessages } from '../../../../../utils/utils';
 
 const Input = () => {
   const [valueText, setValueText] = useState("");
@@ -30,6 +31,12 @@ const Input = () => {
         createdAt: serverTimestamp(),
         combinedId: compareCombinedId,
         senderId: adminId
+      })
+
+      await updateDoc(doc(db, "userChats", compareCombinedId), {
+        lastMessages: getLastMessages(valueText),
+        senderId: userDecode._id,
+        createdAt: serverTimestamp(),
       })
     } catch (error) {
       console.error("Error send messages from admin to customer:", error);

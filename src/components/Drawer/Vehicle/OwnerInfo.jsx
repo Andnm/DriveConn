@@ -12,7 +12,7 @@ const OwnerInfo = (props) => {
     useEffect(() => {
         const fetchUserProfile = async () => {
             try {
-                const response = await getUserProfileById(currentToken, vehicle_id.user_id);
+                const response = await getUserProfileById(currentToken, vehicle_id.user_id._id);
                 setOwnerProfile(response);
             } catch (error) {
                 console.error("Error fetching user profile:", error);
