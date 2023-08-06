@@ -119,6 +119,9 @@ const VehicleManagement = () => {
                                         Type Vehicle
                                     </th>
                                     <th scope="col">
+                                        License plate
+                                    </th>
+                                    <th scope="col">
                                         Automaker
                                     </th>
                                     <th scope="col">
@@ -126,10 +129,7 @@ const VehicleManagement = () => {
                                     </th>
                                     <th scope="col">
                                         Category
-                                    </th>
-                                    <th scope="col">
-                                        License plate
-                                    </th>
+                                    </th>                                 
                                     <th scope="col" style={{ width: '20%' }}>
                                         Owner
                                     </th>
@@ -144,10 +144,10 @@ const VehicleManagement = () => {
                                                 onClick={() => clickToViewDetailVehicle(vehicle)} />
                                         </td>
                                         <td>{vehicle.transmission ? 'Car' : 'Motorbike'}</td>
+                                        <td>{vehicle.vehicle_id.licensePlate ?? 'N/A'}</td>
                                         <td>{vehicle.autoMaker_id.name ?? "N/A"}</td>
                                         <td>{vehicle.model_id.name ?? 'N/A'}</td>
-                                        <td>{vehicle.category_id.name ?? 'N/A'}</td>
-                                        <td>{vehicle.vehicle_id.licensePlate ?? 'N/A'}</td>
+                                        <td>{vehicle.category_id.name ?? 'N/A'}</td>                                    
                                         <td>{vehicle.vehicle_id.user_id?.lastName} {vehicle.vehicle_id.user_id?.firstName}</td>
                                     </tr>))}
                                 </>
